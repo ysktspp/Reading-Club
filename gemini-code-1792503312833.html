@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Читацький клуб: Перша ракетка | 4 клас</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --clay: #e76f51;
+      --clay-hover: #d65a3d;
+      --peach: #f4a261;
+      --lime: #8ac926;
+      --coral: #e63946;
+      --petrol: #264653;
+      --bg: #fbf9f5;
+      --surface: #ffffff;
+      --surface-glass: rgba(255, 255, 255, 0.94);
+      --border: #f0e6dc;
+      --border-accent: #f7d6c8;
+      --text: #202e3b;
+      --text-muted: #64748b;
+      --shadow-sm: 0 4px 12px rgba(231, 111, 81, 0.06);
+      --shadow-md: 0 10px 28px rgba(231, 111, 81, 0.1);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(244, 162, 97, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(138, 201, 38, 0.08) 0%, transparent 40%);
+    }
+
+    h1, h2, h3, h4, .nav-btn, .btn, .metric-badge, .dict-pill, .ch-btn, .quiz-level-btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 14px;
+      z-index: 100;
+      max-width: 1120px;
+      margin: 0 auto 24px;
+      padding: 0 16px;
+    }
+
+    .navbar {
+      background: var(--surface-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 8px;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--petrol);
+      text-decoration: none;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--clay), var(--coral));
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(231, 111, 81, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.86rem;
+      padding: 8px 14px;
+      border-radius: 40px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover { color: var(--petrol); background: rgba(244, 162, 97, 0.15); }
+    .nav-btn.active {
+      background: var(--clay);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(231, 111, 81, 0.3);
+    }
+
+    main { max-width: 1120px; margin: 0 auto; padding: 0 16px 60px; }
+
+    .tab-view { display: none; animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .tab-view.active { display: block; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 26px 22px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 9px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn:hover { border-color: var(--clay); background: #fff8f5; transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--clay);
+      border-color: var(--clay);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(231, 111, 81, 0.25);
+    }
+    .btn-primary:hover { background: var(--clay-hover); border-color: var(--clay-hover); color: #fff; }
+
+    .hero-card {
+      background: linear-gradient(145deg, #ffffff 0%, #fff7f2 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 38px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid var(--border-accent);
+      color: var(--clay);
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
+    .hero-card h1 {
+      font-size: clamp(2rem, 4.5vw, 2.9rem);
+      font-weight: 900;
+      color: var(--petrol);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .hero-card h1 span {
+      background: linear-gradient(135deg, var(--clay), var(--coral));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin: 0 auto 18px;
+      font-weight: 600;
+    }
+
+    .quotes-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+      max-width: 860px;
+      margin: 0 auto 20px;
+      text-align: left;
+    }
+
+    .author-quote-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .author-quote-card.zhadan { border-left: 5px solid var(--coral); }
+    .author-quote-card.svitolina { border-left: 5px solid var(--lime); }
+
+    .author-quote-name {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--petrol);
+      margin-bottom: 6px;
+    }
+    .author-quote-text {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--clay);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .hero-slogan {
+      display: inline-block;
+      background: #ffffff;
+      border: 2px dashed var(--peach);
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 800;
+      color: var(--coral);
+      font-size: 1.05rem;
+    }
+
+    .guitar-wrap { display: flex; justify-content: center; margin: 15px 0 20px; }
+
+    .fretboard-canvas {
+      display: grid;
+      grid-template-columns: repeat(23, 1fr);
+      width: 100%;
+      max-width: 840px;
+      height: 56px;
+      background: #2b1d14;
+      border: 3px solid #1a100b;
+      border-radius: 12px;
+      box-shadow: inset 0 3px 8px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .fret-slot {
+      border-right: 2px solid #b89876;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #dfcdb9;
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+    .fret-slot:last-child { border-right: none; }
+    .fret-slot:hover { background: rgba(255,255,255,0.18); color: #fff; }
+    .fret-slot.active-fret {
+      background: linear-gradient(180deg, var(--lime) 0%, var(--clay) 100%);
+      color: #fff;
+    }
+
+    .tracker-metrics {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .metric-badge {
+      background: #fff8f5;
+      border: 1px solid var(--border-accent);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--clay);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+    }
+    @media (max-width: 860px) {
+      .showcase-grid { grid-template-columns: 1fr; }
+      .hero-art { order: -1; margin: 0 auto; }
+    }
+
+    .hero-box { border-radius: var(--radius-md); padding: 20px; }
+    .hero-box.alina {
+      background: linear-gradient(180deg, #f9fff0 0%, #ffffff 100%);
+      border: 2px solid #e1f5c4;
+    }
+    .hero-box.senya {
+      background: linear-gradient(180deg, #fff5f5 0%, #ffffff 100%);
+      border: 2px solid #ffd8d8;
+    }
+
+    .arrow-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .arrow-list li {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px 8px 30px;
+      font-size: 0.88rem;
+      position: relative;
+      line-height: 1.45;
+    }
+    .arrow-list li::before {
+      content: "➔";
+      position: absolute;
+      left: 10px;
+      top: 8px;
+      color: var(--clay);
+      font-weight: 900;
+    }
+
+    .hero-art { text-align: center; max-width: 320px; }
+    .hero-art img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--border);
+      background: #fff;
+      display: block;
+    }
+
+    .authors-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .author-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .author-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--peach);
+      flex-shrink: 0;
+    }
+    .author-info h4 { font-size: 1.15rem; color: var(--petrol); margin-bottom: 4px; }
+    .author-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--clay);
+      background: #fff3ee;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 6px;
+    }
+    .author-bio { font-size: 0.86rem; color: var(--text-muted); line-height: 1.45; }
+
+    .compare-poll {
+      background: linear-gradient(135deg, #fff7f2 0%, #f4fce3 100%);
+      border: 2px dashed var(--peach);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      text-align: center;
+    }
+    .poll-title { font-size: 1.15rem; font-weight: 800; color: var(--petrol); margin-bottom: 6px; }
+    .poll-desc { font-size: 0.92rem; color: var(--text-muted); max-width: 680px; margin: 0 auto 16px; }
+    .poll-options { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .poll-btn {
+      background: #fff;
+      border: 2px solid var(--border);
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--petrol);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .poll-btn:hover { border-color: var(--clay); background: #fff8f5; }
+    .poll-btn.selected { background: var(--clay); border-color: var(--clay); color: #fff; }
+    .poll-result { margin-top: 14px; font-weight: 800; font-size: 0.95rem; color: var(--petrol); min-height: 24px; }
+
+    /* Маршрут */
+    .chapter-nav-wrapper {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      scrollbar-width: thin;
+    }
+    .ch-btn {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .ch-btn:hover { border-color: var(--clay); background: #fff8f5; color: var(--petrol); }
+    .ch-btn.active {
+      background: var(--clay);
+      border-color: var(--clay);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(231, 111, 81, 0.3);
+    }
+
+    .chapter-content { display: none; }
+    .chapter-content.active { display: block; animation: slideUp 0.3s ease forwards; }
+
+    .ch-card { padding: 28px 24px; }
+    .ch-header { margin-bottom: 18px; }
+    .ch-badge {
+      display: inline-block;
+      background: #fff3ee;
+      border: 1px solid var(--border-accent);
+      color: var(--clay);
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .ch-title { font-size: 1.35rem; color: var(--petrol); font-weight: 900; }
+
+    .task-box {
+      background: linear-gradient(135deg, #fffbf7 0%, #fff6f0 100%);
+      border: 2px dashed var(--peach);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .task-icon { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
+    .task-body h4 { font-size: 1.05rem; color: var(--petrol); margin-bottom: 6px; }
+    .task-body p { font-size: 0.92rem; color: var(--text); line-height: 1.5; }
+
+    .diary-sample {
+      background: #ffffff;
+      border: 2px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+    .sample-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--clay);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .sample-grid {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+    @media (max-width: 600px) { .sample-grid { grid-template-columns: 1fr; text-align: center; } }
+    .sample-avatar {
+      background: #fff8f5;
+      border: 2px dashed var(--peach);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+    }
+    .sample-specs {
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .friends-circles-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .friend-item {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+    }
+    .circle-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #fff6f0;
+      border: 2px solid var(--peach);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 8px;
+    }
+    .friend-item h5 { font-size: 1rem; color: var(--petrol); margin-bottom: 8px; }
+    .friend-input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      text-align: center;
+      background: var(--bg);
+    }
+    .friend-input:focus { outline: none; border-color: var(--clay); background: #fff; }
+
+    .mood-box {
+      background: #faf7f2;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .mood-title { font-weight: 800; font-size: 0.92rem; color: var(--petrol); }
+    .mood-emojis { display: flex; gap: 8px; }
+    .ch-mood-btn {
+      background: #fff;
+      border: 1px solid var(--border);
+      font-size: 1.4rem;
+      padding: 4px 10px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ch-mood-btn:hover { transform: scale(1.2); border-color: var(--peach); }
+    .ch-mood-btn.active-mood {
+      background: var(--clay);
+      border-color: var(--clay);
+      transform: scale(1.15);
+      box-shadow: 0 2px 8px rgba(231,111,81,0.3);
+    }
+    .mood-status { font-weight: 800; font-size: 0.88rem; color: var(--clay); min-width: 160px; text-align: right; }
+    @media (max-width: 650px) { .mood-status { text-align: left; } }
+
+    /* Щоденник */
+    .book-container {
+      background: #ebd8c8;
+      border: 12px solid #5d4037;
+      border-radius: 26px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.22), inset 0 0 20px rgba(0,0,0,0.15);
+      padding: 24px 20px;
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .book-ribbon {
+      position: absolute;
+      top: -12px;
+      right: 48px;
+      width: 28px;
+      height: 70px;
+      background: var(--coral);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      border-radius: 0 0 6px 6px;
+      z-index: 5;
+    }
+    .book-ribbon::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-bottom: 12px solid #ebd8c8;
+    }
+
+    .book-spread {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      background: #fbf7ee;
+      border-radius: 14px;
+      padding: 32px 28px;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    @media (max-width: 860px) {
+      .book-spread { grid-template-columns: 1fr; gap: 20px; }
+      .book-spine { display: none; }
+    }
+
+    .book-spine {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 24px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, rgba(0,0,0,0.08) 0%, rgba(255,255,255,0.4) 50%, rgba(0,0,0,0.1) 100%);
+      pointer-events: none;
+    }
+
+    .book-page { display: flex; flex-direction: column; gap: 16px; }
+    .page-header {
+      border-bottom: 2px dashed #d5c4b1;
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .page-title { font-size: 1.25rem; font-weight: 900; color: var(--petrol); }
+    .page-num { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--clay); font-weight: 700; }
+
+    .entry-card {
+      background: #fff;
+      border: 1px solid #e7dac9;
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .entry-card h5 {
+      font-size: 0.92rem;
+      color: var(--petrol);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .entry-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      color: #1e3a8a;
+      line-height: 1.4;
+      min-height: 26px;
+      word-break: break-word;
+    }
+    .entry-empty { font-family: 'Nunito', sans-serif; font-size: 0.8rem; color: #a89f91; font-style: italic; }
+
+    .stamps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .stamp-slot {
+      height: 70px;
+      border: 2px dashed #d5c4b1;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.3s;
+      background: rgba(255,255,255,0.4);
+    }
+    .stamp-ch-num { font-size: 0.72rem; color: var(--text-muted); font-weight: 800; }
+
+    .stamp-slot.stamped {
+      border: 3px double var(--clay);
+      background: radial-gradient(circle, rgba(231,111,81,0.12) 0%, rgba(255,255,255,0.8) 100%);
+      transform: rotate(-6deg);
+      box-shadow: 0 2px 8px rgba(231,111,81,0.2);
+    }
+    .stamp-slot.stamped .stamp-mark {
+      display: block;
+      color: var(--clay);
+      font-weight: 900;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+      line-height: 1.1;
+      animation: stampPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .stamp-slot.stamped .stamp-ch-num { color: var(--clay); font-weight: 900; }
+    .stamp-mark { display: none; }
+
+    @keyframes stampPop {
+      0% { transform: scale(2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .diary-actions-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed #d5c4b1;
+    }
+
+    /* Мої думки */
+    .form-textarea, .form-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-top: 8px;
+    }
+    .form-textarea:focus, .form-input:focus { outline: none; border-color: var(--clay); background: #fff; }
+
+    .cert-frame {
+      background: #ffffff;
+      border: 4px double var(--clay);
+      border-radius: var(--radius-lg);
+      padding: 34px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      margin-top: 24px;
+    }
+    .cert-name-input {
+      border: none;
+      border-bottom: 2px solid var(--clay);
+      background: transparent;
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-align: center;
+      color: var(--petrol);
+      padding: 8px 12px;
+      width: 80%;
+      max-width: 380px;
+      margin: 16px 0;
+    }
+
+    /* Словник */
+    .dict-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .dict-pill {
+      background: #fff7f2;
+      border: 1px solid var(--border-accent);
+      color: var(--clay);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dict-pill:hover { background: var(--clay); color: #fff; transform: translateY(-2px); }
+    .dict-output {
+      background: var(--bg);
+      border: 1px dashed var(--peach);
+      padding: 18px;
+      border-radius: var(--radius-md);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--petrol);
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Вікторина */
+    .quiz-nav-wrapper {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .quiz-level-btn {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      color: var(--petrol);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 12px 22px;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quiz-level-btn:hover:not(.locked) { border-color: var(--clay); background: #fff8f5; }
+    .quiz-level-btn.active {
+      background: var(--clay);
+      border-color: var(--clay);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(231, 111, 81, 0.35);
+    }
+    .quiz-level-btn.locked {
+      background: #f1ede8;
+      border-color: #e2d9cf;
+      color: #a89f91;
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
+    .quiz-stage { display: none; }
+    .quiz-stage.active { display: block; animation: slideUp 0.35s ease forwards; }
+
+    .quiz-progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #f0e6dc;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--peach), var(--clay));
+      transition: width 0.3s ease;
+    }
+
+    .q-item-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .q-number-tag {
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: var(--clay);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .q-text-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--petrol);
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+    .q-options-grid { display: flex; flex-direction: column; gap: 10px; }
+    .q-opt-btn {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .q-opt-btn:hover:not(:disabled) { border-color: var(--peach); background: #fff8f5; transform: translateX(4px); }
+    .q-opt-btn.correct-ans {
+      background: #eafaf1 !important;
+      border-color: var(--lime) !important;
+      color: #1e7e34 !important;
+    }
+    .q-opt-btn.wrong-ans {
+      background: #fdf2f2 !important;
+      border-color: var(--coral) !important;
+      color: #b91c1c !important;
+    }
+
+    .quiz-result-box {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #fffaf5 0%, #f4fce3 100%);
+      border: 2px dashed var(--lime);
+      border-radius: var(--radius-lg);
+      margin-top: 20px;
+    }
+    .quiz-result-title { font-size: 1.5rem; font-weight: 900; color: var(--petrol); margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- Навігація сайту -->
+  <header>
+    <nav class="navbar">
+      <div class="brand" data-tab-target="scene">
+        <div class="brand-icon">🎾</div>
+        <span>Перша ракетка</span>
+      </div>
+      <div class="nav-links">
+        <button class="nav-btn active" data-tab-target="scene">Головна</button>
+        <button class="nav-btn" data-tab-target="route">Маршрут</button>
+        <button class="nav-btn" data-tab-target="diary">📖 Щоденник</button>
+        <button class="nav-btn" data-tab-target="thoughts">Мої думки</button>
+        <button class="nav-btn" data-tab-target="dictionary">Словник</button>
+        <button class="nav-btn" data-tab-target="quiz">Вікторина</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================= 1. ГОЛОВНА ================= -->
+    <section id="scene" class="tab-view active">
+      <div class="hero-card">
+        <div class="hero-badge">⚡ Читацький клуб • 4 клас</div>
+        <h1>🎾 ПЕРША <span>РАКЕТКА</span> 🎸</h1>
+        <p class="hero-subtitle">Сергій Жадан & Еліна Світоліна • Ілюстрації Ольги Якименко</p>
+        
+        <div class="quotes-wrapper">
+          <div class="author-quote-card zhadan">
+            <div class="author-quote-name">🎸 Сергій Жадан:</div>
+            <div class="author-quote-text">«Тримайся своєї мрії і ніколи не опускай рук! Ти і є чемпіон».</div>
+          </div>
+          <div class="author-quote-card svitolina">
+            <div class="author-quote-name">🎾 Еліна Світоліна:</div>
+            <div class="author-quote-text">«Вір у себе, навіть коли складно. Кожен маленький крок наближає тебе до великої перемоги».</div>
+          </div>
+        </div>
+
+        <div class="hero-slogan">«Подавай сміливо — грай свій найгучніший рок!»</div>
+      </div>
+
+      <!-- Інтерактивна гітара -->
+      <div class="card" style="text-align: center;">
+        <h2 style="font-size: 1.35rem; color: var(--petrol); margin-bottom: 4px;">🎸 Гітарний лад читання (23 розділи)</h2>
+        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
+          Клікай по ладах-розділах. Трекер рахує точні сторінки та автоматично ставить <strong>штампи "Прочитано"</strong> у твій читацький щоденник!
+        </p>
+
+        <div class="guitar-wrap">
+          <div class="fretboard-canvas" id="fretCanvas"></div>
+        </div>
+
+        <div class="tracker-metrics">
+          <div class="metric-badge" id="metricChapters">Пройдено: 0 / 23 розділів (0%)</div>
+          <div class="metric-badge" id="metricPages">Сторінок: 0 / 174</div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 10px;">
+          <button class="btn" id="btn_minus_chapter">− 1 Розділ</button>
+          <button class="btn btn-primary" id="btn_plus_chapter">+ 1 Розділ</button>
+          <button class="btn" id="btn_reset_chapters" style="color: var(--coral);">Скинути</button>
+        </div>
+      </div>
+
+      <!-- Герої та ілюстрація -->
+      <div class="card showcase-grid">
+        <div class="hero-box alina">
+          <h3 style="color: var(--petrol); margin-bottom: 2px;">🎾 Аліна</h3>
+          <div style="font-size: 0.82rem; color: var(--text-muted); font-weight: 700; margin-bottom: 10px;">Теніс • Витримка • Харків</div>
+          <ul class="arrow-list">
+            <li>Переїхала до Києва через війну та адаптується в новому класі.</li>
+            <li>Тренується щодня, прагнучи повернутися на улюблений корт.</li>
+            <li>Долає байдужість дорослих тренерів своєю працьовитістю.</li>
+            <li>Знаходить справжнього друга у веселому рокері Сєні.</li>
+          </ul>
+        </div>
+
+        <div class="hero-art">
+          <img src="Gemini_Generated_Image_7xjuxk7xjuxk7xju.jpg" 
+               alt="Аліна та Сєня" 
+               onerror="this.src='https://balka-book.com/files/2026/10_02/00_03/u_files_store_35_74.jpg'" />
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">Аліна та Сєня (іл. Ольга Якименко)</div>
+        </div>
+
+        <div class="hero-box senya">
+          <h3 style="color: var(--petrol); margin-bottom: 2px;">🎸 Сєня</h3>
+          <div style="font-size: 0.82rem; color: var(--text-muted); font-weight: 700; margin-bottom: 10px;">Електрогітара • Драйв • Мрія про хіт</div>
+          <ul class="arrow-list">
+            <li>Мріє зібрати рок-гурт і створити хіт лише за 30 днів!</li>
+            <li>Завжди знаходить привід для оптимізму та підбадьорення.</li>
+            <li>Першим простягає руку допомоги новенькій у школі.</li>
+            <li>Вчить не боятися помилок ні в акордах, ні в житті.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Автори та опитування -->
+      <div class="card">
+        <h3 style="font-size: 1.3rem; color: var(--petrol); margin-bottom: 16px; text-align: center;">
+          ✍️ Автори книги: хто стоїть за історією?
+        </h3>
+
+        <div class="authors-container">
+          <div class="author-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Serhiy_Zhadan_2022.jpg/440px-Serhiy_Zhadan_2022.jpg" 
+                 alt="Сергій Жадан" 
+                 class="author-photo"
+                 onerror="this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200'">
+            <div class="author-info">
+              <span class="author-badge">🎸 Рок-музикант & Письменник</span>
+              <h4>Сергій Жадан</h4>
+              <p class="author-bio">
+                Відомий український поет, прозаїк і фронтмен рок-гурту «Жадан і Собаки». Народився на Луганщині, багато років жив і творив у Харкові.
+              </p>
+            </div>
+          </div>
+
+          <div class="author-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Elina_Svitolina_2023.jpg/440px-Elina_Svitolina_2023.jpg" 
+                 alt="Еліна Світоліна" 
+                 class="author-photo"
+                 onerror="this.src='https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=200'">
+            <div class="author-info">
+              <span class="author-badge">🎾 Олімпійська призерка & Перша ракетка</span>
+              <h4>Еліна Світоліна</h4>
+              <p class="author-bio">
+                Найтитулованіша українська тенісистка, третя ракетка світу, бронзова призерка Олімпійських ігор. Засновниця благодійного фонду підтримки юних талантів.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-poll">
+          <div class="poll-title">🤔 Запитання для читацького клубу:</div>
+          <p class="poll-desc">
+            Погляньте на біографії авторів та захоплення героїв. Як ви вважаєте, <strong>чи схожі Сергій Жадан та Еліна Світоліна на персонажів книги — Сєню та Аліну?</strong>
+          </p>
+          <div class="poll-options">
+            <button class="poll-btn" data-poll-choice="yes">Так, вони подарували їм власні таланти! 🎾🎸</button>
+            <button class="poll-btn" data-poll-choice="partly">Частково — риси характеру схожі, але це художні герої 💡</button>
+            <button class="poll-btn" data-poll-choice="discuss">Хочемо обговорити це на зустрічі клубу! 🗣️</button>
+          </div>
+          <div class="poll-result" id="pollResult"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. МАРШРУТ ЧИТАННЯ ================= -->
+    <section id="route" class="tab-view">
+      <div class="card" style="text-align: center; margin-bottom: 20px;">
+        <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
+          🗺️ Маршрут читання: крок за кроком
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+          Обирай розділ, фіксуй свій настрій у трекері вражень та вписуй свої думки — вони <strong>миттєво підтягнуться у твій читацький щоденник</strong>!
+        </p>
+      </div>
+
+      <div class="chapter-nav-wrapper">
+        <button class="ch-btn active" data-ch-target="ch1">1 розділ</button>
+        <button class="ch-btn" data-ch-target="ch2">2 розділ</button>
+        <button class="ch-btn" data-ch-target="ch3">3 розділ</button>
+        <button class="ch-btn" data-ch-target="ch_soon" style="opacity: 0.6;">4–23 розділи ⏳</button>
+      </div>
+
+      <!-- ВМІСТ 1 РОЗДІЛУ -->
+      <div id="ch1" class="chapter-content active">
+        <div class="card ch-card">
+          <div class="ch-header">
+            <span class="ch-badge">Розділ 1 • стор. 5–9</span>
+            <h3 class="ch-title">Знайомство з Сєнею: мрії про рок-гурт</h3>
+          </div>
+
+          <div class="task-box">
+            <div class="task-icon">🎨</div>
+            <div class="task-body">
+              <h4>Творче завдання:</h4>
+              <p>
+                Після прочитання першого розділу ви трохи дізналися про <strong>Сєню</strong> — головного героя нашої книги. Яким ти його уявляєш? Що, окрім алгебри, ще не любить Сєня?
+              </p>
+              <p style="margin-top: 6px;">
+                📝 <strong>Заповни характеристики нижче</strong>, і вони одразу з'являться у твоєму інтерактивному читацькому щоденнику!
+              </p>
+            </div>
+          </div>
+
+          <div style="background: #fff8f5; border: 1px solid var(--border-accent); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <label style="font-size: 0.88rem; font-weight: 700; color: var(--petrol);">Яким ти уявляєш Сєню? Що ще він не любить, крім алгебри?</label>
+            <input type="text" class="form-input" id="ch1_input_dislike" placeholder="Наприклад: Сєня любить гучний рок, а терпіти не може нудьгу та мити посуд..." oninput="syncData('ch1_dislike', this.value)">
+          </div>
+
+          <div class="diary-sample">
+            <div class="sample-tag">Зразок оформлення сторінки в щоденнику:</div>
+            <div class="sample-grid">
+              <div class="sample-avatar">
+                <div style="font-size: 3rem;">🎸</div>
+                <div style="font-weight: 800; color: var(--petrol); margin-top: 4px;">Сєня</div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">майбутня рок-зірка</span>
+              </div>
+              <div class="sample-specs">
+                <div>⚡ <strong>Суперсила & Захоплення:</strong> шаленіє від рок-музики, гри на електрогітарі та мріє зібрати свій гурт за 30 днів.</div>
+                <div>❌ <strong>Терпіти не може:</strong> алгебру, нудні повчання дорослих, сидіти на місці та коли хтось здається завчасно!</div>
+                <div>💡 <strong>Риси характеру:</strong> впертий, сміливий, вигадливий оптиміст і надійний товариш.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mood-box">
+            <div class="mood-title">Твій настрій після 1 розділу:</div>
+            <div class="mood-emojis">
+              <button class="ch-mood-btn" data-mood-target="ch1_mood" data-mood-text="😃 Захоплення!">😃</button>
+              <button class="ch-mood-btn" data-mood-target="ch1_mood" data-mood-text="🎸 Драйвово!">🎸</button>
+              <button class="ch-mood-btn" data-mood-target="ch1_mood" data-mood-text="🤔 Цікаво, що далі">🤔</button>
+              <button class="ch-mood-btn" data-mood-target="ch1_mood" data-mood-text="⚡ Сповнений енергії!">⚡</button>
+            </div>
+            <div class="mood-status" id="ch1_mood">Обери настрій смайликом ☝️</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ВМІСТ 2 РОЗДІЛУ -->
+      <div id="ch2" class="chapter-content">
+        <div class="card ch-card">
+          <div class="ch-header">
+            <span class="ch-badge">Розділ 2 • стор. 10–16</span>
+            <h3 class="ch-title">Команда Сєні: хлопці з нашого двору</h3>
+          </div>
+
+          <div class="task-box">
+            <div class="task-icon">👥</div>
+            <div class="task-body">
+              <h4>Творче завдання:</h4>
+              <p>
+                Тут ти дізнався/-лася більше про друзів Сєні — <strong>Сашу, Мішу, Андрюху та Данька</strong>.
+              </p>
+              <p style="margin-top: 6px;">
+                🖌️ <strong>Впиши короткі факти</strong>, які запам'ятав/-ла про кожного з них — вони заповнять картку друзів у твоєму щоденнику!
+              </p>
+            </div>
+          </div>
+
+          <div class="friends-circles-wrap">
+            <div class="friend-item">
+              <div class="circle-avatar">👦</div>
+              <h5>Саша</h5>
+              <input type="text" class="friend-input" id="friend_sasha" placeholder="Факт про Сашу..." oninput="syncData('friend_sasha', this.value)">
+            </div>
+            <div class="friend-item">
+              <div class="circle-avatar">🧢</div>
+              <h5>Міша</h5>
+              <input type="text" class="friend-input" id="friend_misha" placeholder="Факт про Мішу..." oninput="syncData('friend_misha', this.value)">
+            </div>
+            <div class="friend-item">
+              <div class="circle-avatar">🎧</div>
+              <h5>Андрюха</h5>
+              <input type="text" class="friend-input" id="friend_andryukha" placeholder="Факт про Андрюху..." oninput="syncData('friend_andryukha', this.value)">
+            </div>
+            <div class="friend-item">
+              <div class="circle-avatar">👟</div>
+              <h5>Данько</h5>
+              <input type="text" class="friend-input" id="friend_danko" placeholder="Факт про Данька..." oninput="syncData('friend_danko', this.value)">
+            </div>
+          </div>
+
+          <div class="mood-box">
+            <div class="mood-title">Твій настрій після 2 розділу:</div>
+            <div class="mood-emojis">
+              <button class="ch-mood-btn" data-mood-target="ch2_mood" data-mood-text="🤝 Ціную справжню дружбу!">🤝</button>
+              <button class="ch-mood-btn" data-mood-target="ch2_mood" data-mood-text="😂 Було весело!">😂</button>
+              <button class="ch-mood-btn" data-mood-target="ch2_mood" data-mood-text="🥁 Хочу до них у бенд!">🥁</button>
+              <button class="ch-mood-btn" data-mood-target="ch2_mood" data-mood-text="🧐 Розмірковую над вчинками">🧐</button>
+            </div>
+            <div class="mood-status" id="ch2_mood">Обери настрій смайликом ☝️</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ВМІСТ 3 РОЗДІЛУ -->
+      <div id="ch3" class="chapter-content">
+        <div class="card ch-card">
+          <div class="ch-header">
+            <span class="ch-badge" style="background:#eafaf1; color:var(--lime); border-color:#d4efdf;">Розділ 3 • стор. 17–22</span>
+            <h3 class="ch-title">Аліна: сила волі та морквяний салат</h3>
+          </div>
+
+          <div class="task-box">
+            <div class="task-icon">🎾</div>
+            <div class="task-body">
+              <h4>Творче завдання & Рефлексія:</h4>
+              <p>
+                Тепер ти трохи більше знаєш і про <strong>Аліну</strong> — наполегливу спортсменку, яка заради великого тенісу готова терпіти виснажливі тренування і їсти навіть ненависний морквяний салат!
+              </p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">
+                ❓ На які жертви готовий/-а піти ти заради досягнення власної мрії?
+              </p>
+            </div>
+          </div>
+
+          <div style="margin: 18px 0;">
+            <textarea class="form-textarea" id="alinaChallenge" rows="3" placeholder="Заради моєї мрії я готовий/-а щодня тренуватися / відмовитися від..." oninput="syncData('ch3_sacrifice', this.value)"></textarea>
+          </div>
+
+          <div class="mood-box">
+            <div class="mood-title">Твій настрій після 3 розділу:</div>
+            <div class="mood-emojis">
+              <button class="ch-mood-btn" data-mood-target="ch3_mood" data-mood-text="💪 Відчуваю силу волі!">💪</button>
+              <button class="ch-mood-btn" data-mood-target="ch3_mood" data-mood-text="🥕 Навіть салат не лякає!">🥕</button>
+              <button class="ch-mood-btn" data-mood-target="ch3_mood" data-mood-text="❤️ Дуже співчуваю Аліні">❤️</button>
+              <button class="ch-mood-btn" data-mood-target="ch3_mood" data-mood-text="🎯 Готовий/-а йти до мети!">🎯</button>
+            </div>
+            <div class="mood-status" id="ch3_mood">Обери настрій смайликом ☝️</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="ch_soon" class="chapter-content">
+        <div class="card" style="text-align: center; padding: 40px 20px;">
+          <div style="font-size: 3rem; margin-bottom: 10px;">📖</div>
+          <h3 style="color: var(--petrol); margin-bottom: 8px;">Наступні розділи (4–23)</h3>
+          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
+            Ми відкриваємо нові завдання поступово на кожній зустрічі читацького клубу. Читайте далі разом із нами!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3. ЧИТАЦЬКИЙ ЩОДЕННИК ================= -->
+    <section id="diary" class="tab-view">
+      <div class="card" style="text-align: center; margin-bottom: 20px;">
+        <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
+          📖 Мій інтерактивний читацький щоденник
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+          Усі відповіді зберігаються автоматично на твоєму пристрої. Ти також можеш <strong>завантажити щоденник у файл</strong> або роздрукувати його!
+        </p>
+      </div>
+
+      <div class="book-container">
+        <div class="book-ribbon"></div>
+        <div class="book-spread">
+          <div class="book-spine"></div>
+
+          <!-- Ліва сторінка книги -->
+          <div class="book-page">
+            <div class="page-header">
+              <span class="page-title">📝 Мої читацькі нотатки</span>
+              <span class="page-num">стор. 1</span>
+            </div>
+
+            <div class="entry-card">
+              <h5>🎸 Про Сєню (Розділ 1):</h5>
+              <div class="entry-text" id="diary_ch1_dislike"><span class="entry-empty">Записів ще немає... Заповни у розділі "Маршрут"!</span></div>
+            </div>
+
+            <div class="entry-card">
+              <h5>👥 Друзі Сєні (Розділ 2):</h5>
+              <div class="entry-text" id="diary_friends" style="font-size: 1.1rem; line-height: 1.5;">
+                <span class="entry-empty">Факти про друзів ще не додано...</span>
+              </div>
+            </div>
+
+            <div class="entry-card">
+              <h5>🎾 Заради мрії як Аліна (Розділ 3):</h5>
+              <div class="entry-text" id="diary_ch3_sacrifice"><span class="entry-empty">Твої роздуми з'являться тут після заповнення у "Маршруті"...</span></div>
+            </div>
+
+            <div class="entry-card">
+              <h5>✨ Мої ідеї та роздуми про книгу:</h5>
+              <div class="entry-text" id="diary_thoughts"><span class="entry-empty">Впиши свої думки та ідеї у розділі "Мої думки"...</span></div>
+            </div>
+          </div>
+
+          <!-- Права сторінка книги -->
+          <div class="book-page">
+            <div class="page-header">
+              <span class="page-title">🏅 Колекція штампів читача</span>
+              <span class="page-num">стор. 2</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Кожен лад на гітарі автоматично ставить особистий штамп на відповідний розділ книги!
+            </p>
+
+            <div class="stamps-grid" id="stampsGrid"></div>
+          </div>
+        </div>
+
+        <div class="diary-actions-bar">
+          <button class="btn btn-primary" id="btn_export_diary">💾 Завантажити мій щоденник (.txt)</button>
+          <label class="btn" style="cursor: pointer;">
+            📂 Завантажити з файлу
+            <input type="file" id="importFileInput" accept=".txt" style="display: none;">
+          </label>
+          <button class="btn" onclick="window.print()">🖨️ Роздрукувати</button>
+        </div>
+        <div id="fileNotice" style="font-size: 0.82rem; color: var(--lime); font-weight: 800; text-align: center; min-height: 18px; margin-top: 8px;"></div>
+      </div>
+    </section>
+
+    <!-- ================= 4. МОЇ ДУМКИ ================= -->
+    <section id="thoughts" class="tab-view">
+      <div class="card">
+        <h2 style="font-size: 1.5rem; color: var(--petrol); margin-bottom: 6px;">💬 Клубна трибуна: мої враження</h2>
+        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">
+          Поділися своїми думками про книгу, придумай назву рок-гурту чи кричалку підтримки. Усі записи синхронізуються із читацьким щоденником!
+        </p>
+
+        <div style="margin-bottom: 20px;">
+          <label style="font-weight: 800; color: var(--petrol); font-size: 0.95rem;">
+            Чого мене навчила історія Аліни та Сєні? (Головна думка книги):
+          </label>
+          <textarea class="form-textarea" id="input_review" rows="3" placeholder="Ця книга показує, що справжня дружба та щоденна праця..." oninput="syncData('general_review', this.value)"></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
+          <div>
+            <label style="font-weight: 800; color: var(--petrol); font-size: 0.9rem;">🎸 Твоя ідея назви для рок-гурту Сєні:</label>
+            <input type="text" class="form-input" id="input_band" placeholder="Наприклад: Ракетний Драйв, Струни Перемоги..." oninput="syncData('band_name', this.value)">
+          </div>
+          <div>
+            <label style="font-weight: 800; color: var(--petrol); font-size: 0.9rem;">🎾 Кричалка вболівальника для тенісного турніру Аліни:</label>
+            <input type="text" class="form-input" id="input_cheer" placeholder="Наприклад: М'яч летить — корт тремтить! Аліна переможе вмить!" oninput="syncData('cheer_slogan', this.value)">
+          </div>
+        </div>
+
+        <div class="cert-frame">
+          <div style="font-size: 2.2rem; margin-bottom: 6px;">🏆</div>
+          <h3 style="color: var(--clay); font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">СЕРТИФІКАТ ПЕРЕМОЖЦЯ</h3>
+          <p style="font-weight: 800; color: var(--petrol);">Читацького клубу за книгою «Перша ракетка»</p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 10px;">Цей диплом засвідчує, що відважний читач / читачка:</p>
+          
+          <input type="text" class="cert-name-input" id="cert_name" placeholder="Впиши своє ім'я та прізвище" oninput="syncData('student_name', this.value)">
+          
+          <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.5; color: var(--text);">
+            успішно підкорив/-ла сторінки книги, навчився/-лася цінувати підтримку друзів і впевнено рухатися вперед!
+          </p>
+
+          <div style="margin-top: 20px; font-weight: 800; color: var(--clay); font-size: 0.95rem;">
+            🎾 Еліна Світоліна & Сергій Жадан 🎸
+          </div>
+          <button class="btn btn-primary" style="margin-top: 16px;" onclick="window.print()">🖨️ Роздрукувати сертифікат</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. СЛОВНИК ================= -->
+    <section id="dictionary" class="tab-view">
+      <div class="card">
+        <h2 style="font-size: 1.5rem; color: var(--petrol); margin-bottom: 6px;">📖 Словничок Ракетки & Гітари</h2>
+        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 18px;">
+          Натискай на спортивні та музичні терміни, щоб дізнатися їхнє точне значення!
+        </p>
+
+        <div class="dict-grid">
+          <button class="dict-pill" data-dict-def="🎾 Ейс — подача навиліт у тенісі, яку суперник навіть не зміг зачепити своєю ракеткою!">🎾 Ейс</button>
+          <button class="dict-pill" data-dict-def="🎾 Сет — частина тенісного матчу, яка складається з серії виграних геймів (зазвичай до 6).">🎾 Сет</button>
+          <button class="dict-pill" data-dict-def="🎾 Корт — спеціальний прямокутний майданчик із розміткою для гри у теніс.">🎾 Корт</button>
+          <button class="dict-pill" data-dict-def="🎾 Тай-брейк — вирішальний короткий гейм у тенісі за рівного рахунку (6:6), що визначає переможця сету.">🎾 Тай-брейк</button>
+          <button class="dict-pill" data-dict-def="🎸 Риф — яскрава, повторювана коротка музична фраза (зазвичай на гітарі), що задає драйв пісні.">🎸 Риф</button>
+          <button class="dict-pill" data-dict-def="🎸 Соло — віртуозна індивідуальна партія інструмента, коли всі слухають виключно його звучання.">🎸 Соло</button>
+          <button class="dict-pill" data-dict-def="🎸 Хіт — надзвичайно успішна й популярна музична композиція, яку знають і люблять усі навколо!">🎸 Хіт</button>
+          <button class="dict-pill" data-dict-def="🎸 Акорд — гармонійне одночасне звучання трьох або більше нот.">🎸 Акорд</button>
+        </div>
+
+        <div class="dict-output" id="dictOutput">
+          👈 Обери будь-яке слово вище, щоб прочитати його пояснення!
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. ВІКТОРИНА ================= -->
+    <section id="quiz" class="tab-view">
+      <div class="card" style="text-align: center; margin-bottom: 20px;">
+        <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
+          🎯 Велика турнірна вікторина «Перша ракетка»
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+          Перевір свою уважність до деталей книги! Дай правильні відповіді на всі питання 1 розділу, щоб розблокувати доступ до наступного рівня! 🎾🎸
+        </p>
+      </div>
+
+      <div class="quiz-nav-wrapper">
+        <button class="quiz-level-btn active" id="btn_quiz_ch1" data-quiz-level="quiz_ch1">
+          🎾 Розділ 1 (7 питань)
+        </button>
+        <button class="quiz-level-btn locked" id="btn_quiz_ch2" data-quiz-level="quiz_ch2">
+          🔒 Розділ 2 (Заблоковано)
+        </button>
+        <button class="quiz-level-btn locked" id="btn_quiz_ch3" data-quiz-level="quiz_ch3">
+          🔒 Розділ 3 (Скоро)
+        </button>
+      </div>
+
+      <div id="quiz_ch1" class="quiz-stage active">
+        <div class="card">
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="progress_ch1" style="width: 0%;"></div>
+          </div>
+          <div id="container_ch1"></div>
+        </div>
+      </div>
+
+      <div id="quiz_ch2" class="quiz-stage">
+        <div class="card">
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="progress_ch2" style="width: 0%;"></div>
+          </div>
+          <div id="container_ch2"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const chapterPages = [
+      5, 10, 17, 23, 30, 35, 40, 45, 51, 59, 
+      69, 78, 87, 94, 104, 111, 118, 124, 130, 139, 145, 149, 174
+    ];
+    const TOTAL_CHAPTERS = 23;
+    const TOTAL_PAGES = 174;
+    let completedChapters = 0;
+
+    let diaryData = {
+      ch1_dislike: '',
+      friend_sasha: '',
+      friend_misha: '',
+      friend_andryukha: '',
+      friend_danko: '',
+      ch3_sacrifice: '',
+      general_review: '',
+      band_name: '',
+      cheer_slogan: '',
+      student_name: '',
+      ch1_mood: '',
+      ch2_mood: '',
+      ch3_mood: '',
+      quiz_unlocked: 1
+    };
+
+    // Навігація вкладок
+    function navigate(tabId) {
+      document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+
+      const activeBtn = document.querySelector(`.nav-btn[data-tab-target="${tabId}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Рендеринг гітари та штампів
+    function initFretboardAndStamps() {
+      const fretCanvas = document.getElementById('fretCanvas');
+      const stampsGrid = document.getElementById('stampsGrid');
+      if (!fretCanvas || !stampsGrid) return;
+      
+      fretCanvas.innerHTML = '';
+      stampsGrid.innerHTML = '';
+
+      for (let i = 1; i <= TOTAL_CHAPTERS; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'fret-slot';
+        slot.id = `fret_slot_${i}`;
+        slot.innerHTML = `<span>${i}</span><span style="font-size:0.56rem; opacity:0.8;">${chapterPages[i-1]}с</span>`;
+        slot.title = `Розділ ${i} (до стор. ${chapterPages[i-1]})`;
+        slot.addEventListener('click', () => setProgress(i));
+        fretCanvas.appendChild(slot);
+
+        const stamp = document.createElement('div');
+        stamp.className = 'stamp-slot';
+        stamp.id = `stamp_slot_${i}`;
+        stamp.innerHTML = `
+          <div class="stamp-ch-num">${i} розд.</div>
+          <div class="stamp-mark">ПРОЧИТАНО<br>🎾</div>
+        `;
+        stampsGrid.appendChild(stamp);
+      }
+    }
+
+    function renderProgress() {
+      for (let i = 1; i <= TOTAL_CHAPTERS; i++) {
+        const fret = document.getElementById(`fret_slot_${i}`);
+        const stamp = document.getElementById(`stamp_slot_${i}`);
+
+        if (i <= completedChapters) {
+          if (fret) fret.classList.add('active-fret');
+          if (stamp) stamp.classList.add('stamped');
+        } else {
+          if (fret) fret.classList.remove('active-fret');
+          if (stamp) stamp.classList.remove('stamped');
+        }
+      }
+
+      const percent = Math.round((completedChapters / TOTAL_CHAPTERS) * 100);
+      const pages = completedChapters > 0 ? chapterPages[completedChapters - 1] : 0;
+
+      const chMetric = document.getElementById('metricChapters');
+      const pgMetric = document.getElementById('metricPages');
+      if (chMetric) chMetric.textContent = `Пройдено: ${completedChapters} / ${TOTAL_CHAPTERS} розділів (${pct(completedChapters)}%)`;
+      if (pgMetric) pgMetric.textContent = `Сторінок: ${pages} / ${TOTAL_PAGES}`;
+
+      localStorage.setItem('persha_raketka_progress', completedChapters);
+    }
+
+    function pct(val) {
+      return Math.round((val / TOTAL_CHAPTERS) * 100);
+    }
+
+    function setProgress(val) {
+      completedChapters = val;
+      renderProgress();
+    }
+
+    function moveProgress(step) {
+      completedChapters = Math.max(0, Math.min(TOTAL_CHAPTERS, completedChapters + step));
+      renderProgress();
+    }
+
+    function resetProgress() {
+      if (confirm("Скинути позначки прочитаних розділів?")) {
+        completedChapters = 0;
+        renderProgress();
+      }
+    }
+
+    // Маршрут: підрозділи
+    function switchChapter(chId) {
+      document.querySelectorAll('.chapter-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.ch-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById(chId);
+      if (target) target.classList.add('active');
+
+      const btn = document.querySelector(`.ch-btn[data-ch-target="${chId}"]`);
+      if (btn) btn.classList.add('active');
+    }
+
+    // Синхронізація відповідей у щоденник
+    function syncData(key, value) {
+      diaryData[key] = value;
+      localStorage.setItem('persha_raketka_diary', JSON.stringify(diaryData));
+      updateDiaryDisplay();
+    }
+
+    function updateDiaryDisplay() {
+      const d1 = document.getElementById('diary_ch1_dislike');
+      if (d1) {
+        d1.textContent = diaryData.ch1_dislike.trim() || 'Записів ще немає... Заповни у розділі "Маршрут"!';
+      }
+
+      const df = document.getElementById('diary_friends');
+      if (df) {
+        const friends = [];
+        if (diaryData.friend_sasha.trim()) friends.push(`• Саша: ${diaryData.friend_sasha}`);
+        if (diaryData.friend_misha.trim()) friends.push(`• Міша: ${diaryData.friend_misha}`);
+        if (diaryData.friend_andryukha.trim()) friends.push(`• Андрюха: ${diaryData.friend_andryukha}`);
+        if (diaryData.friend_danko.trim()) friends.push(`• Данько: ${diaryData.friend_danko}`);
+        df.innerHTML = friends.length > 0 ? friends.join('<br>') : '<span class="entry-empty">Факти про друзів ще не додано...</span>';
+      }
+
+      const d3 = document.getElementById('diary_ch3_sacrifice');
+      if (d3) {
+        d3.textContent = diaryData.ch3_sacrifice.trim() || 'Твої роздуми з\'являться тут після заповнення у "Маршруті"...';
+      }
+
+      const dt = document.getElementById('diary_thoughts');
+      if (dt) {
+        const thoughts = [];
+        if (diaryData.general_review.trim()) thoughts.push(`💡 Головна думка: «${diaryData.general_review}»`);
+        if (diaryData.band_name.trim()) thoughts.push(`🎸 Назва рок-гурту: «${diaryData.band_name}»`);
+        if (diaryData.cheer_slogan.trim()) thoughts.push(`🎾 Кричалка для Аліни: «${diaryData.cheer_slogan}»`);
+        dt.innerHTML = thoughts.length > 0 ? thoughts.join('<br>') : '<span class="entry-empty">Впиши свої думки та ідеї у розділі "Мої думки"...</span>';
+      }
+    }
+
+    // Вікторина
+    const quizCh1Data = [
+      { q: "1. Куди запізнювався Сєня на початку книги?", opts: ["На тренування", "На перший урок", "На рок-концерт", "До їдальні"], correct: 1 },
+      { q: "2. Який елемент одягу зіпсував Сєня, поспішаючи до класу?", opts: ["Порвав штанину", "Загубив кепку", "Відірвав ґудзик", "Забруднив сорочку"], correct: 0 },
+      { q: "3. Яка пора року за вікном?", opts: ["Осінь", "Зима", "Весна", "Літо"], correct: 2 },
+      { q: "4. Як звали вчительку з алгебри?", opts: ["Пані Марина", "Пані Олена", "Пані Тетяна", "Пані Оксана"], correct: 0 },
+      { q: "5. Скільки разів розпадався гурт Сєні, не зігравши жодного концерту?", opts: ["Один раз", "Двічі", "Тричі", "Жодного разу"], correct: 1 },
+      { q: "6. Скільки хлопців з гурту Сєні хотіли співати?", opts: ["Один", "Двоє", "Троє", "Усі"], correct: 2 },
+      { q: "7. Що було написано на рукаві у новенької?", opts: ["«Рок»", "«Ха»", "«Київ»", "«Теніс»"], correct: 1 }
+    ];
+
+    const quizCh2Data = [
+      { q: "1. На якому заході хотіли виступити хлопці?", opts: ["На Новий рік", "Свято Останнього дзвоника", "День спорту", "Міський фестиваль"], correct: 1 },
+      { q: "2. Обери правильний опис Данька:", opts: [
+          "Високий хлопець у чорній шкірянці.",
+          "Невисокий, ледве волочить на собі гітару. Нещодавно пофарбував волосся у зелений, за що мама його насварила, він образився і тому поголився налисо.",
+          "Повненький хлопець в окулярах.",
+          "Найспокійніший учень класу."
+        ], correct: 1 },
+      { q: "3. Обери правильний опис Саші:", opts: [
+          "Повненький, з короткою стрижкою, часто соромився своїх окулярів. Прагнув бути самостійним, але коли намагався приготувати сніданок — ледь не спалив кухню.",
+          "Хлопець із зеленим волоссям.",
+          "Жив із бабусею та дідусем.",
+          "Любив грати лише на барабанах."
+        ], correct: 0 },
+      { q: "4. Обери правильний опис Андрюхи:", opts: [
+          "Постійно сидів у теплиці.",
+          "Жив із бабусею і дідусем, тому був дуже самостійним. Носив братову шкірянку і відчував себе справжньою рок-зіркою.",
+          "Боявся виходити на сцену.",
+          "Ніколи не слухав рок-музику."
+        ], correct: 1 },
+      { q: "5. Хто з хлопців першим зміг поговорити з новенькою?", opts: ["Сєня", "Міша", "Саша", "Данько"], correct: 3 },
+      { q: "6. Чому Данько застряг у теплиці?", opts: [
+          "Загубив ключі від дверей.",
+          "Бо прийшовши погодувати свою монстеру Марічку, двері зачинилися і їх заблокувала лопата, що впала.",
+          "Ховався від уроків.",
+          "Його там навмисно зачинили друзі."
+        ], correct: 1 }
+    ];
+
+    let quizAnswers = { ch1: {}, ch2: {} };
+
+    function renderQuiz(chapterKey, data, containerId, progressId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
+
+      data.forEach((item, qIdx) => {
+        const card = document.createElement('div');
+        card.className = 'q-item-card';
+
+        let buttons = '';
+        item.opts.forEach((optText, optIdx) => {
+          buttons += `<button class="q-opt-btn" data-ch="${chapterKey}" data-q="${qIdx}" data-opt="${optIdx}">${optText}</button>`;
+        });
+
+        card.innerHTML = `
+          <div class="q-number-tag">Запитання ${qIdx + 1} з ${data.length}</div>
+          <div class="q-text-title">${item.q}</div>
+          <div class="q-options-grid">${buttons}</div>
+        `;
+        container.appendChild(card);
+      });
+
+      container.querySelectorAll('.q-opt-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const ch = this.dataset.ch;
+          const q = parseInt(this.dataset.q, 10);
+          const opt = parseInt(this.dataset.opt, 10);
+          handleQuizAnswer(ch, q, opt);
+        });
+      });
+    }
+
+    function handleQuizAnswer(ch, qIdx, optIdx) {
+      const data = ch === 'ch1' ? quizCh1Data : quizCh2Data;
+      const item = data[qIdx];
+      quizAnswers[ch][qIdx] = optIdx;
+
+      const cardButtons = document.querySelectorAll(`button[data-ch="${ch}"][data-q="${qIdx}"]`);
+      cardButtons.forEach((b, i) => {
+        b.disabled = true;
+        if (i === item.correct) b.classList.add('correct-ans');
+        else if (i === optIdx) b.classList.add('wrong-ans');
+      });
+
+      const answered = Object.keys(quizAnswers[ch]).length;
+      const progressFill = document.getElementById(ch === 'ch1' ? 'progress_ch1' : 'progress_ch2');
+      if (progressFill) progressFill.style.width = Math.round((answered / data.length) * 100) + '%';
+
+      if (answered === data.length) {
+        let correct = 0;
+        data.forEach((itm, idx) => {
+          if (quizAnswers[ch][idx] === itm.correct) correct++;
+        });
+
+        setTimeout(() => {
+          if (ch === 'ch1') {
+            if (correct === data.length) {
+              unlockQuizStage2();
+              alert(`🎉 Чудово! 7 з 7 правильних відповідей!\nРозділ 2 вікторини відкрито! 🔓`);
+            } else {
+              alert(`Правильно: ${correct} з ${data.length}. Потрібно 100% для відкриття 2 розділу! Оновіть вікторину і спробуйте знову.`);
+            }
+          } else {
+            alert(`🏆 Вітаємо! Результат 2 розділу: ${correct} з ${data.length}!`);
+          }
+        }, 300);
+      }
+    }
+
+    function unlockQuizStage2() {
+      const btn2 = document.getElementById('btn_quiz_ch2');
+      if (btn2) {
+        btn2.classList.remove('locked');
+        btn2.textContent = '🎾 Розділ 2 (6 питань) 🔓';
+      }
+      diaryData.quiz_unlocked = 2;
+      localStorage.setItem('persha_raketka_diary', JSON.stringify(diaryData));
+    }
+
+    function switchQuizLevel(stageId) {
+      if (stageId === 'quiz_ch2' && diaryData.quiz_unlocked < 2) {
+        alert('Цей розділ заблоковано! Спершу дай 100% правильних відповідей у Розділі 1! 🎾');
+        return;
+      }
+      document.querySelectorAll('.quiz-stage').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.quiz-level-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById(stageId);
+      if (target) target.classList.add('active');
+
+      const btn = document.querySelector(`.quiz-level-btn[data-quiz-level="${stageId}"]`);
+      if (btn) btn.classList.add('active');
+    }
+
+    function exportDiaryFile() {
+      const student = diaryData.student_name.trim() || 'Учень/Учениця 4 класу';
+      const content = 
+`==============================================
+📖 ЧИТАЦЬКИЙ ЩОДЕННИК: «ПЕРША РАКЕТКА»
+Автор: ${student}
+Дата: ${new Date().toLocaleDateString('uk-UA')}
+Підкорено розділів: ${completedChapters} з 23 (~${completedChapters > 0 ? chapterPages[completedChapters - 1] : 0} стор.)
+==============================================
+
+[РОЗДІЛ 1. ПРО СЄНЮ]
+${diaryData.ch1_dislike || 'Не заповнено'}
+Настрій: ${diaryData.ch1_mood || 'Не відзначено'}
+
+[РОЗДІЛ 2. ДРУЗІ СЄНІ]
+• Саша: ${diaryData.friend_sasha || '-'}
+• Міша: ${diaryData.friend_misha || '-'}
+• Андрюха: ${diaryData.friend_andryukha || '-'}
+• Данько: ${diaryData.friend_danko || '-'}
+Настрій: ${diaryData.ch2_mood || 'Не відзначено'}
+
+[РОЗДІЛ 3. АЛІНА ТА ЖЕРТВИ ЗАРАДИ МРІЇ]
+${diaryData.ch3_sacrifice || 'Не заповнено'}
+Настрій: ${diaryData.ch3_mood || 'Не відзначено'}
+
+[МОЇ ДУМКИ ТА ТВОРЧІСТЬ]
+• Головна думка: ${diaryData.general_review || 'Не заповнено'}
+• Назва для рок-гурту: ${diaryData.band_name || 'Не заповнено'}
+• Кричалка для Аліни: ${diaryData.cheer_slogan || 'Не заповнено'}
+
+==============================================
+Читацький клуб "Перша ракетка"
+`;
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Щоденник_${student.replace(/\s+/g, '_')}.txt`;
+      a.click();
+    }
+
+    // Ініціалізація слухачів подій після завантаження сторінки
+    document.addEventListener('DOMContentLoaded', () => {
+      // Кнопки верхньої навігації
+      document.querySelectorAll('[data-tab-target]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          navigate(this.dataset.tabTarget);
+        });
+      });
+
+      // Кнопки маршруту
+      document.querySelectorAll('[data-ch-target]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          switchChapter(this.dataset.chTarget);
+        });
+      });
+
+      // Кнопки гітари
+      document.getElementById('btn_minus_chapter')?.addEventListener('click', () => moveProgress(-1));
+      document.getElementById('btn_plus_chapter')?.addEventListener('click', () => moveProgress(1));
+      document.getElementById('btn_reset_chapters')?.addEventListener('click', resetProgress);
+
+      // Смайлики настрою
+      document.querySelectorAll('.ch-mood-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const parent = this.parentElement;
+          parent.querySelectorAll('.ch-mood-btn').forEach(b => b.classList.remove('active-mood'));
+          this.classList.add('active-mood');
+
+          const targetId = this.dataset.moodTarget;
+          const text = this.dataset.moodText;
+          const statusEl = document.getElementById(targetId);
+          if (statusEl) statusEl.textContent = text;
+
+          diaryData[targetId] = text;
+          localStorage.setItem('persha_raketka_diary', JSON.stringify(diaryData));
+        });
+      });
+
+      // Опитування авторів
+      document.querySelectorAll('[data-poll-choice]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.poll-btn').forEach(b => b.classList.remove('selected'));
+          this.classList.add('selected');
+          const res = document.getElementById('pollResult');
+          const choice = this.dataset.pollChoice;
+          if (choice === 'yes') {
+            res.innerHTML = "🎾🎸 <strong>Чудове спостереження!</strong> Сєня, як і Сергій Жадан, обожнює рок і драйв, а Аліна має залізну волю та любов до тенісу, як і Еліна Світоліна!";
+          } else if (choice === 'partly') {
+            res.innerHTML = "💡 <strong>Влучно!</strong> Автори вклали в історію частинку власного досвіду, створивши водночас близьких кожному школяреві героїв.";
+          } else {
+            res.innerHTML = "🗣️ <strong>Чудова ідея!</strong> Обов'язково обговоріть це разом на зустрічі клубу.";
+          }
+        });
+      });
+
+      // Словник
+      document.querySelectorAll('[data-dict-def]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.getElementById('dictOutput').textContent = this.dataset.dictDef;
+        });
+      });
+
+      // Кнопки вікторини
+      document.querySelectorAll('[data-quiz-level]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          switchQuizLevel(this.dataset.quizLevel);
+        });
+      });
+
+      // Експорт щоденника
+      document.getElementById('btn_export_diary')?.addEventListener('click', exportDiaryFile);
+
+      // Завантаження збережених даних
+      initFretboardAndStamps();
+      const savedProg = localStorage.getItem('persha_raketka_progress');
+      if (savedProg !== null) completedChapters = parseInt(savedProg, 10) || 0;
+      renderProgress();
+
+      const savedDiary = localStorage.getItem('persha_raketka_diary');
+      if (savedDiary) {
+        try { Object.assign(diaryData, JSON.parse(savedDiary)); } catch(e) {}
+      }
+
+      if (diaryData.ch1_dislike) document.getElementById('ch1_input_dislike').value = diaryData.ch1_dislike;
+      if (diaryData.friend_sasha) document.getElementById('friend_sasha').value = diaryData.friend_sasha;
+      if (diaryData.friend_misha) document.getElementById('friend_misha').value = diaryData.friend_misha;
+      if (diaryData.friend_andryukha) document.getElementById('friend_andryukha').value = diaryData.friend_andryukha;
+      if (diaryData.friend_danko) document.getElementById('friend_danko').value = diaryData.friend_danko;
+      if (diaryData.ch3_sacrifice) document.getElementById('alinaChallenge').value = diaryData.ch3_sacrifice;
+      if (diaryData.general_review) document.getElementById('input_review').value = diaryData.general_review;
+      if (diaryData.band_name) document.getElementById('input_band').value = diaryData.band_name;
+      if (diaryData.cheer_slogan) document.getElementById('input_cheer').value = diaryData.cheer_slogan;
+      if (diaryData.student_name) document.getElementById('cert_name').value = diaryData.student_name;
+
+      if (diaryData.ch1_mood) document.getElementById('ch1_mood').textContent = diaryData.ch1_mood;
+      if (diaryData.ch2_mood) document.getElementById('ch2_mood').textContent = diaryData.ch2_mood;
+      if (diaryData.ch3_mood) document.getElementById('ch3_mood').textContent = diaryData.ch3_mood;
+
+      updateDiaryDisplay();
+      renderQuiz('ch1', quizCh1Data, 'container_ch1', 'progress_ch1');
+      renderQuiz('ch2', quizCh2Data, 'container_ch2', 'progress_ch2');
+
+      if (diaryData.quiz_unlocked >= 2) unlockQuizStage2();
+    });
+  </script>
+</body>
+</html>
