@@ -9,6 +9,215 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* СТИЛІ РОЗДІЛУ "СЛОВНИК" */
+    .dict-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .dict-expand-card {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .dict-expand-card:hover {
+      border-color: var(--peach);
+      transform: translateY(-2px);
+    }
+    .dict-expand-card.open {
+      border-color: var(--clay);
+      background: #fffdfb;
+    }
+
+    .dict-expand-head {
+      padding: 12px 16px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--petrol);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fffaf7;
+    }
+    .dict-arrow {
+      font-size: 0.75rem;
+      color: var(--clay);
+      transition: transform 0.25s ease;
+    }
+    .dict-expand-card.open .dict-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dict-expand-body {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.45;
+      display: none;
+      border-top: 1px dashed var(--border-accent);
+    }
+    .dict-expand-card.open .dict-expand-body {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    /* Інтерактивний сортер слів */
+    .word-pool-box {
+      background: #faf7f2;
+      border: 2px dashed var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      min-height: 58px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .sort-tag {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 16px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--petrol);
+      cursor: grab;
+      user-select: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .sort-tag:hover {
+      border-color: var(--clay);
+      background: #fff8f5;
+      transform: scale(1.05);
+    }
+    .sort-tag.selected-word {
+      background: var(--clay);
+      color: #fff;
+      border-color: var(--clay);
+    }
+
+    .sort-columns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 700px) {
+      .sort-columns-grid { grid-template-columns: 1fr; }
+    }
+
+    .sort-column {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+    .sort-column.tennis-col { border-top: 6px solid var(--lime); }
+    .sort-column.music-col { border-top: 6px solid var(--coral); }
+    .sort-column.drag-over {
+      background: #fff8f3;
+      border-color: var(--clay);
+      box-shadow: 0 0 12px rgba(231,111,81,0.2);
+    }
+
+    .col-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .col-header h4 { font-size: 1.05rem; color: var(--petrol); }
+    .col-icon { font-size: 1.3rem; }
+
+    .sort-slot-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 120px;
+    }
+    .slot-placeholder {
+      font-size: 0.85rem;
+      color: #a89f91;
+      font-style: italic;
+      text-align: center;
+      margin: auto 0;
+      padding: 20px 0;
+    }
+
+    .sort-feedback {
+      margin-top: 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      min-height: 28px;
+    }
+
+    /* Блокнот слів учня */
+    .custom-word-form {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr auto;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 680px) {
+      .custom-word-form { grid-template-columns: 1fr; }
+    }
+
+    .custom-words-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .custom-word-item {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--peach);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .custom-word-term {
+      font-weight: 800;
+      color: var(--petrol);
+      font-size: 0.95rem;
+    }
+    .custom-word-def {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .delete-word-btn {
+      background: transparent;
+      border: none;
+      color: var(--coral);
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .delete-word-btn:hover { background: #ffebee; }
     :root {
       --clay: #e76f51;
       --clay-hover: #d65a3d;
@@ -1581,6 +1790,228 @@
   </main>
 
   <script>
+    // ================= РОБОТА З РОЗДІЛОМ "СЛОВНИК" =================
+
+    // 1. Клік на картку терміна (розгортання значення)
+    function toggleDictCard(cardEl) {
+      cardEl.classList.toggle('open');
+    }
+
+    // 2. Інтерактивна вправа-сортер
+    const initialWords = [
+      { id: 'w1', text: 'Ейс', cat: 'tennis' },
+      { id: 'w2', text: 'Риф', cat: 'music' },
+      { id: 'w3', text: 'Тай-брейк', cat: 'tennis' },
+      { id: 'w4', text: 'Соло', cat: 'music' },
+      { id: 'w5', text: 'Сет', cat: 'tennis' },
+      { id: 'w6', text: 'Акорд', cat: 'music' },
+      { id: 'w7', text: 'Подвійна помилка', cat: 'tennis' },
+      { id: 'w8', text: 'Медіатор', cat: 'music' }
+    ];
+
+    let wordsInPool = [...initialWords];
+    let tennisColumnWords = [];
+    let musicColumnWords = [];
+    let selectedWordObj = null;
+
+    function renderSortGame() {
+      const poolEl = document.getElementById('wordPool');
+      const tSlot = document.getElementById('tennisSlot');
+      const mSlot = document.getElementById('musicSlot');
+
+      // Відображення слів у банку
+      poolEl.innerHTML = '';
+      if (wordsInPool.length === 0) {
+        poolEl.innerHTML = '<span style="font-size:0.85rem; color:#8ac926; font-weight:800;">Усі слова розподілено! Тисни «Перевірити» 👇</span>';
+      } else {
+        wordsInPool.forEach(word => {
+          const tag = document.createElement('div');
+          tag.className = 'sort-tag' + (selectedWordObj?.id === word.id ? ' selected-word' : '');
+          tag.draggable = true;
+          tag.textContent = word.text;
+          tag.onclick = () => selectWordForSort(word);
+          tag.ondragstart = (e) => e.dataTransfer.setData('text/plain', word.id);
+          poolEl.appendChild(tag);
+        });
+      }
+
+      // Відображення колонки "Теніс"
+      tSlot.innerHTML = '';
+      if (tennisColumnWords.length === 0) {
+        tSlot.innerHTML = '<div class="slot-placeholder">Перетягни або натисни на слово і сюди...</div>';
+      } else {
+        tennisColumnWords.forEach(w => {
+          tSlot.appendChild(createSortedTagElement(w, 'tennis'));
+        });
+      }
+
+      // Відображення колонки "Музика"
+      mSlot.innerHTML = '';
+      if (musicColumnWords.length === 0) {
+        mSlot.innerHTML = '<div class="slot-placeholder">Перетягни або натисни на слово і сюди...</div>';
+      } else {
+        musicColumnWords.forEach(w => {
+          mSlot.appendChild(createSortedTagElement(w, 'music'));
+        });
+      }
+    }
+
+    function createSortedTagElement(word, currentCol) {
+      const el = document.createElement('div');
+      el.className = 'sort-tag';
+      el.style.width = '100%';
+      el.style.justifyContent = 'space-between';
+      el.innerHTML = `<span>${currentCol === 'tennis' ? '🎾' : '🎸'} ${word.text}</span> <span style="font-size:0.8rem; color:var(--text-muted); cursor:pointer;">✖ поверни</span>`;
+      el.onclick = () => returnWordToPool(word, currentCol);
+      return el;
+    }
+
+    function selectWordForSort(word) {
+      selectedWordObj = (selectedWordObj?.id === word.id) ? null : word;
+      renderSortGame();
+    }
+
+    // Клік на саму колонку, якщо вибрано слово
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('colTennis').addEventListener('click', (e) => {
+        if (selectedWordObj && !e.target.closest('.sort-tag')) {
+          moveWordToColumn(selectedWordObj, 'tennis');
+        }
+      });
+      document.getElementById('colMusic').addEventListener('click', (e) => {
+        if (selectedWordObj && !e.target.closest('.sort-tag')) {
+          moveWordToColumn(selectedWordObj, 'music');
+        }
+      });
+    });
+
+    function moveWordToColumn(word, targetCategory) {
+      wordsInPool = wordsInPool.filter(w => w.id !== word.id);
+      if (targetCategory === 'tennis') {
+        tennisColumnWords.push(word);
+      } else {
+        musicColumnWords.push(word);
+      }
+      selectedWordObj = null;
+      renderSortGame();
+      document.getElementById('sortFeedback').textContent = '';
+    }
+
+    function returnWordToPool(word, fromCategory) {
+      if (fromCategory === 'tennis') {
+        tennisColumnWords = tennisColumnWords.filter(w => w.id !== word.id);
+      } else {
+        musicColumnWords = musicColumnWords.filter(w => w.id !== word.id);
+      }
+      wordsInPool.push(word);
+      renderSortGame();
+      document.getElementById('sortFeedback').textContent = '';
+    }
+
+    // Drag and Drop підтримка
+    function allowDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    }
+
+    function handleDrop(e, targetCat) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      const wordId = e.dataTransfer.getData('text/plain');
+      const word = wordsInPool.find(w => w.id === wordId);
+      if (word) {
+        moveWordToColumn(word, targetCat);
+      }
+    }
+
+    document.querySelectorAll('.sort-column').forEach(col => {
+      col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+    });
+
+    // Перевірка правильності
+    function checkSorting() {
+      const feedback = document.getElementById('sortFeedback');
+      if (wordsInPool.length > 0) {
+        feedback.innerHTML = `<span style="color:var(--coral);">⚠️ Спершу розсортуй усі ${wordsInPool.length} слів із банку!</span>`;
+        return;
+      }
+
+      let errors = 0;
+      tennisColumnWords.forEach(w => { if (w.cat !== 'tennis') errors++; });
+      musicColumnWords.forEach(w => { if (w.cat !== 'music') errors++; });
+
+      if (errors === 0) {
+        feedback.innerHTML = `<span style="color:var(--lime);">🎉 Браво! Усі терміни розсортовано на 100% правильно! Справжній чемпіон! 🎾🎸</span>`;
+      } else {
+        feedback.innerHTML = `<span style="color:var(--coral);">Є помилок: ${errors}. Зверни увагу на підказки та спробуй виправити! 😉</span>`;
+      }
+    }
+
+    function resetSortGame() {
+      wordsInPool = [...initialWords];
+      tennisColumnWords = [];
+      musicColumnWords = [];
+      selectedWordObj = null;
+      document.getElementById('sortFeedback').textContent = '';
+      renderSortGame();
+    }
+
+    // 3. Блокнот невідомих слів учня з localStorage
+    let customWords = JSON.parse(localStorage.getItem('persha_raketka_custom_words') || '[]');
+
+    function renderCustomWords() {
+      const listEl = document.getElementById('customWordsList');
+      listEl.innerHTML = '';
+
+      if (customWords.length === 0) {
+        listEl.innerHTML = '<div style="font-size:0.85rem; color:#a89f91; font-style:italic; padding:8px 0;">У тебе ще немає доданих слів. Записуй сюди все нове, що зустрінеш у книзі!</div>';
+        return;
+      }
+
+      customWords.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'custom-word-item';
+        itemEl.innerHTML = `
+          <div>
+            <div class="custom-word-term">📌 ${item.word}</div>
+            <div class="custom-word-def">${item.def || 'Значення ще не вказано'}</div>
+          </div>
+          <button class="delete-word-btn" title="Видалити" onclick="deleteCustomWord(${index})">✕</button>
+        `;
+        listEl.appendChild(itemEl);
+      });
+    }
+
+    function addNewCustomWord() {
+      const wordInput = document.getElementById('newWordInput');
+      const defInput = document.getElementById('newWordDefInput');
+      const word = wordInput.value.trim();
+      const def = defInput.value.trim();
+
+      if (!word) {
+        alert('Вкажи, будь ласка, саме слово!');
+        return;
+      }
+
+      customWords.unshift({ word, def });
+      localStorage.setItem('persha_raketka_custom_words', JSON.stringify(customWords));
+
+      wordInput.value = '';
+      defInput.value = '';
+      renderCustomWords();
+    }
+
+    function deleteCustomWord(index) {
+      customWords.splice(index, 1);
+      localStorage.setItem('persha_raketka_custom_words', JSON.stringify(customWords));
+      renderCustomWords();
+    }
+
+    // Виклик ініціалізації в window.addEventListener('DOMContentLoaded', ...)
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSortGame();
+      renderCustomWords();
+    });
     const chapterPages = [
       5, 10, 17, 23, 30, 35, 40, 45, 51, 59, 
       69, 78, 87, 94, 104, 111, 118, 124, 130, 139, 145, 149, 174
