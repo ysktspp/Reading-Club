@@ -1365,31 +1365,178 @@
       </div>
     </section>
 
-    <!-- ================= 5. СЛОВНИК ================= -->
+    <<!-- ================= 5. РОЗДІЛ: СЛОВНИК ================= -->
     <section id="dictionary" class="tab-view">
+      <!-- Заголовок розділу -->
+      <div class="card" style="text-align: center; margin-bottom: 20px;">
+        <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
+          📖 Словничок: Тенісний корт & Рок-сцена
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+          Досліджуй нові поняття з книги, тренуйся сортувати терміни та записуй слова, які зустрілися тобі вперше під час читання! 🎾🎸
+        </p>
+      </div>
+
+      <!-- ЧАСТИНА 1: Картки зі словами (клік для розкриття значення) -->
       <div class="card">
-        <h2 style="font-size: 1.5rem; color: var(--petrol); margin-bottom: 6px;">📖 Словничок Ракетки & Гітари</h2>
-        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 18px;">
-          Натискай на спортивні та музичні терміни, щоб дізнатися їхнє точне значення!
+        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+          🔍 Терміни книги (натисни на слово, щоб розкрити значення)
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+          Клікай на картки зі словами Сєні та Аліни:
         </p>
 
-        <div class="dict-grid">
-          <button class="dict-pill" data-dict-def="🎾 Ейс — подача навиліт у тенісі, яку суперник навіть не зміг зачепити своєю ракеткою!">🎾 Ейс</button>
-          <button class="dict-pill" data-dict-def="🎾 Сет — частина тенісного матчу, яка складається з серії виграних геймів (зазвичай до 6).">🎾 Сет</button>
-          <button class="dict-pill" data-dict-def="🎾 Корт — спеціальний прямокутний майданчик із розміткою для гри у теніс.">🎾 Корт</button>
-          <button class="dict-pill" data-dict-def="🎾 Тай-брейк — вирішальний короткий гейм у тенісі за рівного рахунку (6:6), що визначає переможця сету.">🎾 Тай-брейк</button>
-          <button class="dict-pill" data-dict-def="🎸 Риф — яскрава, повторювана коротка музична фраза (зазвичай на гітарі), що задає драйв пісні.">🎸 Риф</button>
-          <button class="dict-pill" data-dict-def="🎸 Соло — віртуозна індивідуальна партія інструмента, коли всі слухають виключно його звучання.">🎸 Соло</button>
-          <button class="dict-pill" data-dict-def="🎸 Хіт — надзвичайно успішна й популярна музична композиція, яку знають і люблять усі навколо!">🎸 Хіт</button>
-          <button class="dict-pill" data-dict-def="🎸 Акорд — гармонійне одночасне звучання трьох або більше нот.">🎸 Акорд</button>
+        <div class="dict-cards-grid" id="dictCardsContainer">
+          <!-- Генерується через JavaScript або картки-аккордеони -->
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎾 Ейс</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Подача навиліт у тенісі! М'яч летить так влучно й швидко, що суперник навіть не встигає торкнутися його своєю ракеткою.
+            </div>
+          </div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎸 Риф</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Коротка, яскрава та ритмічна мелодія на гітарі, яка повторюється впродовж пісні та запам'ятовується з перших секунд.
+            </div>
+          </div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎾 Сет</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Велика партія в тенісному матчі, яка складається з виграних геймів (зазвичай до 6 виграшів).
+            </div>
+          </div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎸 Соло</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Віртуозна партія одного інструмента або вокалу, коли вся увага слухачів прикута лише до одного виконавця!
+            </div>
+          </div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎾 Тай-брейк</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Спеціальний вирішальний швидкий гейм за рахунку 6:6, який визначає, хто саме забере перемогу в сеті.
+            </div>
+          </div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎸 Акорд</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Одночасне гармонійне звучання кількох нот (зазвичай трьох чи більше), затиснутих пальцями на струнах гітари.
+            </div>
+          </div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎾 Корт</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Прямокутний спеціально облаштований майданчик для тенісу із сіткою посередині (буває ґрунтовий, трав'яний чи твердий).
+            </div>
+          </div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)">
+            <div class="dict-expand-head">
+              <span>🎸 Хіт</span>
+              <span class="dict-arrow">▼</span>
+            </div>
+            <div class="dict-expand-body">
+              Надзвичайно популярна музична композиція, яку наспівують усі радіостанції та шанувальники навколо.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ЧАСТИНА 2: Інтерактивна гра «Розсортуй терміни» -->
+      <div class="card sort-game-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+          <div>
+            <h3 style="font-size: 1.25rem; color: var(--petrol);">🎯 Вправа-сортер: Світ спорту чи Світ музики?</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 2px;">
+              Клікай на слово з банку, а потім на потрібну колонку або перетягуй його в правильне поле:
+            </p>
+          </div>
+          <button class="btn" onclick="resetSortGame()">🔄 Скинути гру</button>
         </div>
 
-        <div class="dict-output" id="dictOutput">
-          👈 Обери будь-яке слово вище, щоб прочитати його пояснення!
+        <!-- Банк доступних слів -->
+        <div class="word-pool-box" id="wordPool">
+          <!-- Слова генеруються JS -->
+        </div>
+
+        <!-- Колонки для сортування -->
+        <div class="sort-columns-grid">
+          <div class="sort-column tennis-col" id="colTennis" ondragover="allowDrop(event)" ondrop="handleDrop(event, 'tennis')">
+            <div class="col-header">
+              <span class="col-icon">🎾</span>
+              <h4>Тенісний корт (Аліна)</h4>
+            </div>
+            <div class="sort-slot-list" id="tennisSlot">
+              <div class="slot-placeholder">Перетягни або додай тенісні терміни сюди...</div>
+            </div>
+          </div>
+
+          <div class="sort-column music-col" id="colMusic" ondragover="allowDrop(event)" ondrop="handleDrop(event, 'music')">
+            <div class="col-header">
+              <span class="col-icon">🎸</span>
+              <h4>Музична сцена (Сєня)</h4>
+            </div>
+            <div class="sort-slot-list" id="musicSlot">
+              <div class="slot-placeholder">Перетягни або додай музичні терміни сюди...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Кнопка перевірки результату -->
+        <div style="text-align: center; margin-top: 18px;">
+          <button class="btn btn-primary" onclick="checkSorting()">✨ Перевірити сортування!</button>
+          <div id="sortFeedback" class="sort-feedback"></div>
+        </div>
+      </div>
+
+      <!-- ЧАСТИНА 3: Мій блокнот нових/невідомих слів з книги -->
+      <div class="card">
+        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 4px;">
+          ✏️ Мій блокнот незнайомих слів
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+          Зустрів/-ла в тексті «Першої ракетки» незрозуміле чи нове слово? Запиши його сюди та спробуй дізнатися його значення у вчителя, словнику або однокласників![cite: 1]
+        </p>
+
+        <div class="custom-word-form">
+          <input type="text" id="newWordInput" class="form-input" placeholder="Слово з тексту (наприклад: подача, драйв, корт)...">
+          <input type="text" id="newWordDefInput" class="form-input" placeholder="Що воно означає? (або твоя здогадка)">
+          <button class="btn btn-primary" style="white-space: nowrap;" onclick="addNewCustomWord()">➕ Додати слово</button>
+        </div>
+
+        <div class="custom-words-list" id="customWordsList">
+          <!-- Список слів додається динамічно -->
         </div>
       </div>
     </section>
-
     <!-- ================= 6. ВІКТОРИНА ================= -->
     <section id="quiz" class="tab-view">
       <div class="card" style="text-align: center; margin-bottom: 20px;">
