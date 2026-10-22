@@ -31,14 +31,25 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(244, 162, 97, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(138, 201, 38, 0.08) 0%, transparent 40%);
-    }
+   
+   body {
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+
+  /* Тематичний патерн: гітара, ракетка, м'ячик і ноти */
+  background-image: 
+    /* М'які теплі градієнтні акценти */
+    radial-gradient(circle at 10% 20%, rgba(244, 162, 97, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(138, 201, 38, 0.12) 0%, transparent 40%),
+    /* Векторний ненав'язливий візерунок */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23e76f51' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.16'%3E%3C!-- Ракетка --%3E%3Cellipse cx='30' cy='30' rx='12' ry='16' transform='rotate(-25 30 30)'/%3E%3Cline x1='30' y1='14' x2='30' y2='46' transform='rotate(-25 30 30)'/%3E%3Cline x1='18' y1='30' x2='42' y2='30' transform='rotate(-25 30 30)'/%3E%3Cline x1='37' y1='44' x2='50' y2='62'/%3E%3C!-- Тенісний м%27ячик --%3E%3Ccircle cx='95' cy='25' r='10' stroke='%238ac926' opacity='0.25' stroke-width='1.8'/%3E%3Cpath d='M88 20 A 7 7 0 0 0 88 30' stroke='%238ac926' opacity='0.25'/%3E%3Cpath d='M102 20 A 7 7 0 0 1 102 30' stroke='%238ac926' opacity='0.25'/%3E%3C!-- Електрогітара --%3E%3Cpath d='M75 95 C 68 90 70 82 76 78 C 80 75 80 70 78 68 L 94 84 C 92 82 87 82 84 86 C 80 92 72 90 75 95 Z'/%3E%3Cline x1='78' y1='68' x2='100' y2='46' stroke-width='2'/%3E%3Ccircle cx='102' cy='44' r='2.5' fill='%23e76f51'/%3E%3C!-- Музичні ноти та іскри --%3E%3Cpath d='M22 85 v-8 h8 v8 M22 80 h8'/%3E%3Ccircle cx='20' cy='85' r='2.5' fill='%23e76f51'/%3E%3Ccircle cx='28' cy='85' r='2.5' fill='%23e76f51'/%3E%3Cpath d='M58 20 l2 4 l4 2 l-4 2 l-2 4 l-2 -4 l-4 -2 l4 -2 z' fill='%23f4a261' stroke='none' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E");
+  
+  background-repeat: repeat;
+  background-size: auto, auto, 140px 140px;
+  background-attachment: fixed;
+   }
 
     h1, h2, h3, h4, .nav-btn, .btn, .metric-badge, .dict-pill, .ch-btn, .quiz-level-btn {
       font-family: 'Plus Jakarta Sans', sans-serif;
