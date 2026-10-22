@@ -9,299 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* СТИЛІ РОЗДІЛУ "МОЇ ДУМКИ" ТА МІНІ-ІГОР */
-    .dilemma-box {
-      background: #faf7f2;
-      border: 2px solid var(--border-accent);
-      border-radius: var(--radius-md);
-      padding: 18px;
-    }
-    .dilemma-situation {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--petrol);
-      line-height: 1.45;
-      margin-bottom: 16px;
-      padding-left: 12px;
-      border-left: 4px solid var(--clay);
-    }
-    .dilemma-options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .dilemma-btn {
-      background: #ffffff;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      text-align: left;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .dilemma-btn:hover {
-      border-color: var(--clay);
-      background: #fff9f5;
-      transform: translateX(4px);
-    }
-    .dilemma-btn.active-choice {
-      border-color: var(--clay);
-      background: #fff2ea;
-      font-weight: 700;
-    }
-    .dilemma-feedback {
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      line-height: 1.45;
-      display: none;
-      background: #ffffff;
-      border: 1px dashed var(--clay);
-      animation: fadeIn 0.25s ease;
-    }
-
-    /* Віджет стійкості */
-    .resilience-card {
-      background: linear-gradient(135deg, #ffffff 0%, #fffbf8 100%);
-      border: 2px solid var(--border-accent);
-    }
-    .resilience-quote-box {
-      background: #fff7f2;
-      border: 2px dashed var(--clay);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .resilience-quote-box.pop {
-      transform: scale(1.02);
-    }
-    .quote-text {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--petrol);
-      line-height: 1.5;
-      font-style: italic;
-    }
-    .quote-author {
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--clay);
-      margin-top: 8px;
-    }
-    /* СТИЛІ РОЗДІЛУ "СЛОВНИК" */
-    .dict-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin-bottom: 10px;
-    }
-
-    .dict-expand-card {
-      background: #fff;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .dict-expand-card:hover {
-      border-color: var(--peach);
-      transform: translateY(-2px);
-    }
-    .dict-expand-card.open {
-      border-color: var(--clay);
-      background: #fffdfb;
-    }
-
-    .dict-expand-head {
-      padding: 12px 16px;
-      font-weight: 800;
-      font-size: 0.95rem;
-      color: var(--petrol);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #fffaf7;
-    }
-    .dict-arrow {
-      font-size: 0.75rem;
-      color: var(--clay);
-      transition: transform 0.25s ease;
-    }
-    .dict-expand-card.open .dict-arrow {
-      transform: rotate(180deg);
-    }
-
-    .dict-expand-body {
-      padding: 12px 16px;
-      font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.45;
-      display: none;
-      border-top: 1px dashed var(--border-accent);
-    }
-    .dict-expand-card.open .dict-expand-body {
-      display: block;
-      animation: fadeIn 0.2s ease;
-    }
-
-    /* Інтерактивний сортер слів */
-    .word-pool-box {
-      background: #faf7f2;
-      border: 2px dashed var(--border-accent);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      min-height: 58px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .sort-tag {
-      background: #ffffff;
-      border: 2px solid var(--border);
-      border-radius: 50px;
-      padding: 7px 16px;
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--petrol);
-      cursor: grab;
-      user-select: none;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-    .sort-tag:hover {
-      border-color: var(--clay);
-      background: #fff8f5;
-      transform: scale(1.05);
-    }
-    .sort-tag.selected-word {
-      background: var(--clay);
-      color: #fff;
-      border-color: var(--clay);
-    }
-
-    .sort-columns-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    @media (max-width: 700px) {
-      .sort-columns-grid { grid-template-columns: 1fr; }
-    }
-
-    .sort-column {
-      background: #ffffff;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.25s ease;
-    }
-    .sort-column.tennis-col { border-top: 6px solid var(--lime); }
-    .sort-column.music-col { border-top: 6px solid var(--coral); }
-    .sort-column.drag-over {
-      background: #fff8f3;
-      border-color: var(--clay);
-      box-shadow: 0 0 12px rgba(231,111,81,0.2);
-    }
-
-    .col-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    .col-header h4 { font-size: 1.05rem; color: var(--petrol); }
-    .col-icon { font-size: 1.3rem; }
-
-    .sort-slot-list {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-height: 120px;
-    }
-    .slot-placeholder {
-      font-size: 0.85rem;
-      color: #a89f91;
-      font-style: italic;
-      text-align: center;
-      margin: auto 0;
-      padding: 20px 0;
-    }
-
-    .sort-feedback {
-      margin-top: 12px;
-      font-size: 1rem;
-      font-weight: 800;
-      min-height: 28px;
-    }
-
-    /* Блокнот слів учня */
-    .custom-word-form {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr auto;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    @media (max-width: 680px) {
-      .custom-word-form { grid-template-columns: 1fr; }
-    }
-
-    .custom-words-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .custom-word-item {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--peach);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    .custom-word-term {
-      font-weight: 800;
-      color: var(--petrol);
-      font-size: 0.95rem;
-    }
-    .custom-word-def {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-    .delete-word-btn {
-      background: transparent;
-      border: none;
-      color: var(--coral);
-      cursor: pointer;
-      font-weight: 800;
-      font-size: 1.1rem;
-      padding: 4px 8px;
-      border-radius: 6px;
-    }
-    .delete-word-btn:hover { background: #ffebee; }
     :root {
       --clay: #e76f51;
       --clay-hover: #d65a3d;
@@ -456,6 +163,7 @@
     }
     .btn-primary:hover { background: var(--clay-hover); border-color: var(--clay-hover); color: #fff; }
 
+    /* Головна */
     .hero-card {
       background: linear-gradient(145deg, #ffffff 0%, #fff7f2 100%);
       border: 1px solid var(--border-accent);
@@ -1035,7 +743,7 @@
       border-top: 1px dashed #d5c4b1;
     }
 
-    /* Мої думки */
+    /* Поля введення */
     .form-textarea, .form-input {
       width: 100%;
       background: var(--bg);
@@ -1047,56 +755,6 @@
       margin-top: 8px;
     }
     .form-textarea:focus, .form-input:focus { outline: none; border-color: var(--clay); background: #fff; }
-
-    .cert-frame {
-      background: #ffffff;
-      border: 4px double var(--clay);
-      border-radius: var(--radius-lg);
-      padding: 34px 20px;
-      text-align: center;
-      box-shadow: var(--shadow-md);
-      margin-top: 24px;
-    }
-    .cert-name-input {
-      border: none;
-      border-bottom: 2px solid var(--clay);
-      background: transparent;
-      font-size: 1.25rem;
-      font-weight: 800;
-      text-align: center;
-      color: var(--petrol);
-      padding: 8px 12px;
-      width: 80%;
-      max-width: 380px;
-      margin: 16px 0;
-    }
-
-    /* Словник */
-    .dict-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-    .dict-pill {
-      background: #fff7f2;
-      border: 1px solid var(--border-accent);
-      color: var(--clay);
-      padding: 8px 16px;
-      border-radius: 50px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .dict-pill:hover { background: var(--clay); color: #fff; transform: translateY(-2px); }
-    .dict-output {
-      background: var(--bg);
-      border: 1px dashed var(--peach);
-      padding: 18px;
-      border-radius: var(--radius-md);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--petrol);
-      min-height: 60px;
-      display: flex;
-      align-items: center;
-    }
 
     /* Вікторина */
     .quiz-nav-wrapper {
@@ -1201,15 +859,297 @@
       color: #b91c1c !important;
     }
 
-    .quiz-result-box {
-      text-align: center;
-      padding: 30px 20px;
-      background: linear-gradient(135deg, #fffaf5 0%, #f4fce3 100%);
-      border: 2px dashed var(--lime);
-      border-radius: var(--radius-lg);
-      margin-top: 20px;
+    /* Стилі Словника */
+    .dict-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 10px;
     }
-    .quiz-result-title { font-size: 1.5rem; font-weight: 900; color: var(--petrol); margin-bottom: 8px; }
+
+    .dict-expand-card {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .dict-expand-card:hover {
+      border-color: var(--peach);
+      transform: translateY(-2px);
+    }
+    .dict-expand-card.open {
+      border-color: var(--clay);
+      background: #fffdfb;
+    }
+
+    .dict-expand-head {
+      padding: 12px 16px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--petrol);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fffaf7;
+    }
+    .dict-arrow {
+      font-size: 0.75rem;
+      color: var(--clay);
+      transition: transform 0.25s ease;
+    }
+    .dict-expand-card.open .dict-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dict-expand-body {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.45;
+      display: none;
+      border-top: 1px dashed var(--border-accent);
+    }
+    .dict-expand-card.open .dict-expand-body {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .word-pool-box {
+      background: #faf7f2;
+      border: 2px dashed var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      min-height: 58px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .sort-tag {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 16px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--petrol);
+      cursor: grab;
+      user-select: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .sort-tag:hover {
+      border-color: var(--clay);
+      background: #fff8f5;
+      transform: scale(1.05);
+    }
+    .sort-tag.selected-word {
+      background: var(--clay);
+      color: #fff;
+      border-color: var(--clay);
+    }
+
+    .sort-columns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 700px) {
+      .sort-columns-grid { grid-template-columns: 1fr; }
+    }
+
+    .sort-column {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+    .sort-column.tennis-col { border-top: 6px solid var(--lime); }
+    .sort-column.music-col { border-top: 6px solid var(--coral); }
+    .sort-column.drag-over {
+      background: #fff8f3;
+      border-color: var(--clay);
+      box-shadow: 0 0 12px rgba(231,111,81,0.2);
+    }
+
+    .col-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .col-header h4 { font-size: 1.05rem; color: var(--petrol); }
+    .col-icon { font-size: 1.3rem; }
+
+    .sort-slot-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 120px;
+    }
+    .slot-placeholder {
+      font-size: 0.85rem;
+      color: #a89f91;
+      font-style: italic;
+      text-align: center;
+      margin: auto 0;
+      padding: 20px 0;
+    }
+
+    .sort-feedback {
+      margin-top: 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      min-height: 28px;
+    }
+
+    .custom-word-form {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr auto;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 680px) {
+      .custom-word-form { grid-template-columns: 1fr; }
+    }
+
+    .custom-words-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .custom-word-item {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--peach);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .custom-word-term {
+      font-weight: 800;
+      color: var(--petrol);
+      font-size: 0.95rem;
+    }
+    .custom-word-def {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .delete-word-btn {
+      background: transparent;
+      border: none;
+      color: var(--coral);
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .delete-word-btn:hover { background: #ffebee; }
+
+    /* Стилі розділу Мої думки */
+    .dilemma-box {
+      background: #faf7f2;
+      border: 2px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+    .dilemma-situation {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--petrol);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--clay);
+    }
+    .dilemma-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dilemma-btn {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dilemma-btn:hover {
+      border-color: var(--clay);
+      background: #fff9f5;
+      transform: translateX(4px);
+    }
+    .dilemma-btn.active-choice {
+      border-color: var(--clay);
+      background: #fff2ea;
+      font-weight: 700;
+    }
+    .dilemma-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      display: none;
+      background: #ffffff;
+      border: 1px dashed var(--clay);
+      animation: fadeIn 0.25s ease;
+    }
+
+    .resilience-card {
+      background: linear-gradient(135deg, #ffffff 0%, #fffbf8 100%);
+      border: 2px solid var(--border-accent);
+    }
+    .resilience-quote-box {
+      background: #fff7f2;
+      border: 2px dashed var(--clay);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .resilience-quote-box.pop {
+      transform: scale(1.02);
+    }
+    .quote-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--petrol);
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .quote-author {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--clay);
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -1221,13 +1161,13 @@
         <div class="brand-icon">🎾</div>
         <span>Перша ракетка</span>
       </div>
-     <div class="nav-links">
-        <button class="nav-btn active" onclick="navigate('scene')">🏠Головна</button>
-        <button class="nav-btn" onclick="navigate('route')">🚩Маршрут</button>
-        <button class="nav-btn" onclick="navigate('diary')">📖 Щоденник</button>
-        <button class="nav-btn" onclick="navigate('quiz')">🤔Вікторина</button>
-        <button class="nav-btn" onclick="navigate('dictionary')">📚Словник</button>
-        <button class="nav-btn" onclick="navigate('thoughts')">😶‍🌫️Мої думки</button>
+      <div class="nav-links">
+        <button class="nav-btn active" data-tab-target="scene">🏠 Головна</button>
+        <button class="nav-btn" data-tab-target="route">🚩 Маршрут</button>
+        <button class="nav-btn" data-tab-target="diary">📖 Щоденник</button>
+        <button class="nav-btn" data-tab-target="quiz">🤔 Вікторина</button>
+        <button class="nav-btn" data-tab-target="dictionary">📚 Словник</button>
+        <button class="nav-btn" data-tab-target="thoughts">💭 Мої думки</button>
       </div>
     </nav>
   </header>
@@ -1612,106 +1552,50 @@
       </div>
     </section>
 
-<!-- ================= 6. РОЗДІЛ: МОЇ ДУМКИ ================= -->
-    <section id="thoughts" class="tab-view">
-      <!-- Заголовок розділу -->
+    <!-- ================= 4. ВІКТОРИНА ================= -->
+    <section id="quiz" class="tab-view">
       <div class="card" style="text-align: center; margin-bottom: 20px;">
         <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
-          💭 Простір думок: Відлуння корту та сцени
+          🎯 Велика турнірна вікторина «Перша ракетка»
         </h2>
         <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
-          Тут ти можеш поміркувати над головними ідеями книги, випробувати себе в грі життєвих рішень та зарядитися мотивацією на кожен день! 🎾🎸
+          Перевір свою уважність до деталей книги! Дай правильні відповіді на всі питання 1 розділу, щоб розблокувати доступ до наступного рівня! 🎾🎸
         </p>
       </div>
 
-      <!-- БЛОК 1: Клубна трибуна & Творча скарбничка -->
-      <div class="card" style="margin-bottom: 20px;">
-        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 8px;">
-          💬 Клубна трибуна: Головна тема книги
-        </h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">
-          Напиши свої роздуми: про що ця історія для тебе особисто? Чого вона навчає?
-        </p>
-        <textarea id="reviewText" rows="3" class="form-input" style="width: 100%; resize: vertical;" 
-                  placeholder="Ця книга вчить мене ніколи не опускати руки, тому що..."></textarea>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
-          <div>
-            <label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎸 Назва для рок-гурту Сєні:</label>
-            <input type="text" id="bandName" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Твій креативний варіант...">
-          </div>
-          <div>
-            <label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎾 Кричалка підтримки для Аліни:</label>
-            <input type="text" id="cheerText" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Слова вболівальників на корті...">
-          </div>
-        </div>
+      <div class="quiz-nav-wrapper">
+        <button class="quiz-level-btn active" id="btn_quiz_ch1" data-quiz-level="quiz_ch1">
+          🎾 Розділ 1 (7 питань)
+        </button>
+        <button class="quiz-level-btn locked" id="btn_quiz_ch2" data-quiz-level="quiz_ch2">
+          🔒 Розділ 2 (Заблоковано)
+        </button>
+        <button class="quiz-level-btn locked" id="btn_quiz_ch3" data-quiz-level="quiz_ch3">
+          🔒 Розділ 3 (Скоро)
+        </button>
+      </div>
 
-        <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
-          <button class="btn btn-primary" onclick="saveThoughts()">💾 Зберегти мої думки</button>
-          <span id="thoughtsSaveNotice" style="font-size: 0.88rem; font-weight: 700; color: var(--lime);"></span>
+      <div id="quiz_ch1" class="quiz-stage active">
+        <div class="card">
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="progress_ch1" style="width: 0%;"></div>
+          </div>
+          <div id="container_ch1"></div>
         </div>
       </div>
 
-      <!-- БЛОК 2: Інтерактивна гра «Рішення чемпіона» -->
-      <div class="card" style="margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
-          <div>
-            <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 4px;">
-              🎯 Гра-дилема: «Рішення чемпіона»
-            </h3>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">
-              Уяви себе на місці персонажів. Як би вчинив/-ла ти? Обирай свій варіант:
-            </p>
+      <div id="quiz_ch2" class="quiz-stage">
+        <div class="card">
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="progress_ch2" style="width: 0%;"></div>
           </div>
-          <div style="font-size: 0.85rem; font-weight: 800; color: var(--clay);" id="dilemmaCounter">
-            Ситуація 1 з 2
-          </div>
-        </div>
-
-        <!-- Контейнер поточної ситуації гри -->
-        <div class="dilemma-box" id="dilemmaBox">
-          <div class="dilemma-situation" id="dilemmaSituationText">
-            <!-- Текст ситуації з'явиться через JS -->
-          </div>
-          <div class="dilemma-options" id="dilemmaOptionsContainer">
-            <!-- Варіанти дій -->
-          </div>
-          <div class="dilemma-feedback" id="dilemmaFeedback"></div>
-        </div>
-
-        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
-          <button class="btn" onclick="prevDilemma()">◀ Попередня</button>
-          <button class="btn btn-primary" onclick="nextDilemma()">Наступна ситуація ▶</button>
-        </div>
-      </div>
-
-      <!-- БЛОК 3: Кнопка / Віджет стійкості «Коли опускаються руки» -->
-      <div class="card resilience-card">
-        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 6px;">
-          ⚡ Кнопка стійкості: «Порада чемпіонів»
-        </h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
-          Буває важко? Потрібен заряд енергії? Тисни на кнопку й витягуй випадкову пораду від Еліни Світоліної та Сєні:
-        </p>
-
-        <div class="resilience-quote-box" id="resilienceQuoteBox">
-          <div class="quote-text" id="resilienceQuoteText">
-            «Помилка на корті — це не програш, а лише підказка для наступного точного удару!» 🎾
-          </div>
-          <div class="quote-author" id="resilienceQuoteAuthor">— Еліна Світоліна</div>
-        </div>
-
-        <div style="text-align: center; margin-top: 16px;">
-          <button class="btn btn-primary" onclick="getRandomResilienceQuote()">
-            🎲 Витягнути нову пораду дня
-          </button>
+          <div id="container_ch2"></div>
         </div>
       </div>
     </section>
 
-    <<!-- ================= 5. РОЗДІЛ: СЛОВНИК ================= -->
+    <!-- ================= 5. РОЗДІЛ: СЛОВНИК ================= -->
     <section id="dictionary" class="tab-view">
-      <!-- Заголовок розділу -->
       <div class="card" style="text-align: center; margin-bottom: 20px;">
         <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
           📖 Словничок: Тенісний корт & Рок-сцена
@@ -1721,7 +1605,7 @@
         </p>
       </div>
 
-      <!-- ЧАСТИНА 1: Картки зі словами (клік для розкриття значення) -->
+      <!-- ЧАСТИНА 1: Картки зі словами -->
       <div class="card">
         <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
           🔍 Терміни книги (натисни на слово, щоб розкрити значення)
@@ -1731,7 +1615,6 @@
         </p>
 
         <div class="dict-cards-grid" id="dictCardsContainer">
-          <!-- Генерується через JavaScript або картки-аккордеони -->
           <div class="dict-expand-card" onclick="toggleDictCard(this)">
             <div class="dict-expand-head">
               <span>🎾 Ейс</span>
@@ -1826,12 +1709,8 @@
           <button class="btn" onclick="resetSortGame()">🔄 Скинути гру</button>
         </div>
 
-        <!-- Банк доступних слів -->
-        <div class="word-pool-box" id="wordPool">
-          <!-- Слова генеруються JS -->
-        </div>
+        <div class="word-pool-box" id="wordPool"></div>
 
-        <!-- Колонки для сортування -->
         <div class="sort-columns-grid">
           <div class="sort-column tennis-col" id="colTennis" ondragover="allowDrop(event)" ondrop="handleDrop(event, 'tennis')">
             <div class="col-header">
@@ -1854,436 +1733,125 @@
           </div>
         </div>
 
-        <!-- Кнопка перевірки результату -->
         <div style="text-align: center; margin-top: 18px;">
           <button class="btn btn-primary" onclick="checkSorting()">✨ Перевірити сортування!</button>
           <div id="sortFeedback" class="sort-feedback"></div>
         </div>
       </div>
 
-      <!-- ЧАСТИНА 3: Мій блокнот нових/невідомих слів з книги -->
+      <!-- ЧАСТИНА 3: Мій блокнот нових слів -->
       <div class="card">
         <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 4px;">
           ✏️ Мій блокнот незнайомих слів
         </h3>
         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
-          Зустрів/-ла в тексті «Першої ракетки» незрозуміле чи нове слово? Запиши його сюди та спробуй дізнатися його значення у вчителя, словнику або однокласників!
+          Зустрів/-ла в тексті «Першої ракетки» незрозуміле чи нове слово? Запиши його сюди та дізнайся значення!
         </p>
 
         <div class="custom-word-form">
-          <input type="text" id="newWordInput" class="form-input" placeholder="Слово з тексту (наприклад: подача, драйв, корт)...">
+          <input type="text" id="newWordInput" class="form-input" placeholder="Слово з тексту (наприклад: гейм, драйв, корт)...">
           <input type="text" id="newWordDefInput" class="form-input" placeholder="Що воно означає? (або твоя здогадка)">
           <button class="btn btn-primary" style="white-space: nowrap;" onclick="addNewCustomWord()">➕ Додати слово</button>
         </div>
 
-        <div class="custom-words-list" id="customWordsList">
-          <!-- Список слів додається динамічно -->
-        </div>
+        <div class="custom-words-list" id="customWordsList"></div>
       </div>
     </section>
-    <!-- ================= 6. ВІКТОРИНА ================= -->
-    <section id="quiz" class="tab-view">
+
+    <!-- ================= 6. РОЗДІЛ: МОЇ ДУМКИ ================= -->
+    <section id="thoughts" class="tab-view">
       <div class="card" style="text-align: center; margin-bottom: 20px;">
         <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
-          🎯 Велика турнірна вікторина «Перша ракетка»
+          💭 Простір думок: Відлуння корту та сцени
         </h2>
         <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
-          Перевір свою уважність до деталей книги! Дай правильні відповіді на всі питання 1 розділу, щоб розблокувати доступ до наступного рівня! 🎾🎸
+          Тут ти можеш поміркувати над головними ідеями книги, випробувати себе в грі життєвих рішень та зарядитися мотивацією на кожен день! 🎾🎸
         </p>
       </div>
 
-      <div class="quiz-nav-wrapper">
-        <button class="quiz-level-btn active" id="btn_quiz_ch1" data-quiz-level="quiz_ch1">
-          🎾 Розділ 1 (7 питань)
-        </button>
-        <button class="quiz-level-btn locked" id="btn_quiz_ch2" data-quiz-level="quiz_ch2">
-          🔒 Розділ 2 (Заблоковано)
-        </button>
-        <button class="quiz-level-btn locked" id="btn_quiz_ch3" data-quiz-level="quiz_ch3">
-          🔒 Розділ 3 (Скоро)
-        </button>
-      </div>
-
-      <div id="quiz_ch1" class="quiz-stage active">
-        <div class="card">
-          <div class="quiz-progress-bar">
-            <div class="quiz-progress-fill" id="progress_ch1" style="width: 0%;"></div>
+      <!-- БЛОК 1: Клубна трибуна -->
+      <div class="card" style="margin-bottom: 20px;">
+        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 8px;">
+          💬 Клубна трибуна: Головна тема книги
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">
+          Напиши свої роздуми: про що ця історія для тебе особисто? Чого вона навчає?
+        </p>
+        <textarea id="reviewText" rows="3" class="form-input" style="width: 100%; resize: vertical;" 
+                  placeholder="Ця книга вчить мене ніколи не опускати руки, тому що..."></textarea>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎸 Назва для рок-гурту Сєні:</label>
+            <input type="text" id="bandName" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Твій креативний варіант...">
           </div>
-          <div id="container_ch1"></div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎾 Кричалка підтримки для Аліни:</label>
+            <input type="text" id="cheerText" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Слова вболівальників на корті...">
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
+          <button class="btn btn-primary" onclick="saveThoughts()">💾 Зберегти мої думки</button>
+          <span id="thoughtsSaveNotice" style="font-size: 0.88rem; font-weight: 700; color: var(--lime);"></span>
         </div>
       </div>
 
-      <div id="quiz_ch2" class="quiz-stage">
-        <div class="card">
-          <div class="quiz-progress-bar">
-            <div class="quiz-progress-fill" id="progress_ch2" style="width: 0%;"></div>
+      <!-- БЛОК 2: Гра «Рішення чемпіона» -->
+      <div class="card" style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+          <div>
+            <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 4px;">
+              🎯 Гра-дилема: «Рішення чемпіона»
+            </h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Уяви себе на місці персонажів. Як би вчинив/-ла ти? Обирай свій варіант:
+            </p>
           </div>
-          <div id="container_ch2"></div>
+          <div style="font-size: 0.85rem; font-weight: 800; color: var(--clay);" id="dilemmaCounter">
+            Ситуація 1 з 2
+          </div>
+        </div>
+
+        <div class="dilemma-box" id="dilemmaBox">
+          <div class="dilemma-situation" id="dilemmaSituationText"></div>
+          <div class="dilemma-options" id="dilemmaOptionsContainer"></div>
+          <div class="dilemma-feedback" id="dilemmaFeedback"></div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+          <button class="btn" onclick="prevDilemma()">◀ Попередня</button>
+          <button class="btn btn-primary" onclick="nextDilemma()">Наступна ситуація ▶</button>
+        </div>
+      </div>
+
+      <!-- БЛОК 3: Кнопка стійкості -->
+      <div class="card resilience-card">
+        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 6px;">
+          ⚡ Кнопка стійкості: «Порада чемпіонів»
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+          Буває важко? Потрібен заряд енергії? Тисни на кнопку й витягуй випадкову пораду від Еліни Світоліної та Сєні:
+        </p>
+
+        <div class="resilience-quote-box" id="resilienceQuoteBox">
+          <div class="quote-text" id="resilienceQuoteText">
+            «Помилка на корті — це не програш, а лише підказка для наступного точного удару!» 🎾
+          </div>
+          <div class="quote-author" id="resilienceQuoteAuthor">— Еліна Світоліна</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 16px;">
+          <button class="btn btn-primary" onclick="getRandomResilienceQuote()">
+            🎲 Витягнути нову пораду дня
+          </button>
         </div>
       </div>
     </section>
   </main>
 
   <script>
-    // ================= РОБОТА З РОЗДІЛОМ "МОЇ ДУМКИ" =================
-
-    // 1. Збереження роздумів учня в localStorage
-    function saveThoughts() {
-      const review = document.getElementById('reviewText').value.trim();
-      const band = document.getElementById('bandName').value.trim();
-      const cheer = document.getElementById('cheerText').value.trim();
-
-      const data = { review, band, cheer };
-      localStorage.setItem('persha_raketka_thoughts', JSON.stringify(data));
-
-      const notice = document.getElementById('thoughtsSaveNotice');
-      notice.textContent = '✅ Твої думки успішно збережено!';
-      setTimeout(() => { notice.textContent = ''; }, 3000);
-    }
-
-    function loadSavedThoughts() {
-      const saved = JSON.parse(localStorage.getItem('persha_raketka_thoughts') || '{}');
-      if (saved.review) document.getElementById('reviewText').value = saved.review;
-      if (saved.band) document.getElementById('bandName').value = saved.band;
-      if (saved.cheer) document.getElementById('cheerText').value = saved.cheer;
-    }
-
-    // 2. СИТУАЦІЇ ДЛЯ ГРИ «РІШЕННЯ ЧЕМПІОНА»
-    // Сюди ви можете легко дописувати нові ситуації по ходу читання:
-    const dilemmasData = [
-      {
-        id: 1,
-        situation: "🎾 Ситуація 1: Ти приходиш на нове тренування з тенісу, а тренер Петро навіть не дивиться на твої удари й займається іншими. Що ти зробиш?",
-        options: [
-          {
-            text: "А) Кину ракетку в сумку і більше ніколи туди не прийду.",
-            reaction: "«Образитися легко, але чи варто через когось кидати власну мрію? Згадай Аліну: справжня чемпіонка продовжує відточувати подачу!» 🎾"
-          },
-          {
-            text: "Б) Запитаю у тренера, яку вправу мені відпрацювати просто зараз, і покажу максимум.",
-            reaction: "«Чудовий хід! Ініціатива та впертість завжди змушують інших звернути на тебе увагу. Ти граєш за своїми правилами!» 🏆"
-          },
-          {
-            text: "В) Поділюся переживаннями з друзями (як Аліна із Сєнею), щоб знайти підтримку.",
-            reaction: "«Мудрий вибір! Коли поруч є хтось, хто вірить у тебе, навіть найсуворіший тренер не зможе зламати твій настрій!» 🤝"
-          }
-        ]
-      },
-      {
-        id: 2,
-        situation: "🎸 Ситуація 2: До шкільного виступу гурту лишився тиждень, а на репетиції хтось із хлопців постійно збивається з ритму. Твої дії як лідера:",
-        options: [
-          {
-            text: "А) Накричу й скажу, що він усе псує.",
-            reaction: "«Крик лише додасть страху. Справжній рок-гурт — це родина, де підтримують, а не топлять!» 🎸"
-          },
-          {
-            text: "Б) Запропоную зіграти у повільному темпі кілька разів разом і підбадьорю.",
-            reaction: "«Браво! Сєня вчинив би саме так: терпіння, усмішка і спільний драйв творять дива!» ⚡"
-          },
-          {
-            text: "В) Спростити партію, щоб усім було комфортно зіграти без помилок.",
-            reaction: "«Гнучке командне рішення! Краще зіграти простіше, але з щирим вогником у серці!» 🔥"
-          }
-        ]
-      }
-    ];
-
-    let currentDilemmaIdx = 0;
-
-    function renderDilemma() {
-      const d = dilemmasData[currentDilemmaIdx];
-      document.getElementById('dilemmaCounter').textContent = `Ситуація ${currentDilemmaIdx + 1} з ${dilemmasData.length}`;
-      document.getElementById('dilemmaSituationText').textContent = d.situation;
-
-      const optsContainer = document.getElementById('dilemmaOptionsContainer');
-      optsContainer.innerHTML = '';
-
-      d.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'dilemma-btn';
-        btn.textContent = opt.text;
-        btn.onclick = () => selectDilemmaOption(idx, opt.reaction, btn);
-        optsContainer.appendChild(btn);
-      });
-
-      const fb = document.getElementById('dilemmaFeedback');
-      fb.style.display = 'none';
-      fb.textContent = '';
-    }
-
-    function selectDilemmaOption(index, reaction, buttonEl) {
-      document.querySelectorAll('.dilemma-btn').forEach(b => b.classList.remove('active-choice'));
-      buttonEl.classList.add('active-choice');
-
-      const fb = document.getElementById('dilemmaFeedback');
-      fb.style.display = 'block';
-      fb.innerHTML = `<strong>Коментар клубу:</strong> ${reaction}`;
-    }
-
-    function nextDilemma() {
-      if (currentDilemmaIdx < dilemmasData.length - 1) {
-        currentDilemmaIdx++;
-        renderDilemma();
-      } else {
-        alert('Ти пройшов/-ла всі поточні ситуації! Нові додаватимуться разом із новими розділами 🎾');
-      }
-    }
-
-    function prevDilemma() {
-      if (currentDilemmaIdx > 0) {
-        currentDilemmaIdx--;
-        renderDilemma();
-      }
-    }
-
-    // 3. ГЕНЕРАТОР ПОРАД ДНЯ («Кнопка стійкості»)
-    const resilienceQuotes = [
-      { text: "«Помилка на корті — це не програш, а лише підказка для наступного точного удару!» 🎾", author: "— Еліна Світоліна" },
-      { text: "«Порвалася струна? Зіграй на трьох інших так, ніби так і було задумано!» 🎸", author: "— Сєня" },
-      { text: "«Ніколи не опускай рук. Твій головний переможний гейм ще попереду!» 🏆", author: "— Сергій Жадан" },
-      { text: "«Коли складно в новому місці, пам'ятай: щира усмішка перетворює незнайомців на друзів!» 🤝", author: "— Аліна" },
-      { text: "«Великий рок і великий спорт починаються з одного маленького тренування щодня!» ⚡", author: "— Читацький клуб" }
-    ];
-
-    function getRandomResilienceQuote() {
-      const box = document.getElementById('resilienceQuoteBox');
-      box.classList.remove('pop');
-      void box.offsetWidth; // перезапуск css-анімації
-      box.classList.add('pop');
-
-      const randomItem = resilienceQuotes[Math.floor(Math.random() * resilienceQuotes.length)];
-      document.getElementById('resilienceQuoteText').textContent = randomItem.text;
-      document.getElementById('resilienceQuoteAuthor').textContent = randomItem.author;
-    }
-
-    // Викликаємо ініціалізацію при завантаженні сторінки:
-    window.addEventListener('DOMContentLoaded', () => {
-      loadSavedThoughts();
-      renderDilemma();
-    });
-    // ================= РОБОТА З РОЗДІЛОМ "СЛОВНИК" =================
-
-    // 1. Клік на картку терміна (розгортання значення)
-    function toggleDictCard(cardEl) {
-      cardEl.classList.toggle('open');
-    }
-
-    // 2. Інтерактивна вправа-сортер
-    const initialWords = [
-      { id: 'w1', text: 'Ейс', cat: 'tennis' },
-      { id: 'w2', text: 'Риф', cat: 'music' },
-      { id: 'w3', text: 'Тай-брейк', cat: 'tennis' },
-      { id: 'w4', text: 'Соло', cat: 'music' },
-      { id: 'w5', text: 'Сет', cat: 'tennis' },
-      { id: 'w6', text: 'Акорд', cat: 'music' },
-      { id: 'w7', text: 'Подвійна помилка', cat: 'tennis' },
-      { id: 'w8', text: 'Медіатор', cat: 'music' }
-    ];
-
-    let wordsInPool = [...initialWords];
-    let tennisColumnWords = [];
-    let musicColumnWords = [];
-    let selectedWordObj = null;
-
-    function renderSortGame() {
-      const poolEl = document.getElementById('wordPool');
-      const tSlot = document.getElementById('tennisSlot');
-      const mSlot = document.getElementById('musicSlot');
-
-      // Відображення слів у банку
-      poolEl.innerHTML = '';
-      if (wordsInPool.length === 0) {
-        poolEl.innerHTML = '<span style="font-size:0.85rem; color:#8ac926; font-weight:800;">Усі слова розподілено! Тисни «Перевірити» 👇</span>';
-      } else {
-        wordsInPool.forEach(word => {
-          const tag = document.createElement('div');
-          tag.className = 'sort-tag' + (selectedWordObj?.id === word.id ? ' selected-word' : '');
-          tag.draggable = true;
-          tag.textContent = word.text;
-          tag.onclick = () => selectWordForSort(word);
-          tag.ondragstart = (e) => e.dataTransfer.setData('text/plain', word.id);
-          poolEl.appendChild(tag);
-        });
-      }
-
-      // Відображення колонки "Теніс"
-      tSlot.innerHTML = '';
-      if (tennisColumnWords.length === 0) {
-        tSlot.innerHTML = '<div class="slot-placeholder">Перетягни або натисни на слово і сюди...</div>';
-      } else {
-        tennisColumnWords.forEach(w => {
-          tSlot.appendChild(createSortedTagElement(w, 'tennis'));
-        });
-      }
-
-      // Відображення колонки "Музика"
-      mSlot.innerHTML = '';
-      if (musicColumnWords.length === 0) {
-        mSlot.innerHTML = '<div class="slot-placeholder">Перетягни або натисни на слово і сюди...</div>';
-      } else {
-        musicColumnWords.forEach(w => {
-          mSlot.appendChild(createSortedTagElement(w, 'music'));
-        });
-      }
-    }
-
-    function createSortedTagElement(word, currentCol) {
-      const el = document.createElement('div');
-      el.className = 'sort-tag';
-      el.style.width = '100%';
-      el.style.justifyContent = 'space-between';
-      el.innerHTML = `<span>${currentCol === 'tennis' ? '🎾' : '🎸'} ${word.text}</span> <span style="font-size:0.8rem; color:var(--text-muted); cursor:pointer;">✖ поверни</span>`;
-      el.onclick = () => returnWordToPool(word, currentCol);
-      return el;
-    }
-
-    function selectWordForSort(word) {
-      selectedWordObj = (selectedWordObj?.id === word.id) ? null : word;
-      renderSortGame();
-    }
-
-    // Клік на саму колонку, якщо вибрано слово
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('colTennis').addEventListener('click', (e) => {
-        if (selectedWordObj && !e.target.closest('.sort-tag')) {
-          moveWordToColumn(selectedWordObj, 'tennis');
-        }
-      });
-      document.getElementById('colMusic').addEventListener('click', (e) => {
-        if (selectedWordObj && !e.target.closest('.sort-tag')) {
-          moveWordToColumn(selectedWordObj, 'music');
-        }
-      });
-    });
-
-    function moveWordToColumn(word, targetCategory) {
-      wordsInPool = wordsInPool.filter(w => w.id !== word.id);
-      if (targetCategory === 'tennis') {
-        tennisColumnWords.push(word);
-      } else {
-        musicColumnWords.push(word);
-      }
-      selectedWordObj = null;
-      renderSortGame();
-      document.getElementById('sortFeedback').textContent = '';
-    }
-
-    function returnWordToPool(word, fromCategory) {
-      if (fromCategory === 'tennis') {
-        tennisColumnWords = tennisColumnWords.filter(w => w.id !== word.id);
-      } else {
-        musicColumnWords = musicColumnWords.filter(w => w.id !== word.id);
-      }
-      wordsInPool.push(word);
-      renderSortGame();
-      document.getElementById('sortFeedback').textContent = '';
-    }
-
-    // Drag and Drop підтримка
-    function allowDrop(e) {
-      e.preventDefault();
-      e.currentTarget.classList.add('drag-over');
-    }
-
-    function handleDrop(e, targetCat) {
-      e.preventDefault();
-      e.currentTarget.classList.remove('drag-over');
-      const wordId = e.dataTransfer.getData('text/plain');
-      const word = wordsInPool.find(w => w.id === wordId);
-      if (word) {
-        moveWordToColumn(word, targetCat);
-      }
-    }
-
-    document.querySelectorAll('.sort-column').forEach(col => {
-      col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
-    });
-
-    // Перевірка правильності
-    function checkSorting() {
-      const feedback = document.getElementById('sortFeedback');
-      if (wordsInPool.length > 0) {
-        feedback.innerHTML = `<span style="color:var(--coral);">⚠️ Спершу розсортуй усі ${wordsInPool.length} слів із банку!</span>`;
-        return;
-      }
-
-      let errors = 0;
-      tennisColumnWords.forEach(w => { if (w.cat !== 'tennis') errors++; });
-      musicColumnWords.forEach(w => { if (w.cat !== 'music') errors++; });
-
-      if (errors === 0) {
-        feedback.innerHTML = `<span style="color:var(--lime);">🎉 Браво! Усі терміни розсортовано на 100% правильно! Справжній чемпіон! 🎾🎸</span>`;
-      } else {
-        feedback.innerHTML = `<span style="color:var(--coral);">Є помилок: ${errors}. Зверни увагу на підказки та спробуй виправити! 😉</span>`;
-      }
-    }
-
-    function resetSortGame() {
-      wordsInPool = [...initialWords];
-      tennisColumnWords = [];
-      musicColumnWords = [];
-      selectedWordObj = null;
-      document.getElementById('sortFeedback').textContent = '';
-      renderSortGame();
-    }
-
-    // 3. Блокнот невідомих слів учня з localStorage
-    let customWords = JSON.parse(localStorage.getItem('persha_raketka_custom_words') || '[]');
-
-    function renderCustomWords() {
-      const listEl = document.getElementById('customWordsList');
-      listEl.innerHTML = '';
-
-      if (customWords.length === 0) {
-        listEl.innerHTML = '<div style="font-size:0.85rem; color:#a89f91; font-style:italic; padding:8px 0;">У тебе ще немає доданих слів. Записуй сюди все нове, що зустрінеш у книзі!</div>';
-        return;
-      }
-
-      customWords.forEach((item, index) => {
-        const itemEl = document.createElement('div');
-        itemEl.className = 'custom-word-item';
-        itemEl.innerHTML = `
-          <div>
-            <div class="custom-word-term">📌 ${item.word}</div>
-            <div class="custom-word-def">${item.def || 'Значення ще не вказано'}</div>
-          </div>
-          <button class="delete-word-btn" title="Видалити" onclick="deleteCustomWord(${index})">✕</button>
-        `;
-        listEl.appendChild(itemEl);
-      });
-    }
-
-    function addNewCustomWord() {
-      const wordInput = document.getElementById('newWordInput');
-      const defInput = document.getElementById('newWordDefInput');
-      const word = wordInput.value.trim();
-      const def = defInput.value.trim();
-
-      if (!word) {
-        alert('Вкажи, будь ласка, саме слово!');
-        return;
-      }
-
-      customWords.unshift({ word, def });
-      localStorage.setItem('persha_raketka_custom_words', JSON.stringify(customWords));
-
-      wordInput.value = '';
-      defInput.value = '';
-      renderCustomWords();
-    }
-
-    function deleteCustomWord(index) {
-      customWords.splice(index, 1);
-      localStorage.setItem('persha_raketka_custom_words', JSON.stringify(customWords));
-      renderCustomWords();
-    }
-
-    // Виклик ініціалізації в window.addEventListener('DOMContentLoaded', ...)
-    window.addEventListener('DOMContentLoaded', () => {
-      renderSortGame();
-      renderCustomWords();
-    });
+    // ================= 1. БАЗОВІ ДАНІ ТА СХОВИЩЕ =================
     const chapterPages = [
       5, 10, 17, 23, 30, 35, 40, 45, 51, 59, 
       69, 78, 87, 94, 104, 111, 118, 124, 130, 139, 145, 149, 174
@@ -2323,7 +1891,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Рендеринг гітари та штампів
+    // ================= 2. ГІТАРА ТА ШТАМПИ =================
     function initFretboardAndStamps() {
       const fretCanvas = document.getElementById('fretCanvas');
       const stampsGrid = document.getElementById('stampsGrid');
@@ -2371,14 +1939,10 @@
 
       const chMetric = document.getElementById('metricChapters');
       const pgMetric = document.getElementById('metricPages');
-      if (chMetric) chMetric.textContent = `Пройдено: ${completedChapters} / ${TOTAL_CHAPTERS} розділів (${pct(completedChapters)}%)`;
+      if (chMetric) chMetric.textContent = `Пройдено: ${completedChapters} / ${TOTAL_CHAPTERS} розділів (${percent}%)`;
       if (pgMetric) pgMetric.textContent = `Сторінок: ${pages} / ${TOTAL_PAGES}`;
 
       localStorage.setItem('persha_raketka_progress', completedChapters);
-    }
-
-    function pct(val) {
-      return Math.round((val / TOTAL_CHAPTERS) * 100);
     }
 
     function setProgress(val) {
@@ -2448,7 +2012,7 @@
       }
     }
 
-    // Вікторина
+    // ================= 3. ВІКТОРИНА =================
     const quizCh1Data = [
       { q: "1. Куди запізнювався Сєня на початку книги?", opts: ["На тренування", "На перший урок", "На рок-концерт", "До їдальні"], correct: 1 },
       { q: "2. Який елемент одягу зіпсував Сєня, поспішаючи до класу?", opts: ["Порвав штанину", "Загубив кепку", "Відірвав ґудзик", "Забруднив сорочку"], correct: 0 },
@@ -2550,7 +2114,7 @@
               unlockQuizStage2();
               alert(`🎉 Чудово! 7 з 7 правильних відповідей!\nРозділ 2 вікторини відкрито! 🔓`);
             } else {
-              alert(`Правильно: ${correct} з ${data.length}. Потрібно 100% для відкриття 2 розділу! Оновіть вікторину і спробуйте знову.`);
+              alert(`Правильно: ${correct} з ${data.length}. Потрібно 100% для відкриття 2 розділу! Оновіть сторінку і спробуйте знову.`);
             }
           } else {
             alert(`🏆 Вітаємо! Результат 2 розділу: ${correct} з ${data.length}!`);
@@ -2584,6 +2148,329 @@
       if (btn) btn.classList.add('active');
     }
 
+    // ================= 4. СЛОВНИК =================
+    function toggleDictCard(cardEl) {
+      cardEl.classList.toggle('open');
+    }
+
+    const initialWords = [
+      { id: 'w1', text: 'Ейс', cat: 'tennis' },
+      { id: 'w2', text: 'Риф', cat: 'music' },
+      { id: 'w3', text: 'Тай-брейк', cat: 'tennis' },
+      { id: 'w4', text: 'Соло', cat: 'music' },
+      { id: 'w5', text: 'Сет', cat: 'tennis' },
+      { id: 'w6', text: 'Акорд', cat: 'music' },
+      { id: 'w7', text: 'Подвійна помилка', cat: 'tennis' },
+      { id: 'w8', text: 'Медіатор', cat: 'music' }
+    ];
+
+    let wordsInPool = [...initialWords];
+    let tennisColumnWords = [];
+    let musicColumnWords = [];
+    let selectedWordObj = null;
+
+    function renderSortGame() {
+      const poolEl = document.getElementById('wordPool');
+      const tSlot = document.getElementById('tennisSlot');
+      const mSlot = document.getElementById('musicSlot');
+      if (!poolEl || !tSlot || !mSlot) return;
+
+      poolEl.innerHTML = '';
+      if (wordsInPool.length === 0) {
+        poolEl.innerHTML = '<span style="font-size:0.85rem; color:#8ac926; font-weight:800;">Усі слова розподілено! Тисни «Перевірити» 👇</span>';
+      } else {
+        wordsInPool.forEach(word => {
+          const tag = document.createElement('div');
+          tag.className = 'sort-tag' + (selectedWordObj?.id === word.id ? ' selected-word' : '');
+          tag.draggable = true;
+          tag.textContent = word.text;
+          tag.onclick = () => selectWordForSort(word);
+          tag.ondragstart = (e) => e.dataTransfer.setData('text/plain', word.id);
+          poolEl.appendChild(tag);
+        });
+      }
+
+      tSlot.innerHTML = '';
+      if (tennisColumnWords.length === 0) {
+        tSlot.innerHTML = '<div class="slot-placeholder">Перетягни або натисни на слово і сюди...</div>';
+      } else {
+        tennisColumnWords.forEach(w => {
+          tSlot.appendChild(createSortedTagElement(w, 'tennis'));
+        });
+      }
+
+      mSlot.innerHTML = '';
+      if (musicColumnWords.length === 0) {
+        mSlot.innerHTML = '<div class="slot-placeholder">Перетягни або натисни на слово і сюди...</div>';
+      } else {
+        musicColumnWords.forEach(w => {
+          mSlot.appendChild(createSortedTagElement(w, 'music'));
+        });
+      }
+    }
+
+    function createSortedTagElement(word, currentCol) {
+      const el = document.createElement('div');
+      el.className = 'sort-tag';
+      el.style.width = '100%';
+      el.style.justifyContent = 'space-between';
+      el.innerHTML = `<span>${currentCol === 'tennis' ? '🎾' : '🎸'} ${word.text}</span> <span style="font-size:0.8rem; color:var(--text-muted); cursor:pointer;">✖ поверни</span>`;
+      el.onclick = () => returnWordToPool(word, currentCol);
+      return el;
+    }
+
+    function selectWordForSort(word) {
+      selectedWordObj = (selectedWordObj?.id === word.id) ? null : word;
+      renderSortGame();
+    }
+
+    function moveWordToColumn(word, targetCategory) {
+      wordsInPool = wordsInPool.filter(w => w.id !== word.id);
+      if (targetCategory === 'tennis') {
+        tennisColumnWords.push(word);
+      } else {
+        musicColumnWords.push(word);
+      }
+      selectedWordObj = null;
+      renderSortGame();
+      document.getElementById('sortFeedback').textContent = '';
+    }
+
+    function returnWordToPool(word, fromCategory) {
+      if (fromCategory === 'tennis') {
+        tennisColumnWords = tennisColumnWords.filter(w => w.id !== word.id);
+      } else {
+        musicColumnWords = musicColumnWords.filter(w => w.id !== word.id);
+      }
+      wordsInPool.push(word);
+      renderSortGame();
+      document.getElementById('sortFeedback').textContent = '';
+    }
+
+    function allowDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    }
+
+    function handleDrop(e, targetCat) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      const wordId = e.dataTransfer.getData('text/plain');
+      const word = wordsInPool.find(w => w.id === wordId);
+      if (word) moveWordToColumn(word, targetCat);
+    }
+
+    function checkSorting() {
+      const feedback = document.getElementById('sortFeedback');
+      if (wordsInPool.length > 0) {
+        feedback.innerHTML = `<span style="color:var(--coral);">⚠️ Спершу розсортуй усі ${wordsInPool.length} слів із банку!</span>`;
+        return;
+      }
+
+      let errors = 0;
+      tennisColumnWords.forEach(w => { if (w.cat !== 'tennis') errors++; });
+      musicColumnWords.forEach(w => { if (w.cat !== 'music') errors++; });
+
+      if (errors === 0) {
+        feedback.innerHTML = `<span style="color:var(--lime);">🎉 Браво! Усі терміни розсортовано на 100% правильно! Справжній чемпіон! 🎾🎸</span>`;
+      } else {
+        feedback.innerHTML = `<span style="color:var(--coral);">Є помилок: ${errors}. Зверни увагу на підказки та спробуй виправити! 😉</span>`;
+      }
+    }
+
+    function resetSortGame() {
+      wordsInPool = [...initialWords];
+      tennisColumnWords = [];
+      musicColumnWords = [];
+      selectedWordObj = null;
+      document.getElementById('sortFeedback').textContent = '';
+      renderSortGame();
+    }
+
+    // Блокнот невідомих слів
+    let customWords = JSON.parse(localStorage.getItem('persha_raketka_custom_words') || '[]');
+
+    function renderCustomWords() {
+      const listEl = document.getElementById('customWordsList');
+      if (!listEl) return;
+      listEl.innerHTML = '';
+
+      if (customWords.length === 0) {
+        listEl.innerHTML = '<div style="font-size:0.85rem; color:#a89f91; font-style:italic; padding:8px 0;">У тебе ще немає доданих слів. Записуй сюди все нове, що зустрінеш у книзі!</div>';
+        return;
+      }
+
+      customWords.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'custom-word-item';
+        itemEl.innerHTML = `
+          <div>
+            <div class="custom-word-term">📌 ${item.word}</div>
+            <div class="custom-word-def">${item.def || 'Значення ще не вказано'}</div>
+          </div>
+          <button class="delete-word-btn" title="Видалити" onclick="deleteCustomWord(${index})">✕</button>
+        `;
+        listEl.appendChild(itemEl);
+      });
+    }
+
+    function addNewCustomWord() {
+      const wordInput = document.getElementById('newWordInput');
+      const defInput = document.getElementById('newWordDefInput');
+      const word = wordInput.value.trim();
+      const def = defInput.value.trim();
+
+      if (!word) {
+        alert('Вкажи, будь ласка, саме слово!');
+        return;
+      }
+
+      customWords.unshift({ word, def });
+      localStorage.setItem('persha_raketka_custom_words', JSON.stringify(customWords));
+
+      wordInput.value = '';
+      defInput.value = '';
+      renderCustomWords();
+    }
+
+    function deleteCustomWord(index) {
+      customWords.splice(index, 1);
+      localStorage.setItem('persha_raketka_custom_words', JSON.stringify(customWords));
+      renderCustomWords();
+    }
+
+    // ================= 5. МОЇ ДУМКИ =================
+    function saveThoughts() {
+      const review = document.getElementById('reviewText').value.trim();
+      const band = document.getElementById('bandName').value.trim();
+      const cheer = document.getElementById('cheerText').value.trim();
+
+      diaryData.general_review = review;
+      diaryData.band_name = band;
+      diaryData.cheer_slogan = cheer;
+      localStorage.setItem('persha_raketka_diary', JSON.stringify(diaryData));
+      updateDiaryDisplay();
+
+      const notice = document.getElementById('thoughtsSaveNotice');
+      notice.textContent = '✅ Твої думки успішно збережено!';
+      setTimeout(() => { notice.textContent = ''; }, 3000);
+    }
+
+    const dilemmasData = [
+      {
+        id: 1,
+        situation: "🎾 Ситуація 1: Ти приходиш на нове тренування з тенісу, а тренер Петро навіть не дивиться на твої удари й займається іншими. Що ти зробиш?",
+        options: [
+          {
+            text: "А) Кину ракетку в сумку і більше ніколи туди не прийду.",
+            reaction: "«Образитися легко, але чи варто через когось кидати власну мрію? Згадай Аліну: справжня чемпіонка продовжує відточувати подачу!» 🎾"
+          },
+          {
+            text: "Б) Запитаю у тренера, яку вправу мені відпрацювати просто зараз, і покажу максимум.",
+            reaction: "«Чудовий хід! Ініціатива та впертість завжди змушують інших звернути на тебе увагу. Ти граєш за своїми правилами!» 🏆"
+          },
+          {
+            text: "В) Поділюся переживаннями з друзями (як Аліна із Сєнею), щоб знайти підтримку.",
+            reaction: "«Мудрий вибір! Коли поруч є хтось, хто вірить у тебе, навіть найсуворіший тренер не зможе зламати твій настрій!» 🤝"
+          }
+        ]
+      },
+      {
+        id: 2,
+        situation: "🎸 Ситуація 2: До шкільного виступу гурту лишився тиждень, а на репетиції хтось із хлопців постійно збивається з ритму. Твої дії як лідера:",
+        options: [
+          {
+            text: "А) Накричу й скажу, що він усе псує.",
+            reaction: "«Крик лише додасть страху. Справжній рок-гурт — це родина, де підтримують, а не топлять!» 🎸"
+          },
+          {
+            text: "Б) Запропоную зіграти у повільному темпі кілька разів разом і підбадьорю.",
+            reaction: "«Браво! Сєня вчинив би саме так: терпіння, усмішка і спільний драйв творять дива!» ⚡"
+          },
+          {
+            text: "В) Спростити партію, щоб усім було комфортно зіграти без помилок.",
+            reaction: "«Гнучке командне рішення! Краще зіграти простіше, але з щирим вогником у серці!» 🔥"
+          }
+        ]
+      }
+    ];
+
+    let currentDilemmaIdx = 0;
+
+    function renderDilemma() {
+      const d = dilemmasData[currentDilemmaIdx];
+      const counterEl = document.getElementById('dilemmaCounter');
+      const textEl = document.getElementById('dilemmaSituationText');
+      const optsContainer = document.getElementById('dilemmaOptionsContainer');
+      if (!counterEl || !textEl || !optsContainer) return;
+
+      counterEl.textContent = `Ситуація ${currentDilemmaIdx + 1} з ${dilemmasData.length}`;
+      textEl.textContent = d.situation;
+      optsContainer.innerHTML = '';
+
+      d.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'dilemma-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => selectDilemmaOption(idx, opt.reaction, btn);
+        optsContainer.appendChild(btn);
+      });
+
+      const fb = document.getElementById('dilemmaFeedback');
+      if (fb) {
+        fb.style.display = 'none';
+        fb.textContent = '';
+      }
+    }
+
+    function selectDilemmaOption(index, reaction, buttonEl) {
+      document.querySelectorAll('.dilemma-btn').forEach(b => b.classList.remove('active-choice'));
+      buttonEl.classList.add('active-choice');
+
+      const fb = document.getElementById('dilemmaFeedback');
+      if (fb) {
+        fb.style.display = 'block';
+        fb.innerHTML = `<strong>Коментар клубу:</strong> ${reaction}`;
+      }
+    }
+
+    function nextDilemma() {
+      if (currentDilemmaIdx < dilemmasData.length - 1) {
+        currentDilemmaIdx++;
+        renderDilemma();
+      } else {
+        alert('Ти пройшов/-ла всі доступні ситуації! Нові додаватимуться з новими розділами 🎾');
+      }
+    }
+
+    function prevDilemma() {
+      if (currentDilemmaIdx > 0) {
+        currentDilemmaIdx--;
+        renderDilemma();
+      }
+    }
+
+    const resilienceQuotes = [
+      { text: "«Помилка на корті — це не програш, а лише підказка для наступного точного удару!» 🎾", author: "— Еліна Світоліна" },
+      { text: "«Порвалася струна? Зіграй на трьох інших так, ніби так і було задумано!» 🎸", author: "— Сєня" },
+      { text: "«Ніколи не опускай рук. Твій головний переможний гейм ще попереду!» 🏆", author: "— Сергій Жадан" },
+      { text: "«Коли складно в новому місці, пам'ятай: щира усмішка перетворює незнайомців на друзів!» 🤝", author: "— Аліна" },
+      { text: "«Великий рок і великий спорт починаються з одного маленького тренування щодня!» ⚡", author: "— Читацький клуб" }
+    ];
+
+    function getRandomResilienceQuote() {
+      const box = document.getElementById('resilienceQuoteBox');
+      if (!box) return;
+      box.classList.remove('pop');
+      void box.offsetWidth;
+      box.classList.add('pop');
+
+      const randomItem = resilienceQuotes[Math.floor(Math.random() * resilienceQuotes.length)];
+      document.getElementById('resilienceQuoteText').textContent = randomItem.text;
+      document.getElementById('resilienceQuoteAuthor').textContent = randomItem.author;
+    }
+
+    // ================= 6. ЕКСПОРТ ТА ІМПОРТ =================
     function exportDiaryFile() {
       const student = diaryData.student_name.trim() || 'Учень/Учениця 4 класу';
       const content = 
@@ -2599,10 +2486,10 @@ ${diaryData.ch1_dislike || 'Не заповнено'}
 Настрій: ${diaryData.ch1_mood || 'Не відзначено'}
 
 [РОЗДІЛ 2. ДРУЗІ СЄНІ]
-• Саша: ${diaryData.friend_sasha || '-'}
-• Міша: ${diaryData.friend_misha || '-'}
-• Андрюха: ${diaryData.friend_andryukha || '-'}
-• Данько: ${diaryData.friend_danko || '-'}
+- Саша: ${diaryData.friend_sasha || '-'}
+- Міша: ${diaryData.friend_misha || '-'}
+- Андрюха: ${diaryData.friend_andryukha || '-'}
+- Данько: ${diaryData.friend_danko || '-'}
 Настрій: ${diaryData.ch2_mood || 'Не відзначено'}
 
 [РОЗДІЛ 3. АЛІНА ТА ЖЕРТВИ ЗАРАДИ МРІЇ]
@@ -2610,9 +2497,9 @@ ${diaryData.ch3_sacrifice || 'Не заповнено'}
 Настрій: ${diaryData.ch3_mood || 'Не відзначено'}
 
 [МОЇ ДУМКИ ТА ТВОРЧІСТЬ]
-• Головна думка: ${diaryData.general_review || 'Не заповнено'}
-• Назва для рок-гурту: ${diaryData.band_name || 'Не заповнено'}
-• Кричалка для Аліни: ${diaryData.cheer_slogan || 'Не заповнено'}
+- Головна думка: ${diaryData.general_review || 'Не заповнено'}
+- Назва для рок-гурту: ${diaryData.band_name || 'Не заповнено'}
+- Кричалка для Аліни: ${diaryData.cheer_slogan || 'Не заповнено'}
 
 ==============================================
 Читацький клуб "Перша ракетка"
@@ -2625,28 +2512,28 @@ ${diaryData.ch3_sacrifice || 'Не заповнено'}
       a.click();
     }
 
-    // Ініціалізація слухачів подій після завантаження сторінки
+    // ================= 7. ГОЛОВНА ІНІЦІАЛІЗАЦІЯ ПРИ СТАРТІ =================
     document.addEventListener('DOMContentLoaded', () => {
-      // Кнопки верхньої навігації
+      // 1. Верхня навігація
       document.querySelectorAll('[data-tab-target]').forEach(btn => {
         btn.addEventListener('click', function() {
           navigate(this.dataset.tabTarget);
         });
       });
 
-      // Кнопки маршруту
+      // 2. Кнопки маршруту
       document.querySelectorAll('[data-ch-target]').forEach(btn => {
         btn.addEventListener('click', function() {
           switchChapter(this.dataset.chTarget);
         });
       });
 
-      // Кнопки гітари
+      // 3. Кнопки гітари
       document.getElementById('btn_minus_chapter')?.addEventListener('click', () => moveProgress(-1));
       document.getElementById('btn_plus_chapter')?.addEventListener('click', () => moveProgress(1));
       document.getElementById('btn_reset_chapters')?.addEventListener('click', resetProgress);
 
-      // Смайлики настрою
+      // 4. Смайлики настрою
       document.querySelectorAll('.ch-mood-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const parent = this.parentElement;
@@ -2663,7 +2550,7 @@ ${diaryData.ch3_sacrifice || 'Не заповнено'}
         });
       });
 
-      // Опитування авторів
+      // 5. Опитування авторів
       document.querySelectorAll('[data-poll-choice]').forEach(btn => {
         btn.addEventListener('click', function() {
           document.querySelectorAll('.poll-btn').forEach(b => b.classList.remove('selected'));
@@ -2680,24 +2567,28 @@ ${diaryData.ch3_sacrifice || 'Не заповнено'}
         });
       });
 
-      // Словник
-      document.querySelectorAll('[data-dict-def]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.getElementById('dictOutput').textContent = this.dataset.dictDef;
-        });
-      });
-
-      // Кнопки вікторини
+      // 6. Кнопки вікторини
       document.querySelectorAll('[data-quiz-level]').forEach(btn => {
         btn.addEventListener('click', function() {
           switchQuizLevel(this.dataset.quizLevel);
         });
       });
 
-      // Експорт щоденника
+      // 7. Експорт щоденника
       document.getElementById('btn_export_diary')?.addEventListener('click', exportDiaryFile);
 
-      // Завантаження збережених даних
+      // 8. Кліки по колонках сортера у словнику
+      document.getElementById('colTennis')?.addEventListener('click', (e) => {
+        if (selectedWordObj && !e.target.closest('.sort-tag')) moveWordToColumn(selectedWordObj, 'tennis');
+      });
+      document.getElementById('colMusic')?.addEventListener('click', (e) => {
+        if (selectedWordObj && !e.target.closest('.sort-tag')) moveWordToColumn(selectedWordObj, 'music');
+      });
+      document.querySelectorAll('.sort-column').forEach(col => {
+        col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+      });
+
+      // 9. Відновлення прогресу та щоденника
       initFretboardAndStamps();
       const savedProg = localStorage.getItem('persha_raketka_progress');
       if (savedProg !== null) completedChapters = parseInt(savedProg, 10) || 0;
@@ -2708,26 +2599,56 @@ ${diaryData.ch3_sacrifice || 'Не заповнено'}
         try { Object.assign(diaryData, JSON.parse(savedDiary)); } catch(e) {}
       }
 
-      if (diaryData.ch1_dislike) document.getElementById('ch1_input_dislike').value = diaryData.ch1_dislike;
-      if (diaryData.friend_sasha) document.getElementById('friend_sasha').value = diaryData.friend_sasha;
-      if (diaryData.friend_misha) document.getElementById('friend_misha').value = diaryData.friend_misha;
-      if (diaryData.friend_andryukha) document.getElementById('friend_andryukha').value = diaryData.friend_andryukha;
-      if (diaryData.friend_danko) document.getElementById('friend_danko').value = diaryData.friend_danko;
-      if (diaryData.ch3_sacrifice) document.getElementById('alinaChallenge').value = diaryData.ch3_sacrifice;
-      if (diaryData.general_review) document.getElementById('input_review').value = diaryData.general_review;
-      if (diaryData.band_name) document.getElementById('input_band').value = diaryData.band_name;
-      if (diaryData.cheer_slogan) document.getElementById('input_cheer').value = diaryData.cheer_slogan;
-      if (diaryData.student_name) document.getElementById('cert_name').value = diaryData.student_name;
+      // Безпечне заповнення полів форми
+      if (diaryData.ch1_dislike && document.getElementById('ch1_input_dislike')) {
+        document.getElementById('ch1_input_dislike').value = diaryData.ch1_dislike;
+      }
+      if (diaryData.friend_sasha && document.getElementById('friend_sasha')) {
+        document.getElementById('friend_sasha').value = diaryData.friend_sasha;
+      }
+      if (diaryData.friend_misha && document.getElementById('friend_misha')) {
+        document.getElementById('friend_misha').value = diaryData.friend_misha;
+      }
+      if (diaryData.friend_andryukha && document.getElementById('friend_andryukha')) {
+        document.getElementById('friend_andryukha').value = diaryData.friend_andryukha;
+      }
+      if (diaryData.friend_danko && document.getElementById('friend_danko')) {
+        document.getElementById('friend_danko').value = diaryData.friend_danko;
+      }
+      if (diaryData.ch3_sacrifice && document.getElementById('alinaChallenge')) {
+        document.getElementById('alinaChallenge').value = diaryData.ch3_sacrifice;
+      }
 
-      if (diaryData.ch1_mood) document.getElementById('ch1_mood').textContent = diaryData.ch1_mood;
-      if (diaryData.ch2_mood) document.getElementById('ch2_mood').textContent = diaryData.ch2_mood;
-      if (diaryData.ch3_mood) document.getElementById('ch3_mood').textContent = diaryData.ch3_mood;
+      if (diaryData.general_review && document.getElementById('reviewText')) {
+        document.getElementById('reviewText').value = diaryData.general_review;
+      }
+      if (diaryData.band_name && document.getElementById('bandName')) {
+        document.getElementById('bandName').value = diaryData.band_name;
+      }
+      if (diaryData.cheer_slogan && document.getElementById('cheerText')) {
+        document.getElementById('cheerText').value = diaryData.cheer_slogan;
+      }
+
+      if (diaryData.ch1_mood && document.getElementById('ch1_mood')) {
+        document.getElementById('ch1_mood').textContent = diaryData.ch1_mood;
+      }
+      if (diaryData.ch2_mood && document.getElementById('ch2_mood')) {
+        document.getElementById('ch2_mood').textContent = diaryData.ch2_mood;
+      }
+      if (diaryData.ch3_mood && document.getElementById('ch3_mood')) {
+        document.getElementById('ch3_mood').textContent = diaryData.ch3_mood;
+      }
 
       updateDiaryDisplay();
+
+      // 10. РЕНДЕРИНГ ВІКТОРИНИ ТА СЛОВНИКА
       renderQuiz('ch1', quizCh1Data, 'container_ch1', 'progress_ch1');
       renderQuiz('ch2', quizCh2Data, 'container_ch2', 'progress_ch2');
-
       if (diaryData.quiz_unlocked >= 2) unlockQuizStage2();
+
+      renderSortGame();
+      renderCustomWords();
+      renderDilemma();
     });
   </script>
 </body>
