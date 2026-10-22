@@ -9,6 +9,90 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* СТИЛІ РОЗДІЛУ "МОЇ ДУМКИ" ТА МІНІ-ІГОР */
+    .dilemma-box {
+      background: #faf7f2;
+      border: 2px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+    .dilemma-situation {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--petrol);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--clay);
+    }
+    .dilemma-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dilemma-btn {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dilemma-btn:hover {
+      border-color: var(--clay);
+      background: #fff9f5;
+      transform: translateX(4px);
+    }
+    .dilemma-btn.active-choice {
+      border-color: var(--clay);
+      background: #fff2ea;
+      font-weight: 700;
+    }
+    .dilemma-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      display: none;
+      background: #ffffff;
+      border: 1px dashed var(--clay);
+      animation: fadeIn 0.25s ease;
+    }
+
+    /* Віджет стійкості */
+    .resilience-card {
+      background: linear-gradient(135deg, #ffffff 0%, #fffbf8 100%);
+      border: 2px solid var(--border-accent);
+    }
+    .resilience-quote-box {
+      background: #fff7f2;
+      border: 2px dashed var(--clay);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .resilience-quote-box.pop {
+      transform: scale(1.02);
+    }
+    .quote-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--petrol);
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .quote-author {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--clay);
+      margin-top: 8px;
+    }
     /* СТИЛІ РОЗДІЛУ "СЛОВНИК" */
     .dict-cards-grid {
       display: grid;
@@ -1528,48 +1612,99 @@
       </div>
     </section>
 
-    <!-- ================= 4. МОЇ ДУМКИ ================= -->
+<!-- ================= 6. РОЗДІЛ: МОЇ ДУМКИ ================= -->
     <section id="thoughts" class="tab-view">
-      <div class="card">
-        <h2 style="font-size: 1.5rem; color: var(--petrol); margin-bottom: 6px;">💬 Клубна трибуна: мої враження</h2>
-        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">
-          Поділися своїми думками про книгу, придумай назву рок-гурту чи кричалку підтримки. Усі записи синхронізуються із читацьким щоденником!
+      <!-- Заголовок розділу -->
+      <div class="card" style="text-align: center; margin-bottom: 20px;">
+        <h2 style="font-size: 1.6rem; color: var(--petrol); margin-bottom: 6px;">
+          💭 Простір думок: Відлуння корту та сцени
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+          Тут ти можеш поміркувати над головними ідеями книги, випробувати себе в грі життєвих рішень та зарядитися мотивацією на кожен день! 🎾🎸
+        </p>
+      </div>
+
+      <!-- БЛОК 1: Клубна трибуна & Творча скарбничка -->
+      <div class="card" style="margin-bottom: 20px;">
+        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 8px;">
+          💬 Клубна трибуна: Головна тема книги
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">
+          Напиши свої роздуми: про що ця історія для тебе особисто? Чого вона навчає?
+        </p>
+        <textarea id="reviewText" rows="3" class="form-input" style="width: 100%; resize: vertical;" 
+                  placeholder="Ця книга вчить мене ніколи не опускати руки, тому що..."></textarea>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎸 Назва для рок-гурту Сєні:</label>
+            <input type="text" id="bandName" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Твій креативний варіант...">
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎾 Кричалка підтримки для Аліни:</label>
+            <input type="text" id="cheerText" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Слова вболівальників на корті...">
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
+          <button class="btn btn-primary" onclick="saveThoughts()">💾 Зберегти мої думки</button>
+          <span id="thoughtsSaveNotice" style="font-size: 0.88rem; font-weight: 700; color: var(--lime);"></span>
+        </div>
+      </div>
+
+      <!-- БЛОК 2: Інтерактивна гра «Рішення чемпіона» -->
+      <div class="card" style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+          <div>
+            <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 4px;">
+              🎯 Гра-дилема: «Рішення чемпіона»
+            </h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Уяви себе на місці персонажів. Як би вчинив/-ла ти? Обирай свій варіант:
+            </p>
+          </div>
+          <div style="font-size: 0.85rem; font-weight: 800; color: var(--clay);" id="dilemmaCounter">
+            Ситуація 1 з 2
+          </div>
+        </div>
+
+        <!-- Контейнер поточної ситуації гри -->
+        <div class="dilemma-box" id="dilemmaBox">
+          <div class="dilemma-situation" id="dilemmaSituationText">
+            <!-- Текст ситуації з'явиться через JS -->
+          </div>
+          <div class="dilemma-options" id="dilemmaOptionsContainer">
+            <!-- Варіанти дій -->
+          </div>
+          <div class="dilemma-feedback" id="dilemmaFeedback"></div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+          <button class="btn" onclick="prevDilemma()">◀ Попередня</button>
+          <button class="btn btn-primary" onclick="nextDilemma()">Наступна ситуація ▶</button>
+        </div>
+      </div>
+
+      <!-- БЛОК 3: Кнопка / Віджет стійкості «Коли опускаються руки» -->
+      <div class="card resilience-card">
+        <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 6px;">
+          ⚡ Кнопка стійкості: «Порада чемпіонів»
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+          Буває важко? Потрібен заряд енергії? Тисни на кнопку й витягуй випадкову пораду від Еліни Світоліної та Сєні:
         </p>
 
-        <div style="margin-bottom: 20px;">
-          <label style="font-weight: 800; color: var(--petrol); font-size: 0.95rem;">
-            Чого мене навчила історія Аліни та Сєні? (Головна думка книги):
-          </label>
-          <textarea class="form-textarea" id="input_review" rows="3" placeholder="Ця книга показує, що справжня дружба та щоденна праця..." oninput="syncData('general_review', this.value)"></textarea>
+        <div class="resilience-quote-box" id="resilienceQuoteBox">
+          <div class="quote-text" id="resilienceQuoteText">
+            «Помилка на корті — це не програш, а лише підказка для наступного точного удару!» 🎾
+          </div>
+          <div class="quote-author" id="resilienceQuoteAuthor">— Еліна Світоліна</div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
-          <div>
-            <label style="font-weight: 800; color: var(--petrol); font-size: 0.9rem;">🎸 Твоя ідея назви для рок-гурту Сєні:</label>
-            <input type="text" class="form-input" id="input_band" placeholder="Наприклад: Ракетний Драйв, Струни Перемоги..." oninput="syncData('band_name', this.value)">
-          </div>
-          <div>
-            <label style="font-weight: 800; color: var(--petrol); font-size: 0.9rem;">🎾 Кричалка вболівальника для тенісного турніру Аліни:</label>
-            <input type="text" class="form-input" id="input_cheer" placeholder="Наприклад: М'яч летить — корт тремтить! Аліна переможе вмить!" oninput="syncData('cheer_slogan', this.value)">
-          </div>
-        </div>
-
-        <div class="cert-frame">
-          <div style="font-size: 2.2rem; margin-bottom: 6px;">🏆</div>
-          <h3 style="color: var(--clay); font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">СЕРТИФІКАТ ПЕРЕМОЖЦЯ</h3>
-          <p style="font-weight: 800; color: var(--petrol);">Читацького клубу за книгою «Перша ракетка»</p>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 10px;">Цей диплом засвідчує, що відважний читач / читачка:</p>
-          
-          <input type="text" class="cert-name-input" id="cert_name" placeholder="Впиши своє ім'я та прізвище" oninput="syncData('student_name', this.value)">
-          
-          <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.5; color: var(--text);">
-            успішно підкорив/-ла сторінки книги, навчився/-лася цінувати підтримку друзів і впевнено рухатися вперед!
-          </p>
-
-          <div style="margin-top: 20px; font-weight: 800; color: var(--clay); font-size: 0.95rem;">
-            🎾 Еліна Світоліна & Сергій Жадан 🎸
-          </div>
-          <button class="btn btn-primary" style="margin-top: 16px;" onclick="window.print()">🖨️ Роздрукувати сертифікат</button>
+        <div style="text-align: center; margin-top: 16px;">
+          <button class="btn btn-primary" onclick="getRandomResilienceQuote()">
+            🎲 Витягнути нову пораду дня
+          </button>
         </div>
       </div>
     </section>
@@ -1790,6 +1925,143 @@
   </main>
 
   <script>
+    // ================= РОБОТА З РОЗДІЛОМ "МОЇ ДУМКИ" =================
+
+    // 1. Збереження роздумів учня в localStorage
+    function saveThoughts() {
+      const review = document.getElementById('reviewText').value.trim();
+      const band = document.getElementById('bandName').value.trim();
+      const cheer = document.getElementById('cheerText').value.trim();
+
+      const data = { review, band, cheer };
+      localStorage.setItem('persha_raketka_thoughts', JSON.stringify(data));
+
+      const notice = document.getElementById('thoughtsSaveNotice');
+      notice.textContent = '✅ Твої думки успішно збережено!';
+      setTimeout(() => { notice.textContent = ''; }, 3000);
+    }
+
+    function loadSavedThoughts() {
+      const saved = JSON.parse(localStorage.getItem('persha_raketka_thoughts') || '{}');
+      if (saved.review) document.getElementById('reviewText').value = saved.review;
+      if (saved.band) document.getElementById('bandName').value = saved.band;
+      if (saved.cheer) document.getElementById('cheerText').value = saved.cheer;
+    }
+
+    // 2. СИТУАЦІЇ ДЛЯ ГРИ «РІШЕННЯ ЧЕМПІОНА»
+    // Сюди ви можете легко дописувати нові ситуації по ходу читання:
+    const dilemmasData = [
+      {
+        id: 1,
+        situation: "🎾 Ситуація 1: Ти приходиш на нове тренування з тенісу, а тренер Петро навіть не дивиться на твої удари й займається іншими. Що ти зробиш?",
+        options: [
+          {
+            text: "А) Кину ракетку в сумку і більше ніколи туди не прийду.",
+            reaction: "«Образитися легко, але чи варто через когось кидати власну мрію? Згадай Аліну: справжня чемпіонка продовжує відточувати подачу!» 🎾"
+          },
+          {
+            text: "Б) Запитаю у тренера, яку вправу мені відпрацювати просто зараз, і покажу максимум.",
+            reaction: "«Чудовий хід! Ініціатива та впертість завжди змушують інших звернути на тебе увагу. Ти граєш за своїми правилами!» 🏆"
+          },
+          {
+            text: "В) Поділюся переживаннями з друзями (як Аліна із Сєнею), щоб знайти підтримку.",
+            reaction: "«Мудрий вибір! Коли поруч є хтось, хто вірить у тебе, навіть найсуворіший тренер не зможе зламати твій настрій!» 🤝"
+          }
+        ]
+      },
+      {
+        id: 2,
+        situation: "🎸 Ситуація 2: До шкільного виступу гурту лишився тиждень, а на репетиції хтось із хлопців постійно збивається з ритму. Твої дії як лідера:",
+        options: [
+          {
+            text: "А) Накричу й скажу, що він усе псує.",
+            reaction: "«Крик лише додасть страху. Справжній рок-гурт — це родина, де підтримують, а не топлять!» 🎸"
+          },
+          {
+            text: "Б) Запропоную зіграти у повільному темпі кілька разів разом і підбадьорю.",
+            reaction: "«Браво! Сєня вчинив би саме так: терпіння, усмішка і спільний драйв творять дива!» ⚡"
+          },
+          {
+            text: "В) Спростити партію, щоб усім було комфортно зіграти без помилок.",
+            reaction: "«Гнучке командне рішення! Краще зіграти простіше, але з щирим вогником у серці!» 🔥"
+          }
+        ]
+      }
+    ];
+
+    let currentDilemmaIdx = 0;
+
+    function renderDilemma() {
+      const d = dilemmasData[currentDilemmaIdx];
+      document.getElementById('dilemmaCounter').textContent = `Ситуація ${currentDilemmaIdx + 1} з ${dilemmasData.length}`;
+      document.getElementById('dilemmaSituationText').textContent = d.situation;
+
+      const optsContainer = document.getElementById('dilemmaOptionsContainer');
+      optsContainer.innerHTML = '';
+
+      d.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'dilemma-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => selectDilemmaOption(idx, opt.reaction, btn);
+        optsContainer.appendChild(btn);
+      });
+
+      const fb = document.getElementById('dilemmaFeedback');
+      fb.style.display = 'none';
+      fb.textContent = '';
+    }
+
+    function selectDilemmaOption(index, reaction, buttonEl) {
+      document.querySelectorAll('.dilemma-btn').forEach(b => b.classList.remove('active-choice'));
+      buttonEl.classList.add('active-choice');
+
+      const fb = document.getElementById('dilemmaFeedback');
+      fb.style.display = 'block';
+      fb.innerHTML = `<strong>Коментар клубу:</strong> ${reaction}`;
+    }
+
+    function nextDilemma() {
+      if (currentDilemmaIdx < dilemmasData.length - 1) {
+        currentDilemmaIdx++;
+        renderDilemma();
+      } else {
+        alert('Ти пройшов/-ла всі поточні ситуації! Нові додаватимуться разом із новими розділами 🎾');
+      }
+    }
+
+    function prevDilemma() {
+      if (currentDilemmaIdx > 0) {
+        currentDilemmaIdx--;
+        renderDilemma();
+      }
+    }
+
+    // 3. ГЕНЕРАТОР ПОРАД ДНЯ («Кнопка стійкості»)
+    const resilienceQuotes = [
+      { text: "«Помилка на корті — це не програш, а лише підказка для наступного точного удару!» 🎾", author: "— Еліна Світоліна" },
+      { text: "«Порвалася струна? Зіграй на трьох інших так, ніби так і було задумано!» 🎸", author: "— Сєня" },
+      { text: "«Ніколи не опускай рук. Твій головний переможний гейм ще попереду!» 🏆", author: "— Сергій Жадан" },
+      { text: "«Коли складно в новому місці, пам'ятай: щира усмішка перетворює незнайомців на друзів!» 🤝", author: "— Аліна" },
+      { text: "«Великий рок і великий спорт починаються з одного маленького тренування щодня!» ⚡", author: "— Читацький клуб" }
+    ];
+
+    function getRandomResilienceQuote() {
+      const box = document.getElementById('resilienceQuoteBox');
+      box.classList.remove('pop');
+      void box.offsetWidth; // перезапуск css-анімації
+      box.classList.add('pop');
+
+      const randomItem = resilienceQuotes[Math.floor(Math.random() * resilienceQuotes.length)];
+      document.getElementById('resilienceQuoteText').textContent = randomItem.text;
+      document.getElementById('resilienceQuoteAuthor').textContent = randomItem.author;
+    }
+
+    // Викликаємо ініціалізацію при завантаженні сторінки:
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSavedThoughts();
+      renderDilemma();
+    });
     // ================= РОБОТА З РОЗДІЛОМ "СЛОВНИК" =================
 
     // 1. Клік на картку терміна (розгортання значення)
