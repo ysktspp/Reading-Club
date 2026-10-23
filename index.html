@@ -1729,7 +1729,7 @@ body {
         <button class="quiz-level-btn locked" id="btn_quiz_ch2" data-quiz-level="quiz_ch2">
           🔒 Розділ 2 (Заблоковано)
         </button>
-       <button class="quiz-level-btn locked" id="btn_quiz_ch3" data-quiz-level="quiz_ch3">
+        <button class="quiz-level-btn locked" id="btn_quiz_ch3" data-quiz-level="quiz_ch3">
           🔒 Розділ 3 (Заблоковано)
         </button>
         <button class="quiz-level-btn locked" id="btn_quiz_ch4" data-quiz-level="quiz_ch4">
@@ -1754,7 +1754,7 @@ body {
           <div id="container_ch2"></div>
         </div>
       </div>
-      <!-- ВІКТОРИНА: РОЗДІЛ 3 -->
+
       <div id="quiz_ch3" class="quiz-stage">
         <div class="card">
           <div class="quiz-progress-bar">
@@ -1764,7 +1764,6 @@ body {
         </div>
       </div>
 
-      <!-- ВІКТОРИНА: РОЗДІЛ 4 -->
       <div id="quiz_ch4" class="quiz-stage">
         <div class="card">
           <div class="quiz-progress-bar">
@@ -2268,6 +2267,8 @@ body {
           "Його там навмисно зачинили друзі."
         ], correct: 1 }
     ];
+
+
     const quizCh3Data = [
       { q: "1. З чим Сєня допоміг своєму дідусю телефоном?", opts: [
           "Знайти окуляри в кімнаті",
@@ -2329,150 +2330,17 @@ body {
         ], correct: 2 }
     ];
 
-    let quizAnswers = { ch1: {}, ch2: {} };
     const QUIZ_KEY = 'persha_raketka_quiz';
-    const quizConfig = {
-      ch1: { data: quizCh1Data, container: 'container_ch1', progress: 'progress_ch1' },
-      ch2: { data: quizCh2Data, container: 'container_ch2', progress: 'progress_ch2' }
-    };
+    const MAX_QUIZ_LEVEL = 4;
     let quizAnswers = { ch1: {}, ch2: {}, ch3: {}, ch4: {} };
-    const QUIZ_KEY = 'persha_raketka_quiz';
+
+    // level — номер розділу; успішне проходження розділу N відкриває розділ N+1
     const quizConfig = {
-      ch1: { data: quizCh1Data, container: 'container_ch1', progress: 'progress_ch1', nextNum: 2 },
-      ch2: { data: quizCh2Data, container: 'container_ch2', progress: 'progress_ch2', nextNum: 3 },
-      ch3: { data: quizCh3Data, container: 'container_ch3', progress: 'progress_ch3', nextNum: 4 },
-      ch4: { data: quizCh4Data, container: 'container_ch4', progress: 'progress_ch4', nextNum: 5 }
+      ch1: { level: 1, data: quizCh1Data, container: 'container_ch1', progress: 'progress_ch1' },
+      ch2: { level: 2, data: quizCh2Data, container: 'container_ch2', progress: 'progress_ch2' },
+      ch3: { level: 3, data: quizCh3Data, container: 'container_ch3', progress: 'progress_ch3' },
+      ch4: { level: 4, data: quizCh4Data, container: 'container_ch4', progress: 'progress_ch4' }
     };
-
-    function loadQuizAnswers() {
-      try {
-        const saved = JSON.parse(lsGet(QUIZ_KEY) || 'null');
-        if (saved && typeof saved === 'object') {
-          quizAnswers = {
-            ch1: cleanQuizAnswers(saved.ch1, quizCh1Data.length),
-            ch2: cleanQuizAnswers(saved.ch2, quizCh2Data.length),
-            ch3: cleanQuizAnswers(saved.ch3, quizCh3Data.length),
-            ch4: cleanQuizAnswers(saved.ch4, quizCh4Data.length)
-          };
-        }
-      } catch (e) { }
-    }
-
-    function updateQuizState(ch, justAnswered) {
-      const cfg = quizConfig[ch];
-      const total = cfg.data.length;
-      const answered = Object.keys(quizAnswers[ch] || {}).length;
-
-      const fill = document.getElementById(cfg.progress);
-      if (fill) fill.style.width = Math.round((answered / total) * 100) + '%';
-
-      const box = document.getElementById('result_' + ch);
-      if (!box) return;
-      if (answered < total) {
-        box.className = 'quiz-result';
-        box.innerHTML = '';
-        return;
-      }
-
-      let correct = 0;
-      cfg.data.forEach((itm, idx) => { if (quizAnswers[ch][idx] === itm.correct) correct++; });
-      const perfect = correct === total;
-
-      let newlyUnlocked = false;
-      const targetUnlockLevel = cfg.nextNum;
-      if (perfect && targetUnlockLevel && diaryData.quiz_unlocked < targetUnlockLevel) {
-        newlyUnlocked = unlockQuizStage(targetUnlockLevel);
-      }
-
-      box.className = 'quiz-result show' + (perfect ? ' success' : '');
-      box.innerHTML = '';
-
-      const title = document.createElement('div');
-      title.className = 'qr-title';
-      const text = document.createElement('div');
-      text.className = 'qr-text';
-      const actions = document.createElement('div');
-      actions.className = 'qr-actions';
-
-      if (perfect) {
-        title.textContent = `🏆 Чудово! ${correct} з ${total} правильних відповідей!`;
-        text.textContent = (targetUnlockLevel <= 4)
-          ? `Розділ ${targetUnlockLevel} вікторини відкрито! 🔓`
-          : 'Ти справжній чемпіон і чудово знаєш розділи книги! 🎾🎸';
-      } else {
-        title.textContent = `Правильно: ${correct} з ${total}`;
-        text.textContent = 'Щоб відкрити наступний рівень, дай правильні відповіді на всі питання. Спробуй ще раз — у тебе все вийде! 💪';
-      }
-
-      if (perfect && targetUnlockLevel <= 4 && diaryData.quiz_unlocked >= targetUnlockLevel) {
-        const next = document.createElement('button');
-        next.className = 'btn btn-primary';
-        next.textContent = `Перейти до розділу ${targetUnlockLevel} ▶`;
-        next.addEventListener('click', () => switchQuizLevel(`quiz_ch${targetUnlockLevel}`));
-        actions.appendChild(next);
-      }
-
-      const retry = document.createElement('button');
-      retry.className = 'btn';
-      retry.textContent = '🔄 Пройти ще раз';
-      retry.addEventListener('click', () => retryQuiz(ch));
-      actions.appendChild(retry);
-
-      box.append(title, text, actions);
-
-      if (justAnswered) {
-        setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
-        if (newlyUnlocked) showToast(`🎉 Розділ ${targetUnlockLevel} вікторини відкрито! 🔓`);
-      }
-    }
-
-    function unlockQuizStage(levelNum) {
-      const wasLocked = diaryData.quiz_unlocked < levelNum;
-      diaryData.quiz_unlocked = Math.max(diaryData.quiz_unlocked, levelNum);
-      saveDiary();
-      refreshQuizLocks();
-      return wasLocked;
-    }
-
-    function refreshQuizLocks() {
-      const currentUnlocked = diaryData.quiz_unlocked || 1;
-      const buttons = [
-        { el: document.getElementById('btn_quiz_ch1'), title: '🎾 Розділ 1 (7 питань)', num: 1 },
-        { el: document.getElementById('btn_quiz_ch2'), title: '🎸 Розділ 2 (6 питань)', num: 2 },
-        { el: document.getElementById('btn_quiz_ch3'), title: '🎾 Розділ 3 (4 питання)', num: 3 },
-        { el: document.getElementById('btn_quiz_ch4'), title: '🎨 Розділ 4 (6 питань)', num: 4 }
-      ];
-
-      buttons.forEach(b => {
-        if (!b.el) return;
-        if (currentUnlocked >= b.num) {
-          b.el.classList.remove('locked');
-          b.el.textContent = b.num === 1 ? b.title : `${b.title} 🔓`;
-        } else {
-          b.el.classList.add('locked');
-          b.el.textContent = `🔒 Розділ ${b.num} (Заблоковано)`;
-        }
-      });
-    }
-
-    function switchQuizLevel(stageId) {
-      const levelMap = { quiz_ch1: 1, quiz_ch2: 2, quiz_ch3: 3, quiz_ch4: 4 };
-      const req = levelMap[stageId] || 1;
-
-      if ((diaryData.quiz_unlocked || 1) < req) {
-        showToast(`Цей розділ заблоковано! Спершу дай 100% правильних відповідей у Розділі ${req - 1} 🎾`);
-        return;
-      }
-
-      document.querySelectorAll('.quiz-stage').forEach(st => st.classList.remove('active'));
-      document.querySelectorAll('.quiz-level-btn').forEach(bt => bt.classList.remove('active'));
-
-      const target = document.getElementById(stageId);
-      if (target) target.classList.add('active');
-
-      const btn = document.querySelector(`.quiz-level-btn[data-quiz-level="${stageId}"]`);
-      if (btn) btn.classList.add('active');
-    }
 
     function cleanQuizAnswers(obj, total) {
       const result = {};
@@ -2485,15 +2353,19 @@ body {
       return result;
     }
 
+    function cleanAllQuizAnswers(src) {
+      src = (src && typeof src === 'object') ? src : {};
+      const out = {};
+      Object.keys(quizConfig).forEach(ch => {
+        out[ch] = cleanQuizAnswers(src[ch], quizConfig[ch].data.length);
+      });
+      return out;
+    }
+
     function loadQuizAnswers() {
       try {
         const saved = JSON.parse(lsGet(QUIZ_KEY) || 'null');
-        if (saved && typeof saved === 'object') {
-          quizAnswers = {
-            ch1: cleanQuizAnswers(saved.ch1, quizCh1Data.length),
-            ch2: cleanQuizAnswers(saved.ch2, quizCh2Data.length)
-          };
-        }
+        if (saved && typeof saved === 'object') quizAnswers = cleanAllQuizAnswers(saved);
       } catch (e) { /* залишаємо порожні відповіді */ }
     }
 
@@ -2585,9 +2457,11 @@ body {
       let correct = 0;
       cfg.data.forEach((itm, idx) => { if (quizAnswers[ch][idx] === itm.correct) correct++; });
       const perfect = correct === total;
+      const nextLevel = cfg.level + 1;
+      const hasNext = nextLevel <= MAX_QUIZ_LEVEL;
 
       let newlyUnlocked = false;
-      if (ch === 'ch1' && perfect) newlyUnlocked = unlockQuizStage2();
+      if (perfect && hasNext) newlyUnlocked = unlockQuizStage(nextLevel);
 
       box.className = 'quiz-result show' + (perfect ? ' success' : '');
       box.innerHTML = '';
@@ -2601,21 +2475,21 @@ body {
 
       if (perfect) {
         title.textContent = `🏆 Чудово! ${correct} з ${total} правильних відповідей!`;
-        text.textContent = ch === 'ch1'
-          ? 'Розділ 2 вікторини відкрито! 🔓'
+        text.textContent = hasNext
+          ? `Розділ ${nextLevel} вікторини відкрито! 🔓`
           : 'Ти справжній знавець книги «Перша ракетка»! 🎾🎸';
       } else {
         title.textContent = `Правильно: ${correct} з ${total}`;
-        text.textContent = ch === 'ch1'
+        text.textContent = hasNext
           ? 'Щоб відкрити наступний розділ, потрібно відповісти правильно на всі питання. Спробуй ще раз — у тебе все вийде! 💪'
           : 'Гарна спроба! Можеш пройти вікторину ще раз і покращити результат. 💪';
       }
 
-      if (ch === 'ch1' && diaryData.quiz_unlocked >= 2) {
+      if (perfect && hasNext) {
         const next = document.createElement('button');
         next.className = 'btn btn-primary';
-        next.textContent = 'Перейти до розділу 2 ▶';
-        next.addEventListener('click', () => switchQuizLevel('quiz_ch2'));
+        next.textContent = `Перейти до розділу ${nextLevel} ▶`;
+        next.addEventListener('click', () => switchQuizLevel('quiz_ch' + nextLevel));
         actions.appendChild(next);
       }
 
@@ -2629,7 +2503,7 @@ body {
 
       if (justAnswered) {
         setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
-        if (newlyUnlocked) showToast('🎉 Розділ 2 вікторини відкрито! 🔓');
+        if (newlyUnlocked) showToast(`🎉 Розділ ${nextLevel} вікторини відкрито! 🔓`);
       }
     }
 
@@ -2641,39 +2515,55 @@ body {
       if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // повертає true, якщо розділ 2 щойно було розблоковано
-    function unlockQuizStage2() {
-      const wasLocked = diaryData.quiz_unlocked < 2;
-      const btn2 = document.getElementById('btn_quiz_ch2');
-      if (btn2) {
-        btn2.classList.remove('locked');
-        btn2.textContent = '🎾 Розділ 2 (6 питань) 🔓';
+    // Відкриває розділ вікторини; повертає true, якщо він щойно став доступним
+    function unlockQuizStage(level) {
+      const wasLocked = (diaryData.quiz_unlocked || 1) < level;
+      if (wasLocked) {
+        diaryData.quiz_unlocked = level;
+        saveDiary();
       }
-      diaryData.quiz_unlocked = 2;
-      saveDiary();
+      refreshQuizLocks();
       return wasLocked;
     }
 
-    function refreshQuizLock() {
-      const btn2 = document.getElementById('btn_quiz_ch2');
-      if (diaryData.quiz_unlocked >= 2) {
-        unlockQuizStage2();
-      } else if (btn2) {
-        btn2.classList.add('locked');
-        btn2.textContent = '🔒 Розділ 2 (Заблоковано)';
-        if (document.getElementById('quiz_ch2')?.classList.contains('active')) switchQuizLevel('quiz_ch1');
+    const quizButtonTitles = {
+      1: '🎾 Розділ 1 (7 питань)',
+      2: '🎸 Розділ 2 (6 питань)',
+      3: '🎾 Розділ 3 (4 питання)',
+      4: '🎨 Розділ 4 (6 питань)'
+    };
+
+    function refreshQuizLocks() {
+      const unlocked = diaryData.quiz_unlocked || 1;
+
+      for (let lvl = 1; lvl <= MAX_QUIZ_LEVEL; lvl++) {
+        const btn = document.getElementById('btn_quiz_ch' + lvl);
+        if (!btn) continue;
+        if (unlocked >= lvl) {
+          btn.classList.remove('locked');
+          btn.textContent = lvl === 1 ? quizButtonTitles[lvl] : quizButtonTitles[lvl] + ' 🔓';
+        } else {
+          btn.classList.add('locked');
+          btn.textContent = `🔒 Розділ ${lvl} (Заблоковано)`;
+        }
+      }
+
+      // Якщо відкритий розділ тепер заблоковано (наприклад, після імпорту) — повертаємось до першого
+      const activeStage = document.querySelector('.quiz-stage.active');
+      if (activeStage) {
+        const activeLevel = Number(activeStage.id.replace('quiz_ch', '')) || 1;
+        if (activeLevel > unlocked) switchQuizLevel('quiz_ch1');
       }
     }
 
     function switchQuizLevel(stageId) {
-      if (stageId === 'quiz_ch3') {
-        showToast('Вікторина до 3 розділу з’явиться трохи згодом — читайте далі! 🎾');
+      const req = Number(String(stageId).replace('quiz_ch', '')) || 1;
+
+      if ((diaryData.quiz_unlocked || 1) < req) {
+        showToast(`Цей розділ заблоковано! Спершу дай 100% правильних відповідей у Розділі ${req - 1} 🎾`);
         return;
       }
-      if (stageId === 'quiz_ch2' && diaryData.quiz_unlocked < 2) {
-        showToast('Цей розділ заблоковано! Спершу дай 100% правильних відповідей у Розділі 1 🎾');
-        return;
-      }
+
       document.querySelectorAll('.quiz-stage').forEach(st => st.classList.remove('active'));
       document.querySelectorAll('.quiz-level-btn').forEach(bt => bt.classList.remove('active'));
 
@@ -3172,10 +3062,7 @@ ${EXPORT_MARKER}${payload}
         lsSet('persha_raketka_custom_words', JSON.stringify(customWords));
       }
       if (data.quiz && typeof data.quiz === 'object') {
-        quizAnswers = {
-          ch1: cleanQuizAnswers(data.quiz.ch1, quizCh1Data.length),
-          ch2: cleanQuizAnswers(data.quiz.ch2, quizCh2Data.length)
-        };
+        quizAnswers = cleanAllQuizAnswers(data.quiz);
         saveQuizAnswers();
       }
       saveDiary();
@@ -3241,6 +3128,8 @@ ${EXPORT_MARKER}${payload}
           const parsed = JSON.parse(savedDiary);
           if (parsed && typeof parsed === 'object') Object.assign(diaryData, parsed);
         } catch (e) { /* ігноруємо пошкоджені дані */ }
+        const ql = Number(diaryData.quiz_unlocked);
+        diaryData.quiz_unlocked = Number.isInteger(ql) ? Math.max(1, Math.min(MAX_QUIZ_LEVEL, ql)) : 1;
       }
       loadQuizAnswers();
     }
@@ -3263,11 +3152,8 @@ ${EXPORT_MARKER}${payload}
       renderProgress();
       applyPoll(diaryData.poll_choice);
       updateDiaryDisplay();
-      refreshQuizLock();
-      renderQuiz('ch1');
-      renderQuiz('ch2');
-      renderQuiz('ch3'); // <-- Додано
-      renderQuiz('ch4'); // <-- Додано
+      refreshQuizLocks();
+      Object.keys(quizConfig).forEach(renderQuiz);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
