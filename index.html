@@ -9,6 +9,66 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* Гра з картинами */
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.art-item img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  margin-bottom: 8px;
+}
+.art-dropzone {
+  border: 2px dashed var(--border-accent);
+  background: #fdfbf7;
+  padding: 10px 5px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-radius: 8px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.art-dropzone.correct {
+  background: #eafaf1;
+  border-color: var(--lime-dark);
+  color: var(--petrol);
+  font-weight: 800;
+}
+.art-names-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 15px;
+  background: #fff8f5;
+  border-radius: 12px;
+}
+.art-drag-name {
+  background: #fff;
+  border: 2px solid var(--clay);
+  color: var(--clay);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: grab;
+}
+.canvas-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
     :root {
       --clay: #e76f51;
       --clay-hover: #d65a3d;
@@ -1466,11 +1526,12 @@ body {
       </div>
 
       <div class="chapter-nav-wrapper">
-        <button class="ch-btn active" data-ch-target="ch1">1 розділ</button>
-        <button class="ch-btn" data-ch-target="ch2">2 розділ</button>
-        <button class="ch-btn" data-ch-target="ch3">3 розділ</button>
-        <button class="ch-btn" data-ch-target="ch_soon" style="opacity: 0.6;">4–23 розділи ⏳</button>
-      </div>
+  <button class="ch-btn active" onclick="switchChapter('ch1')">1 розділ</button>
+  <button class="ch-btn" onclick="switchChapter('ch2')">2 розділ</button>
+  <button class="ch-btn" onclick="switchChapter('ch3')">3 розділ</button>
+  <button class="ch-btn" onclick="switchChapter('ch4')">4 розділ</button>
+  <button class="ch-btn" onclick="switchChapter('ch_soon')" style="opacity: 0.6;">5–23 розділи ⏳</button>
+</div>
 
       <!-- ВМІСТ 1 РОЗДІЛУ -->
       <div id="ch1" class="chapter-content active">
@@ -1622,10 +1683,94 @@ body {
         </div>
       </div>
 
+      <!-- ВМІСТ 4 РОЗДІЛУ -->
+<div id="ch4" class="chapter-content">
+  <div class="card ch-card">
+    <div class="ch-header">
+      <span class="ch-badge" style="background:#fff3ee; color:var(--clay); border-color:#fadbd8;">Розділ 4 • стор. 23–29</span>
+      <h3 class="ch-title">Урок малювання з Деном Івановичем</h3>
+    </div>
+
+    <!-- Завдання 1: Співставлення картин -->
+    <div class="task-box">
+      <div class="task-icon">🖼️</div>
+      <div class="task-body">
+        <h4>Інтерактивне завдання: Великі художники</h4>
+        <p>На уроці Ден Іванович розповідав, наскільки по-різному бачили світ видатні митці[cite: 2]. Співстав картину та ім'я її автора!</p>
+        <p style="margin-top: 6px; font-size: 0.85rem; color: var(--text-muted);">
+          Перетягуй імена художників у порожні комірки під їхніми шедеврами.
+        </p>
+      </div>
+    </div>
+
+    <div class="art-game-container">
+      <!-- Картини -->
+      <div class="art-grid">
+        <div class="art-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/300px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Зоряна ніч">
+          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'vangogh')">Перетягни ім'я сюди</div>
+        </div>
+        <div class="art-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Black_Square.jpg/300px-Black_Square.jpg" alt="Чорний квадрат">
+          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'malevich')">Перетягни ім'я сюди</div>
+        </div>
+        <div class="art-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Maria_Primachenko._Our_Army%2C_Our_Protectors._%281978%29.jpg/300px-Maria_Primachenko._Our_Army%2C_Our_Protectors._%281978%29.jpg" alt="Звір Примаченко">
+          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'prymachenko')">Перетягни ім'я сюди</div>
+        </div>
+        <div class="art-item">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Picasso_Guernica.jpg/300px-Picasso_Guernica.jpg" alt="Пікассо">
+          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'picasso')">Перетягни ім'я сюди</div>
+        </div>
+      </div>
+      
+      <!-- Імена для перетягування -->
+      <div class="art-names-pool" id="artNamesPool">
+        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'malevich')" id="name-malevich">Казимир Малевич</div>
+        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'prymachenko')" id="name-prymachenko">Марія Примаченко</div>
+        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'vangogh')" id="name-vangogh">Вінсент Ван Гог</div>
+        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'picasso')" id="name-picasso">Пабло Пікассо</div>
+      </div>
+      <div id="artFeedback" style="text-align: center; font-weight: 800; min-height: 20px; margin-top: 10px;"></div>
+    </div>
+
+    <!-- Завдання 2: Полотно для малювання -->
+    <div class="task-box" style="margin-top: 24px;">
+      <div class="task-icon">🎨</div>
+      <div class="task-body">
+        <h4>Творче завдання: Твоя усмішка</h4>
+        <p>Ден Іванович запропонував намалювати щось, що викликає усмішку — як це зробили Саша та Сєня[cite: 2].</p>
+        <p style="margin-top: 6px; font-weight: 800; color: var(--clay);">Намалюй це просто тут, на цифровому полотні!</p>
+      </div>
+    </div>
+
+    <div class="canvas-wrapper">
+      <div class="canvas-controls">
+        <input type="color" id="brushColor" value="#2a9d8f" title="Обери колір">
+        <input type="range" id="brushSize" min="2" max="20" value="5" title="Товщина пензлика">
+        <button class="btn" onclick="clearCanvas()">🗑️ Очистити</button>
+      </div>
+      <canvas id="smileCanvas" width="600" height="300" style="border: 2px dashed var(--border-accent); border-radius: 12px; background: #fff; width: 100%; cursor: crosshair; touch-action: none;"></canvas>
+    </div>
+
+    <!-- Трекер вражень -->
+    <div class="mood-box" style="margin-top: 20px;">
+      <div class="mood-title">Твій настрій після 4 розділу:</div>
+      <div class="mood-emojis">
+        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '🎨 Відчув/-ла натхнення!')">🎨</button>
+        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '😂 Сміявся/-лася з малюнків')">😂</button>
+        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '🍣 Хочу суші-колеса!')">🍣</button>
+        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '🎸 Мрію як Сєня')">🎸</button>
+      </div>
+      <div class="mood-status" id="ch4_mood">Обери настрій смайликом ☝️</div>
+    </div>
+  </div>
+</div>
+      
       <div id="ch_soon" class="chapter-content">
         <div class="card" style="text-align: center; padding: 40px 20px;">
           <div style="font-size: 3rem; margin-bottom: 10px;">📖</div>
-          <h3 style="color: var(--petrol); margin-bottom: 8px;">Наступні розділи (4–23)</h3>
+          <h3 style="color: var(--petrol); margin-bottom: 8px;">Наступні розділи (5–23)</h3>
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
             Ми відкриваємо нові завдання поступово на кожній зустрічі читацького клубу. Читайте далі разом із нами!
           </p>
@@ -2033,6 +2178,82 @@ body {
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
+    // --- ЛОГІКА ДЛЯ КАРТИН ---
+let correctArtCount = 0;
+
+function dragArt(ev, artistId) {
+  ev.dataTransfer.setData("text", artistId);
+  ev.dataTransfer.setData("elementId", ev.target.id);
+}
+
+function handleArtDrop(ev, expectedArtist) {
+  ev.preventDefault();
+  const draggedArtist = ev.dataTransfer.getData("text");
+  const elementId = ev.dataTransfer.getData("elementId");
+  
+  if (draggedArtist === expectedArtist) {
+    const dropzone = ev.currentTarget;
+    const nameEl = document.getElementById(elementId);
+    
+    dropzone.innerHTML = `✅ ${nameEl.textContent}`;
+    dropzone.classList.add('correct');
+    nameEl.style.display = 'none';
+    
+    correctArtCount++;
+    if(correctArtCount === 4) {
+      document.getElementById('artFeedback').textContent = "🎉 Блискуче! Ти справжній знавець мистецтва!";
+      document.getElementById('artFeedback').style.color = "var(--lime-dark)";
+    }
+  } else {
+    document.getElementById('artFeedback').textContent = "❌ Не та картина, спробуй ще раз!";
+    document.getElementById('artFeedback').style.color = "var(--coral)";
+    setTimeout(() => { document.getElementById('artFeedback').textContent = ""; }, 2000);
+  }
+}
+
+// --- ЛОГІКА ДЛЯ ПОЛОТНА (CANVAS) ---
+const canvas = document.getElementById('smileCanvas');
+const ctx = canvas.getContext('2d');
+let isDrawing = false;
+
+// Налаштування для миші та сенсорних екранів
+const startPosition = (e) => {
+  isDrawing = true;
+  draw(e);
+};
+const endPosition = () => {
+  isDrawing = false;
+  ctx.beginPath();
+};
+const draw = (e) => {
+  if (!isDrawing) return;
+  e.preventDefault(); 
+  
+  ctx.lineWidth = document.getElementById('brushSize').value;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = document.getElementById('brushColor').value;
+  
+  // Розрахунок координат для миші та дотику
+  const rect = canvas.getBoundingClientRect();
+  const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+  const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+  
+  ctx.lineTo(clientX - rect.left, clientY - rect.top);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(clientX - rect.left, clientY - rect.top);
+};
+
+canvas.addEventListener('mousedown', startPosition);
+canvas.addEventListener('mouseup', endPosition);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('touchstart', startPosition, {passive: false});
+canvas.addEventListener('touchend', endPosition);
+canvas.addEventListener('touchmove', draw, {passive: false});
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
     // ================= 1. БАЗОВІ ДАНІ ТА СХОВИЩЕ =================
     const chapterPages = [
       5, 10, 17, 23, 30, 35, 40, 45, 51, 59, 
