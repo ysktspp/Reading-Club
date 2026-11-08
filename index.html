@@ -1514,12 +1514,14 @@ body {
         </p>
       </div>
 
-      <div class="chapter-nav-wrapper">
+     <div class="chapter-nav-wrapper">
   <button class="ch-btn active" onclick="switchChapter('ch1')">1 розділ</button>
   <button class="ch-btn" onclick="switchChapter('ch2')">2 розділ</button>
   <button class="ch-btn" onclick="switchChapter('ch3')">3 розділ</button>
   <button class="ch-btn" onclick="switchChapter('ch4')">4 розділ</button>
-  <button class="ch-btn" onclick="switchChapter('ch_soon')" style="opacity: 0.6;">5–23 розділи ⏳</button>
+  <button class="ch-btn" onclick="switchChapter('ch5')">5 розділ</button>
+  <button class="ch-btn" onclick="switchChapter('ch6')">6 розділ</button>
+  <button class="ch-btn" onclick="switchChapter('ch_soon')" style="opacity: 0.6;">7–23 розділи ⏳</button>
 </div>
 
       <!-- ВМІСТ 1 РОЗДІЛУ -->
@@ -1748,11 +1750,91 @@ body {
     </div>
   </div>
 </div>
-      
+      <!-- ВМІСТ 5 РОЗДІЛУ -->
+      <div id="ch5" class="chapter-content">
+        <div class="card ch-card">
+          <div class="ch-header">
+            <span class="ch-badge" style="background:#fff3ee; color:var(--clay); border-color:#fadbd8;">Розділ 5 • стор. 30–34</span>
+            <h3 class="ch-title">Кафе «Кристал» та родинні традиції</h3>
+          </div>
+
+          <!-- Творче завдання 5 розділу -->
+          <div class="task-box">
+            <div class="task-icon">🍦</div>
+            <div class="task-body">
+              <h4>Творче завдання & Рефлексія:</h4>
+              <p>
+                Аліна мала гарну традицію проводити час з мамою у кафе «Кристал» і їсти морозиво «Білочка»[cite: 4].
+              </p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">
+                ❓ А чи маєш ти традицію зі своєю мамою чи іншими членами родини? Якщо ні, то чи хотів/-ла би мати? Яку саме?
+              </p>
+            </div>
+          </div>
+
+          <!-- Поле для відповіді учня -->
+          <div style="margin: 18px 0;">
+            <textarea class="form-textarea" id="traditionReflect" rows="3" placeholder="Моя улюблена родинна традиція (або та, яку я хочу започаткувати) — це..."></textarea>
+          </div>
+
+          <!-- Трекер вражень -->
+          <div class="mood-box">
+            <div class="mood-title">Твій настрій після 5 розділу:</div>
+            <div class="mood-emojis">
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch5_mood', '🍦 Смачно і тепло на душі!')">🍦</button>
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch5_mood', '🤔 Роздумую про власні традиції')">🤔</button>
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch5_mood', '❤️ Обіймаю рідних')">❤️</button>
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch5_mood', '🐶 Зрадів/-ла песику Ейсу')">🐶</button>
+            </div>
+            <div class="mood-status" id="ch5_mood">Обери настрій смайликом ☝️</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ВМІСТ 6 РОЗДІЛУ -->
+      <div id="ch6" class="chapter-content">
+        <div class="card ch-card">
+          <div class="ch-header">
+            <span class="ch-badge" style="background:#eafaf1; color:var(--lime-dark); border-color:#d4efdf;">Розділ 6 • стор. 35–39</span>
+            <h3 class="ch-title">Перше тренування: зустріч із Павлом Петровичем</h3>
+          </div>
+
+          <!-- Творче завдання 6 розділу -->
+          <div class="task-box">
+            <div class="task-icon">🤝</div>
+            <div class="task-body">
+              <h4>Творче завдання: Стань справжнім тренером!</h4>
+              <p>
+                Павло Петрович виявився не дуже хорошим і відповідальним тренером[cite: 4]. Замість того, щоб підтримати Аліну, знайомства взагалі не було, і він вирішив відразу зіграти спаринги[cite: 4].
+              </p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">
+                ❓ Уяви, що ти потрапив/-ла на його місце. Як би ти організував/-ла першу зустріч Аліни з командою?
+              </p>
+            </div>
+          </div>
+
+          <!-- Поле для відповіді учня -->
+          <div style="margin: 18px 0;">
+            <textarea class="form-textarea" id="coachReflect" rows="3" placeholder="Якби я був/була тренером, я б розпочав знайомство команди з..."></textarea>
+          </div>
+
+          <!-- Трекер вражень -->
+          <div class="mood-box">
+            <div class="mood-title">Твій настрій після 6 розділу:</div>
+            <div class="mood-emojis">
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch6_mood', '😠 Обурений/-а тренером!')">😠</button>
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch6_mood', '💡 Маю купу лідерських ідей')">💡</button>
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch6_mood', '🤝 Хочу підтримати Аліну')">🤝</button>
+              <button class="ch-mood-btn" onclick="saveMood(this, 'ch6_mood', '🎾 Рвуся в бій на корт!')">🎾</button>
+            </div>
+            <div class="mood-status" id="ch6_mood">Обери настрій смайликом ☝️</div>
+          </div>
+        </div>
+      </div>
       <div id="ch_soon" class="chapter-content">
         <div class="card" style="text-align: center; padding: 40px 20px;">
           <div style="font-size: 3rem; margin-bottom: 10px;">📖</div>
-          <h3 style="color: var(--petrol); margin-bottom: 8px;">Наступні розділи (5–23)</h3>
+          <h3 style="color: var(--petrol); margin-bottom: 8px;">Наступні розділи (7–23)</h3>
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
             Ми відкриваємо нові завдання поступово на кожній зустрічі читацького клубу. Читайте далі разом із нами!
           </p>
