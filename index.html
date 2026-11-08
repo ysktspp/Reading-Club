@@ -63,6 +63,22 @@
   cursor: grab;
 }
 
+/* Гра з картинами: підтримка дотику (торкнись імені, потім картини) */
+.art-drag-name { user-select: none; -webkit-user-select: none; touch-action: manipulation; transition: all 0.2s; }
+.art-drag-name.selected {
+  background: var(--clay);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(231, 111, 81, 0.35);
+}
+.art-grid.has-selection .art-item:not(.solved) { cursor: pointer; }
+.art-grid.has-selection .art-item:not(.solved) .art-dropzone {
+  border-color: var(--clay);
+  background: #fff3ee;
+}
+.art-item.drag-over .art-dropzone { border-color: var(--clay); background: #fff3ee; }
+.art-item.wrong .art-dropzone { border-color: var(--coral); background: #fdf2f2; }
+
     :root {
       --clay: #e76f51;
       --clay-hover: #d65a3d;
@@ -1693,38 +1709,38 @@ body {
         <h4>Інтерактивне завдання: Великі художники</h4>
         <p>На уроці Ден Іванович розповідав, наскільки по-різному бачили світ видатні митці. Співстав картину та ім'я її автора!</p>
         <p style="margin-top: 6px; font-size: 0.85rem; color: var(--text-muted);">
-          Перетягуй імена художників у порожні комірки під їхніми шедеврами.
+          Торкнись імені художника, а потім картини (або перетягни ім'я на картину).
         </p>
       </div>
     </div>
 
     <div class="art-game-container">
       <!-- Картини -->
-      <div class="art-grid">
-        <div class="art-item">
+      <div class="art-grid" id="artGrid">
+        <div class="art-item" data-answer="vangogh">
           <img src="Van_Gogh.webp" alt="Зоряна ніч">
-          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'vangogh')">Перетягни ім'я сюди</div>
+          <div class="art-dropzone">Торкнись або перетягни ім'я сюди</div>
         </div>
-        <div class="art-item">
+        <div class="art-item" data-answer="malevich">
           <img src="Black_Square.png" alt="Чорний квадрат">
-          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'malevich')">Перетягни ім'я сюди</div>
+          <div class="art-dropzone">Торкнись або перетягни ім'я сюди</div>
         </div>
-        <div class="art-item">
+        <div class="art-item" data-answer="prymachenko">
           <img src="Zvir.jpg" alt="Гороховий звір">
-          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'prymachenko')">Перетягни ім'я сюди</div>
+          <div class="art-dropzone">Торкнись або перетягни ім'я сюди</div>
         </div>
-        <div class="art-item">
+        <div class="art-item" data-answer="picasso">
           <img src="try_muzykanty.jpg" alt="Три музиканти (з собакою)">
-          <div class="art-dropzone" ondragover="allowDrop(event)" ondrop="handleArtDrop(event, 'picasso')">Перетягни ім'я сюди</div>
+          <div class="art-dropzone">Торкнись або перетягни ім'я сюди</div>
         </div>
       </div>
       
-      <!-- Імена для перетягування -->
+      <!-- Імена для вибору / перетягування -->
       <div class="art-names-pool" id="artNamesPool">
-        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'malevich')" id="name-malevich">Казимир Малевич</div>
-        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'prymachenko')" id="name-prymachenko">Марія Примаченко</div>
-        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'vangogh')" id="name-vangogh">Вінсент Ван Гог</div>
-        <div class="art-drag-name" draggable="true" ondragstart="dragArt(event, 'picasso')" id="name-picasso">Пабло Пікассо</div>
+        <div class="art-drag-name" draggable="true" data-artist="malevich">Казимир Малевич</div>
+        <div class="art-drag-name" draggable="true" data-artist="prymachenko">Марія Примаченко</div>
+        <div class="art-drag-name" draggable="true" data-artist="vangogh">Вінсент Ван Гог</div>
+        <div class="art-drag-name" draggable="true" data-artist="picasso">Пабло Пікассо</div>
       </div>
       <div id="artFeedback" style="text-align: center; font-weight: 800; min-height: 20px; margin-top: 10px;"></div>
     </div>
@@ -1745,10 +1761,10 @@ body {
     <div class="mood-box" style="margin-top: 20px;">
       <div class="mood-title">Твій настрій після 4 розділу:</div>
       <div class="mood-emojis">
-        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '🎨 Відчув/-ла натхнення!')">🎨</button>
-        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '😂 Сміявся/-лася з малюнків')">😂</button>
-        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '🍣 Хочу суші-колеса!')">🍣</button>
-        <button class="ch-mood-btn" onclick="saveMood(this, 'ch4_mood', '🎸 Мрію як Сєня')">🎸</button>
+        <button class="ch-mood-btn" data-mood-target="ch4_mood" data-mood-text="🎨 Відчув/-ла натхнення!">🎨</button>
+        <button class="ch-mood-btn" data-mood-target="ch4_mood" data-mood-text="😂 Сміявся/-лася з малюнків">😂</button>
+        <button class="ch-mood-btn" data-mood-target="ch4_mood" data-mood-text="🍣 Хочу суші-колеса!">🍣</button>
+        <button class="ch-mood-btn" data-mood-target="ch4_mood" data-mood-text="🎸 Мрію як Сєня">🎸</button>
       </div>
       <div class="mood-status" id="ch4_mood">Обери настрій смайликом ☝️</div>
     </div>
@@ -2166,38 +2182,96 @@ body {
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    // --- ЛОГІКА ДЛЯ КАРТИН ---
-let correctArtCount = 0;
+    // --- ЛОГІКА ДЛЯ КАРТИН (дотик + мишка) ---
+(() => {
+  const grid = document.getElementById('artGrid');
+  const pool = document.getElementById('artNamesPool');
+  const feedback = document.getElementById('artFeedback');
+  if (!grid || !pool || !feedback) return;
 
-function dragArt(ev, artistId) {
-  ev.dataTransfer.setData("text", artistId);
-  ev.dataTransfer.setData("elementId", ev.target.id);
-}
+  let selected = null;     // ім'я, вибране дотиком/кліком
+  let dragged = null;      // ім'я, яке тягнуть мишкою
+  let correctCount = 0;
+  let fbTimer = null;
 
-function handleArtDrop(ev, expectedArtist) {
-  ev.preventDefault();
-  const draggedArtist = ev.dataTransfer.getData("text");
-  const elementId = ev.dataTransfer.getData("elementId");
-  
-  if (draggedArtist === expectedArtist) {
-    const dropzone = ev.currentTarget;
-    const nameEl = document.getElementById(elementId);
-    
-    dropzone.innerHTML = `✅ ${nameEl.textContent}`;
-    dropzone.classList.add('correct');
-    nameEl.style.display = 'none';
-    
-    correctArtCount++;
-    if(correctArtCount === 4) {
-      document.getElementById('artFeedback').textContent = "🎉 Блискуче! Ти справжній знавець мистецтва!";
-      document.getElementById('artFeedback').style.color = "var(--lime-dark)";
-    }
-  } else {
-    document.getElementById('artFeedback').textContent = "❌ Не та картина, спробуй ще раз!";
-    document.getElementById('artFeedback').style.color = "var(--coral)";
-    setTimeout(() => { document.getElementById('artFeedback').textContent = ""; }, 2000);
+  function say(text, color, clearAfter) {
+    clearTimeout(fbTimer);
+    feedback.textContent = text;
+    feedback.style.color = color || 'var(--petrol)';
+    if (clearAfter) fbTimer = setTimeout(() => { feedback.textContent = ''; }, clearAfter);
   }
-}
+
+  function clearSelection() {
+    if (selected) selected.classList.remove('selected');
+    selected = null;
+    grid.classList.remove('has-selection');
+  }
+
+  function place(nameEl, item) {
+    if (!nameEl || !item || item.classList.contains('solved')) return;
+    const zone = item.querySelector('.art-dropzone');
+
+    if (nameEl.dataset.artist === item.dataset.answer) {
+      zone.textContent = '✅ ' + nameEl.textContent;
+      zone.classList.add('correct');
+      item.classList.add('solved');
+      nameEl.style.display = 'none';
+      correctCount++;
+      clearSelection();
+      if (correctCount === 4) {
+        say('🎉 Блискуче! Ти справжній знавець мистецтва!', 'var(--lime-dark)');
+      } else {
+        say('✅ Правильно!', 'var(--lime-dark)', 1500);
+      }
+    } else {
+      item.classList.add('wrong');
+      setTimeout(() => item.classList.remove('wrong'), 700);
+      say('❌ Не та картина, спробуй ще раз!', 'var(--coral)', 2000);
+      clearSelection();
+    }
+  }
+
+  // Вибір імені дотиком / кліком
+  pool.querySelectorAll('.art-drag-name').forEach(nameEl => {
+    nameEl.addEventListener('click', () => {
+      if (selected === nameEl) { clearSelection(); say(''); return; }
+      clearSelection();
+      selected = nameEl;
+      nameEl.classList.add('selected');
+      grid.classList.add('has-selection');
+      say('👆 Тепер торкнись картини, до якої це підходить', 'var(--petrol)');
+    });
+
+    // Перетягування мишкою (змінна замість dataTransfer — працює в усіх браузерах)
+    nameEl.addEventListener('dragstart', (e) => {
+      dragged = nameEl;
+      e.dataTransfer.setData('text/plain', nameEl.dataset.artist);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    nameEl.addEventListener('dragend', () => { dragged = null; });
+  });
+
+  // Клік по картині (або її рамці) — поставити вибране ім'я
+  grid.querySelectorAll('.art-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (selected) place(selected, item);
+      else if (!item.classList.contains('solved')) say('Спершу торкнись імені художника внизу 👇', 'var(--petrol)', 2000);
+    });
+
+    item.addEventListener('dragover', (e) => { e.preventDefault(); item.classList.add('drag-over'); });
+    item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
+    item.addEventListener('drop', (e) => {
+      e.preventDefault();
+      item.classList.remove('drag-over');
+      let nameEl = dragged;
+      if (!nameEl) {
+        const id = e.dataTransfer.getData('text/plain');
+        nameEl = pool.querySelector(`.art-drag-name[data-artist="${id}"]`);
+      }
+      place(nameEl, item);
+    });
+  });
+})();
 
     // ================= 1. БАЗОВІ ДАНІ ТА СХОВИЩЕ =================
     const chapterPages = [
@@ -2222,6 +2296,7 @@ function handleArtDrop(ev, expectedArtist) {
       ch1_mood: '',
       ch2_mood: '',
       ch3_mood: '',
+      ch4_mood: '',
       quiz_unlocked: 1,
       poll_choice: ''
     };
@@ -2349,7 +2424,7 @@ function handleArtDrop(ev, expectedArtist) {
       const target = document.getElementById(chId);
       if (target) target.classList.add('active');
 
-      const btn = document.querySelector(`.ch-btn[data-ch-target="${chId}"]`);
+      const btn = document.querySelector(`.ch-btn[onclick="switchChapter('${chId}')"]`);
       if (btn) btn.classList.add('active');
     }
 
@@ -3117,6 +3192,9 @@ ${diaryData.ch1_dislike || 'Не заповнено'}
 ${diaryData.ch3_sacrifice || 'Не заповнено'}
 Настрій: ${diaryData.ch3_mood || 'Не відзначено'}
 
+[РОЗДІЛ 4. УРОК МАЛЮВАННЯ]
+Настрій: ${diaryData.ch4_mood || 'Не відзначено'}
+
 [МОЇ ДУМКИ ТА ТВОРЧІСТЬ]
 - Головна думка: ${diaryData.general_review || 'Не заповнено'}
 - Назва для рок-гурту: ${diaryData.band_name || 'Не заповнено'}
@@ -3185,6 +3263,10 @@ ${EXPORT_MARKER}${payload}
 
       const s3 = splitMood(getSection('РОЗДІЛ 3'));
       diary.ch3_sacrifice = s3.text; diary.ch3_mood = s3.mood;
+
+      const sec4m = getSection('РОЗДІЛ 4');
+      const m4 = sec4m.match(/Настрій:[ \t]*(.*)$/m);
+      diary.ch4_mood = m4 ? clean(m4[1]) : '';
 
       const sec4 = getSection('МОЇ ДУМКИ');
       diary.general_review = line(sec4, 'Головна думка');
@@ -3307,7 +3389,7 @@ ${EXPORT_MARKER}${payload}
         if (el) el.value = diaryData[key] || '';
       });
 
-      ['ch1_mood', 'ch2_mood', 'ch3_mood'].forEach(key => {
+      ['ch1_mood', 'ch2_mood', 'ch3_mood', 'ch4_mood'].forEach(key => {
         const statusEl = document.getElementById(key);
         if (statusEl) statusEl.textContent = diaryData[key] || 'Обери настрій смайликом ☝️';
         document.querySelectorAll(`.ch-mood-btn[data-mood-target="${key}"]`).forEach(b => {
