@@ -895,15 +895,29 @@ body {
         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Клікай на картки зі словами Сєні та Аліни:</p>
         <div class="dict-cards-grid" id="dictCardsContainer">
           <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Ейс</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Подача навиліт у тенісі! М'яч летить так влучно й швидко, що суперник навіть не встигає торкнутися його своєю ракеткою.</div></div>
+          
           <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎸 Риф</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Коротка, яскрава та ритмічна мелодія на гітарі, яка повторюється впродовж пісні та запам'ятовується з перших секунд.</div></div>
-          <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Сет</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Велика партія в тенісному матчі, яка складається з виграних геймів (зазвичай до 6 виграшів).</div></div>
+          
+          <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Сет</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Основна частина тенісного матчу, яка складається з геймів. Щоб виграти сет, потрібно взяти щонайменше 6 геймів із різницею мінімум у два гейми. За рахунку 6:6 грається тай-брейк.</div></div>
+          
           <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎸 Соло</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Віртуозна партія одного інструмента або вокалу, коли вся увага слухачів прикута лише до одного виконавця!</div></div>
+          
           <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Тай-брейк</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Спеціальний вирішальний швидкий гейм за рахунку 6:6, який визначає, хто саме забере перемогу в сеті.</div></div>
+          
           <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎸 Акорд</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Одночасне гармонійне звучання кількох нот (зазвичай трьох чи більше), затиснутих пальцями на струнах гітари.</div></div>
+          
           <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Корт</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Прямокутний спеціально облаштований майданчик для тенісу із сіткою посередині (буває ґрунтовий, трав'яний чи твердий).</div></div>
+          
           <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎸 Хіт</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Надзвичайно популярна музична композиція, яку наспівують усі радіостанції та шанувальники навколо.</div></div>
+          
+          <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Розіграш</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Відрізок гри від подачі до моменту, коли хтось отримує очко. Із розіграшів складаються гейми.</div></div>
+          
+          <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Гейм</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Частина гри, з яких складається сет. За один гейм найчастіше грають 6–8 розіграшів, але не менше 4-х. Іноді гейм затягується і на понад 10 розіграшів.</div></div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Дропшот</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Короткий удар, у результаті якого м'яч пролітає понад сіткою і падає дуже близько до неї на половині суперника.</div></div>
+
+          <div class="dict-expand-card" onclick="toggleDictCard(this)"><div class="dict-expand-head"><span>🎾 Форхенд</span><span class="dict-arrow">▼</span></div><div class="dict-expand-body">Один із основних ударів у тенісі. Виконується збоку провідної руки (наприклад, правою рукою справа). Його дуже часто використовують під час атаки!</div></div>
         </div>
-      </div>
 
       <div class="card sort-game-card">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
@@ -1498,11 +1512,19 @@ body {
 
     // ================= 4. СЛОВНИК =================
     function toggleDictCard(cardEl) { const isOpen = cardEl.classList.toggle('open'); cardEl.setAttribute('aria-expanded', String(isOpen)); }
-    const initialWords = [
-      { id: 'w1', text: 'Ейс', cat: 'tennis' }, { id: 'w2', text: 'Риф', cat: 'music' },
-      { id: 'w3', text: 'Тай-брейк', cat: 'tennis' }, { id: 'w4', text: 'Соло', cat: 'music' },
-      { id: 'w5', text: 'Сет', cat: 'tennis' }, { id: 'w6', text: 'Акорд', cat: 'music' },
-      { id: 'w7', text: 'Подвійна помилка', cat: 'tennis' }, { id: 'w8', text: 'Медіатор', cat: 'music' }
+  const initialWords = [
+      { id: 'w1', text: 'Ейс', cat: 'tennis' }, 
+      { id: 'w2', text: 'Риф', cat: 'music' },
+      { id: 'w3', text: 'Тай-брейк', cat: 'tennis' }, 
+      { id: 'w4', text: 'Соло', cat: 'music' },
+      { id: 'w5', text: 'Сет', cat: 'tennis' }, 
+      { id: 'w6', text: 'Акорд', cat: 'music' },
+      { id: 'w7', text: 'Подвійна помилка', cat: 'tennis' }, 
+      { id: 'w8', text: 'Медіатор', cat: 'music' },
+      { id: 'w9', text: 'Розіграш', cat: 'tennis' },
+      { id: 'w10', text: 'Гейм', cat: 'tennis' },
+      { id: 'w11', text: 'Дропшот', cat: 'tennis' },
+      { id: 'w12', text: 'Форхенд', cat: 'tennis' }
     ];
 
     let wordsInPool = [...initialWords]; let tennisColumnWords = []; let musicColumnWords = []; let selectedWordObj = null;
