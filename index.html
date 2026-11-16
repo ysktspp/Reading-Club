@@ -683,6 +683,18 @@ body {
           <div style="margin: 18px 0;">
             <textarea class="form-textarea" id="ch7Reflection" rows="3" placeholder="Коли я стикаюся з невдачею, мені допомагає..." oninput="syncData('ch7_reflection', this.value)"></textarea>
           </div>
+          <div class="task-box">
+            <div class="task-icon">📓</div>
+            <div class="task-body">
+              <h4>Завдання для паперового читацького щоденника:</h4>
+              <p>Заверши три речення у своєму паперовому щоденнику:</p>
+              <ul style="margin: 8px 0 0 20px; line-height: 1.7;">
+                <li>Я почуваюся переможцем, коли…</li>
+                <li>Коли в мене щось не виходить, я…</li>
+                <li>Для мене важливіше за перемогу…</li>
+              </ul>
+            </div>
+          </div>
           <div class="mood-box">
             <div class="mood-title">Твій настрій після 7 розділу:</div>
             <div class="mood-emojis">
@@ -713,6 +725,44 @@ body {
           </div>
           <div style="margin: 18px 0;">
             <textarea class="form-textarea" id="ch8Reflection" rows="3" placeholder="У дитинстві моя мама/тато мріяли про те, щоб..." oninput="syncData('ch8_reflection', this.value)"></textarea>
+          </div>
+          <div class="task-box">
+            <div class="task-icon">🎧</div>
+            <div class="task-body">
+              <h4>Послухай пісню, яку слухали мама й Аліна</h4>
+              <p>Луї Армстронг — «Let My People Go». Увімкни її й уяви, як мама з Аліною танцюють на кухні.</p>
+              <audio controls preload="none" style="width: 100%; margin-top: 10px;">
+                <source src="audio/louis_armstrong_let_my_people_go.mp3" type="audio/mpeg">
+                Твій браузер не підтримує відтворення аудіо.
+              </audio>
+            </div>
+          </div>
+          <div class="task-box" style="display: block;">
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+              <div class="task-icon">🎶</div>
+              <div class="task-body">
+                <h4>Плейлист для моєї родини</h4>
+                <p>Мама й Аліна танцювали під музику Луї Армстронга. Уяви, що ти створюєш плейлист для своєї родини. Обери три пісні, запиши їхні назви та поясни свій вибір.</p>
+              </div>
+            </div>
+            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; margin-top: 12px;">
+              <div style="font-weight: 800; color: var(--clay);">😊 Пісня про щасливі моменти</div>
+              <div style="font-size: 0.85rem; opacity: 0.8;">Та, що нагадує тобі про щось радісне</div>
+              <input type="text" class="form-input" id="ch8_song_happy" placeholder="Назва пісні та виконавець" oninput="syncData('ch8_song_happy', this.value)">
+              <textarea class="form-textarea" id="ch8_why_happy" rows="2" placeholder="Чому саме ця пісня нагадує мені про щасливі моменти..." oninput="syncData('ch8_why_happy', this.value)"></textarea>
+            </div>
+            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; margin-top: 12px;">
+              <div style="font-weight: 800; color: var(--clay);">💃 Пісня, під яку хочеться танцювати</div>
+              <div style="font-size: 0.85rem; opacity: 0.8;">Та, під яку неможливо всидіти на місці</div>
+              <input type="text" class="form-input" id="ch8_song_dance" placeholder="Назва пісні та виконавець" oninput="syncData('ch8_song_dance', this.value)">
+              <textarea class="form-textarea" id="ch8_why_dance" rows="2" placeholder="Чому під цю пісню мені хочеться танцювати..." oninput="syncData('ch8_why_dance', this.value)"></textarea>
+            </div>
+            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; margin-top: 12px;">
+              <div style="font-weight: 800; color: var(--clay);">💌 Пісня, яку я присвятив/-ла б рідним</div>
+              <div style="font-size: 0.85rem; opacity: 0.8;">Обери, кому з рідних і чому</div>
+              <input type="text" class="form-input" id="ch8_song_dedicate" placeholder="Назва пісні та виконавець, кому присвячую" oninput="syncData('ch8_song_dedicate', this.value)">
+              <textarea class="form-textarea" id="ch8_why_dedicate" rows="2" placeholder="Чому я присвячую цю пісню цій людині..." oninput="syncData('ch8_why_dedicate', this.value)"></textarea>
+            </div>
           </div>
           <div class="mood-box">
             <div class="mood-title">Твій настрій після 8 розділу:</div>
@@ -1045,6 +1095,7 @@ body {
       ch3_sacrifice: '', general_review: '', band_name: '', cheer_slogan: '', student_name: '',
       ch1_mood: '', ch2_mood: '', ch3_mood: '', ch4_mood: '', ch5_mood: '', ch6_mood: '', ch7_mood: '', ch8_mood: '',
       ch5_reflection: '', ch6_reflection: '', ch7_reflection: '', ch8_reflection: '',
+      ch8_song_happy: '', ch8_why_happy: '', ch8_song_dance: '', ch8_why_dance: '', ch8_song_dedicate: '', ch8_why_dedicate: '',
       quiz_unlocked: 1, poll_choice: ''
     };
     const DIARY_DEFAULTS = Object.assign({}, diaryData);
@@ -1217,7 +1268,7 @@ body {
       { q: "5. Як минуло знайомство Аліни з командою?", opts: ["Усі стали в коло і по черзі називали свої імена", "Тренер урочисто представив її перед усіма учнями", "Знайомства не було, тренер вирішив відразу зіграти спаринги", "Вони разом пили чай перед початком тренування"], correct: 2 }
     ];
     const quizCh7Data = [
-      { q: "1. Чи помітив тренер, як вправно Аліна грає?", opts: ["Ні, він був байдужим", "Так, навіть підійшов, щоб похвалити", "Він узагалі вийшов з корту", "Помітив, але розкритикував її техніку"], correct: 1 },
+      { q: "1. Чи помітив тренер, як вправно Аліна грає?", opts: ["Ні, він був байдужим", "Так, навіть підійшов, щоб похвалити", "Він узагалі вийшов з корту", "Помітив, але розкритикував її техніку"], correct: 0 },
       { q: "2. Чи вдалося виграти Аліні у першому спарингу?", opts: ["Так, вона перемогла дуже легко", "Ні, вона програла другий і третій сети", "Матч зупинили через травму", "Вони зіграли внічию"], correct: 1 },
       { q: "3. Як звали суперницю Аліни?", opts: ["Оксана", "Марина", "Ніна", "Катерина"], correct: 2 },
       { q: "4. Якою була Ніна?", opts: ["Серйозна дівчина з короткою стрижкою", "Сміхотлива дівчина з кучерявим волоссям, так-сяк приборканим барвистою стрічкою", "Висока блондинка у фірмовій кепці", "Дуже мовчазна і зосереджена спортсменка"], correct: 1 }
@@ -1710,7 +1761,9 @@ ${EXPORT_MARKER}${payload}
       ch1_input_dislike: 'ch1_dislike', friend_sasha: 'friend_sasha', friend_misha: 'friend_misha', friend_andryukha: 'friend_andryukha',
       friend_danko: 'friend_danko', alinaChallenge: 'ch3_sacrifice', reviewText: 'general_review', bandName: 'band_name',
       cheerText: 'cheer_slogan', studentNameInput: 'student_name', traditionReflect: 'ch5_reflection', coachReflect: 'ch6_reflection',
-      ch7Reflection: 'ch7_reflection', ch8Reflection: 'ch8_reflection'
+      ch7Reflection: 'ch7_reflection', ch8Reflection: 'ch8_reflection',
+      ch8_song_happy: 'ch8_song_happy', ch8_why_happy: 'ch8_why_happy', ch8_song_dance: 'ch8_song_dance', ch8_why_dance: 'ch8_why_dance',
+      ch8_song_dedicate: 'ch8_song_dedicate', ch8_why_dedicate: 'ch8_why_dedicate'
     };
 
     function loadSavedData() {
