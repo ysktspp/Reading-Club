@@ -731,10 +731,12 @@ body {
             <div class="task-body">
               <h4>Послухай пісню, яку слухали мама й Аліна</h4>
               <p>Луї Армстронг — «Let My People Go». Увімкни її й уяви, як мама з Аліною танцюють на кухні.</p>
-              <audio controls preload="none" style="width: 100%; margin-top: 10px;">
-                <source src="audio/louis_armstrong_let_my_people_go.mp3" type="audio/mpeg">
+              <!-- Шлях до пісні: або назва файлу біля index.html, або повне посилання https://... -->
+              <audio controls preload="none" id="ch8Audio" style="width: 100%; margin-top: 10px;">
+                <source src="Louis_Armstrong_-_Let_My_People_Go.mp3" type="audio/mpeg">
                 Твій браузер не підтримує відтворення аудіо.
               </audio>
+              <p id="ch8AudioErr" style="display:none; margin-top:8px; font-size:0.85rem; color: var(--coral);">⚠️ Не вдалося знайти файл пісні. Поклади файл «Louis_Armstrong_-_Let_My_People_Go.mp3» в ту саму папку, де лежить index.html.</p>
             </div>
           </div>
           <div class="task-box" style="display: block;">
@@ -1790,6 +1792,8 @@ ${EXPORT_MARKER}${payload}
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      const ch8Src = document.querySelector('#ch8Audio source');
+      if (ch8Src) ch8Src.addEventListener('error', () => { const e = document.getElementById('ch8AudioErr'); if (e) e.style.display = 'block'; });
       document.querySelectorAll('[data-tab-target]').forEach(btn => { btn.addEventListener('click', function() { navigate(this.dataset.tabTarget); }); });
       document.querySelectorAll('[data-ch-target]').forEach(btn => { btn.addEventListener('click', function() { switchChapter(this.dataset.chTarget); }); });
       document.getElementById('btn_minus_chapter')?.addEventListener('click', () => moveProgress(-1));
