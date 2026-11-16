@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Читацький клуб: Перша ракетка | 4 клас</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#264653">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
@@ -273,6 +277,10 @@ body {
 
     /* Повідомлення-«тости» замість alert() */
     .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--petrol); color: #fff; padding: 12px 22px; border-radius: 50px; font-weight: 700; font-size: 0.92rem; box-shadow: var(--shadow-md); opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; z-index: 300; max-width: 90vw; text-align: center; }
+    .storage-warning { display: none; position: relative; z-index: 250; margin: 12px auto 0; max-width: 960px; width: calc(100% - 24px); background: #fff4e5; border: 2px solid var(--coral, #e07a5f); color: #5a3a22; border-radius: 16px; padding: 12px 44px 12px 16px; font-size: 0.9rem; line-height: 1.45; box-shadow: var(--shadow-md); }
+    .storage-warning.show { display: block; }
+    .storage-warning b { color: var(--coral, #e07a5f); }
+    .storage-warning button { position: absolute; top: 8px; right: 10px; border: none; background: transparent; font-size: 1.2rem; cursor: pointer; color: #5a3a22; }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
     /* Результат вікторини */
@@ -307,6 +315,10 @@ body {
 <body>
 
 <div class="emoji-background" aria-hidden="true"></div>
+<div class="storage-warning" id="storageWarning" role="alert">
+  <button type="button" aria-label="Закрити" onclick="this.parentElement.classList.remove('show')">✖</button>
+  <span id="storageWarningText"></span>
+</div>
 
   <!-- Навігація сайту -->
   <header>
@@ -952,10 +964,10 @@ body {
       <div class="card" style="margin-bottom: 20px;">
         <h3 style="font-size: 1.25rem; color: var(--petrol); margin-bottom: 8px;">💬 Клубна трибуна: Головна тема книги</h3>
         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">Напиши свої роздуми: про що ця історія для тебе особисто? Чого вона навчає?</p>
-        <textarea id="reviewText" rows="3" class="form-input" style="width: 100%; resize: vertical;" placeholder="Ця книга вчить мене ніколи не опускати руки, тому що..."></textarea>
+        <textarea id="reviewText" oninput="syncData('general_review', this.value)" rows="3" class="form-input" style="width: 100%; resize: vertical;" placeholder="Ця книга вчить мене ніколи не опускати руки, тому що..."></textarea>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
-          <div><label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎸 Назва для рок-гурту Сєні:</label><input type="text" id="bandName" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Твій креативний варіант..."></div>
-          <div><label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎾 Кричалка підтримки для Аліни:</label><input type="text" id="cheerText" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Слова вболівальників на корті..."></div>
+          <div><label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎸 Назва для рок-гурту Сєні:</label><input type="text" id="bandName" oninput="syncData('band_name', this.value)" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Твій креативний варіант..."></div>
+          <div><label style="font-size: 0.85rem; font-weight: 700; color: var(--petrol);">🎾 Кричалка підтримки для Аліни:</label><input type="text" id="cheerText" oninput="syncData('cheer_slogan', this.value)" class="form-input" style="width: 100%; margin-top: 4px;" placeholder="Слова вболівальників на корті..."></div>
         </div>
         <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
           <button class="btn btn-primary" onclick="saveThoughts()">💾 Зберегти мої думки</button>
@@ -1103,7 +1115,36 @@ body {
     const DIARY_DEFAULTS = Object.assign({}, diaryData);
 
     function lsGet(key) { try { return window.localStorage.getItem(key); } catch (e) { return null; } }
-    function lsSet(key, value) { try { window.localStorage.setItem(key, value); } catch (e) {} }
+    let storageWarned = false;
+    function lsSet(key, value) {
+      try { window.localStorage.setItem(key, value); }
+      catch (e) { if (!storageWarned) { storageWarned = true; showStorageWarning('noStorage'); } }
+    }
+
+    // Перевірка: чи може цей браузер запам'ятати прогрес після закриття сторінки
+    function showStorageWarning(reason) {
+      const box = document.getElementById('storageWarning'); const txt = document.getElementById('storageWarningText');
+      if (!box || !txt) return;
+      const tip = 'Щоб нічого не загубити, наприкінці натискай <b>«💾 Завантажити мій щоденник»</b>, а наступного разу — <b>«📂 Завантажити з файлу»</b>.';
+      txt.innerHTML = reason === 'inApp'
+        ? '⚠️ <b>Ти відкрив(-ла) сайт усередині месенджера.</b> Такий вбудований браузер часто стирає прогрес, коли закриваєш сторінку. Натисни «⋮» або «Поділитися» → <b>«Відкрити в браузері»</b> (Chrome або Safari). ' + tip
+        : '⚠️ <b>Цей браузер не зберігає прогрес</b> (можливо, увімкнено режим інкогніто чи приватний перегляд). Відкрий сайт у звичайному вікні Chrome або Safari. ' + tip;
+      box.classList.add('show');
+    }
+
+    function checkStorage() {
+      try {
+        const k = '__pr_test__'; window.localStorage.setItem(k, '1');
+        if (window.localStorage.getItem(k) !== '1') throw new Error('no storage');
+        window.localStorage.removeItem(k);
+      } catch (e) { storageWarned = true; showStorageWarning('noStorage'); return; }
+      // Вбудовані браузери Telegram, Viber, Instagram, Facebook, TikTok тощо
+      const ua = navigator.userAgent || '';
+      const inApp = /Telegram|Viber|Instagram|FBAN|FBAV|FB_IAB|Messenger|Line\/|TikTok|musical_ly|BytedanceWebview|Snapchat|; wv\)/i.test(ua) || (typeof window.TelegramWebviewProxy !== 'undefined');
+      if (inApp) showStorageWarning('inApp');
+      // Просимо браузер не видаляти дані сайту автоматично (де це підтримується)
+      try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch (e) {}
+    }
     function saveDiary() { lsSet('persha_raketka_diary', JSON.stringify(diaryData)); }
     function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 
@@ -1825,7 +1866,7 @@ ${EXPORT_MARKER}${payload}
         card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleDictCard(card); } });
       });
 
-      initFretboardAndStamps(); loadSavedData(); applyStateToUI(); renderSortGame(); renderCustomWords(); renderDilemma();
+      checkStorage(); initFretboardAndStamps(); loadSavedData(); applyStateToUI(); renderSortGame(); renderCustomWords(); renderDilemma();
     });
 
 (() => {

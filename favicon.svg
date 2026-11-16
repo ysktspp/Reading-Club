@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#264653"/>
+  <!-- розкрита книжка -->
+  <path d="M32 58 C24 52 14 51 4 53 V25 C14 23 24 24 32 30 Z" fill="#fbf9f5"/>
+  <path d="M32 58 C40 52 50 51 60 53 V25 C50 23 40 24 32 30 Z" fill="#f4a261"/>
+  <path d="M32 30 V58" stroke="#e76f51" stroke-width="3" stroke-linecap="round"/>
+  <path d="M10 33 Q18 31.5 26 35 M10 40 Q18 38.5 26 42" stroke="#264653" stroke-opacity=".4" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M38 35 Q46 31.5 54 33 M38 42 Q46 38.5 54 40" stroke="#264653" stroke-opacity=".4" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <!-- тенісний м'ячик -->
+  <circle cx="44" cy="16" r="12.5" fill="#8ac926" stroke="#fbf9f5" stroke-width="3"/>
+  <path d="M33.5 10.5 Q40 16 33.5 21.5 M54.5 10.5 Q48 16 54.5 21.5" stroke="#fbf9f5" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+</svg>
