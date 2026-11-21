@@ -461,7 +461,9 @@ body {
         <button class="ch-btn" onclick="switchChapter('ch6')">6 розділ</button>
         <button class="ch-btn" onclick="switchChapter('ch7')">7 розділ</button>
         <button class="ch-btn" onclick="switchChapter('ch8')">8 розділ</button>
-        <button class="ch-btn" onclick="switchChapter('ch_soon')" style="opacity: 0.6;">9–23 розділи ⏳</button>
+        <button class="ch-btn" onclick="switchChapter('ch9')">9 розділ</button>
+        <button class="ch-btn" onclick="switchChapter('ch10')">10 розділ</button>
+        <button class="ch-btn" onclick="switchChapter('ch_soon')" style="opacity: 0.6;">11–23 розділи ⏳</button>
       </div>
 
       <!-- ВМІСТ 1 РОЗДІЛУ -->
@@ -791,10 +793,107 @@ body {
         </div>
       </div>
 
+      <!-- ВМІСТ 9 РОЗДІЛУ -->
+      <div id="ch9" class="chapter-content">
+        <div class="card ch-card">
+          <div class="ch-header">
+            <span class="ch-badge">Розділ 9 • стор. 51–58</span>
+            <h3 class="ch-title">Дивний сон Сєні та пошуки назви гурту</h3>
+          </div>
+          <div class="task-box">
+            <div class="task-icon">🎸</div>
+            <div class="task-body">
+              <h4>Творче завдання: Назва для гурту</h4>
+              <p>Щоб виступити на святі Останнього дзвоника, хлопці мають <strong>до понеділка вигадати назву</strong> для свого гурту. Допоможи їм!</p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ Яку назву ти запропонував/-ла б гурту Сєні? Чому саме таку?</p>
+            </div>
+          </div>
+          <div style="background: #fff8f5; border: 1px solid var(--border-accent); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <label style="font-size: 0.88rem; font-weight: 700; color: var(--petrol);">🎤 Моя назва для гурту:</label>
+            <input type="text" class="form-input" id="ch9_band_name" placeholder="Наприклад: «Гучні струни»" oninput="syncData('band_name', this.value)">
+            <textarea class="form-textarea" id="ch9_band_why" rows="2" placeholder="Я обрав/-ла цю назву, тому що..." oninput="syncData('ch9_band_why', this.value)"></textarea>
+          </div>
+          <div class="task-box">
+            <div class="task-icon">🌧️</div>
+            <div class="task-body">
+              <h4>Творче завдання & паперовий щоденник: Найдивніший сон</h4>
+              <p>Сєні наснилося, що він лежить на шезлонгу поруч із пані Мариною, а з неба падає дощ із бридкого морквяного салату!</p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ А який найдивніший або найсмішніший сон бачив/-ла ти? Опиши його коротко тут.</p>
+              <p style="margin-top: 6px;">📝 А потім <strong>намалюй цей сон у своєму паперовому читацькому щоденнику</strong>.</p>
+            </div>
+          </div>
+          <div style="margin: 18px 0;">
+            <textarea class="form-textarea" id="ch9Dream" rows="3" placeholder="Одного разу мені наснилося, що..." oninput="syncData('ch9_dream', this.value)"></textarea>
+          </div>
+          <div class="mood-box">
+            <div class="mood-title">Твій настрій після 9 розділу:</div>
+            <div class="mood-emojis">
+              <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="😂 Сміявся/-лася з сону!">😂</button>
+              <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="🥕 Тільки не морквяний салат!">🥕</button>
+              <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="🎸 Вигадую назву гурту">🎸</button>
+              <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="🤔 Цікаво, чи встигнуть хлопці">🤔</button>
+            </div>
+            <div class="mood-status" id="ch9_mood">Обери настрій смайликом ☝️</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ВМІСТ 10 РОЗДІЛУ -->
+      <div id="ch10" class="chapter-content">
+        <div class="card ch-card">
+          <div class="ch-header">
+            <span class="ch-badge" style="background:#eafaf1; color:var(--lime-dark); border-color:#d4efdf;">Розділ 10 • стор. 59–68</span>
+            <h3 class="ch-title">Гучна Ніна, Кубок першої ракетки та бабл-ті в парку</h3>
+          </div>
+          <div class="task-box">
+            <div class="task-icon">👭</div>
+            <div class="task-body">
+              <h4>Творче завдання: Такі різні друзі</h4>
+              <p>Ніна — <strong>дуже гучна особистість</strong>, зовсім не схожа на Аліну. Та після тренування дівчата разом пішли в парк пити бабл-ті.</p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ Чи є в тебе друг або подруга, які дуже відрізняються від тебе? Чим ви різні і що вас об'єднує?</p>
+            </div>
+          </div>
+          <div style="margin: 18px 0;">
+            <textarea class="form-textarea" id="ch10Friend" rows="3" placeholder="Мій друг / моя подруга не схожі на мене, бо... Але нас об'єднує..." oninput="syncData('ch10_friend', this.value)"></textarea>
+          </div>
+          <div class="task-box">
+            <div class="task-icon">🤔</div>
+            <div class="task-body">
+              <h4>Рефлексія: Що думає тренер?</h4>
+              <p>Аліні здавалося, що вона <strong>дратує Павла Петровича</strong>.</p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ Чи бувало, що тобі здавалося, ніби хтось на тебе сердиться? Як можна дізнатися, що людина думає насправді?</p>
+            </div>
+          </div>
+          <div style="margin: 18px 0;">
+            <textarea class="form-textarea" id="ch10Reflection" rows="3" placeholder="Коли мені здається, що хтось на мене сердиться, я..." oninput="syncData('ch10_reflection', this.value)"></textarea>
+          </div>
+          <div class="task-box">
+            <div class="task-icon">🏆</div>
+            <div class="task-body">
+              <h4>Підтримай Аліну перед Кубком першої ракетки!</h4>
+              <p>Аліна готується до важливого змагання — <strong>Кубка першої ракетки</strong>. Склади для неї коротку кричалку, яку можна вигукувати з трибун.</p>
+            </div>
+          </div>
+          <div style="margin: 18px 0;">
+            <input type="text" class="form-input" id="ch10_cheer" placeholder="Наприклад: «Аліна, вперед — тебе кубок жде!»" oninput="syncData('cheer_slogan', this.value)">
+          </div>
+          <div class="mood-box">
+            <div class="mood-title">Твій настрій після 10 розділу:</div>
+            <div class="mood-emojis">
+              <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="🧋 Захотілося бабл-ті!">🧋</button>
+              <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="📣 Ніна — вогонь!">📣</button>
+              <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="🏆 Вболіваю за Аліну на Кубку">🏆</button>
+              <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="🤗 Радію новій дружбі">🤗</button>
+            </div>
+            <div class="mood-status" id="ch10_mood">Обери настрій смайликом ☝️</div>
+          </div>
+        </div>
+      </div>
+
       <div id="ch_soon" class="chapter-content">
         <div class="card" style="text-align: center; padding: 40px 20px;">
           <div style="font-size: 3rem; margin-bottom: 10px;">📖</div>
-          <h3 style="color: var(--petrol); margin-bottom: 8px;">Наступні розділи (9–23)</h3>
+          <h3 style="color: var(--petrol); margin-bottom: 8px;">Наступні розділи (11–23)</h3>
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
             Ми відкриваємо нові завдання поступово на кожній зустрічі читацького клубу. Читайте далі разом із нами!
           </p>
@@ -840,6 +939,14 @@ body {
               <div class="entry-text" id="diary_ch3_sacrifice"><span class="entry-empty">Твої роздуми з'являться тут після заповнення у "Маршруті"...</span></div>
             </div>
             <div class="entry-card">
+              <h5>🌧️ Мій найдивніший сон (Розділ 9):</h5>
+              <div class="entry-text" id="diary_ch9_dream"><span class="entry-empty">Твій сон з'явиться тут після заповнення у "Маршруті"...</span></div>
+            </div>
+            <div class="entry-card">
+              <h5>👭 Такі різні друзі (Розділ 10):</h5>
+              <div class="entry-text" id="diary_ch10"><span class="entry-empty">Твої роздуми з'являться тут після заповнення у "Маршруті"...</span></div>
+            </div>
+            <div class="entry-card">
               <h5>✨ Мої ідеї та роздуми про книгу:</h5>
               <div class="entry-text" id="diary_thoughts"><span class="entry-empty">Впиши свої думки та ідеї у розділі "Мої думки"...</span></div>
             </div>
@@ -882,7 +989,9 @@ body {
         <button class="quiz-level-btn locked" id="btn_quiz_ch6" data-quiz-level="quiz_ch6">🔒 Розділ 6 (Заблоковано)</button>
         <button class="quiz-level-btn locked" id="btn_quiz_ch7" data-quiz-level="quiz_ch7">🔒 Розділ 7 (Заблоковано)</button>
         <button class="quiz-level-btn locked" id="btn_quiz_ch8" data-quiz-level="quiz_ch8">🔒 Розділ 8 (Заблоковано)</button>
-        <button class="quiz-level-btn locked" id="btn_quiz_soon" onclick="alert('Наступні розділи відкриються згодом!')">🔒 Розділи 9-23 (Скоро)</button>
+        <button class="quiz-level-btn locked" id="btn_quiz_ch9" data-quiz-level="quiz_ch9">🔒 Розділ 9 (Заблоковано)</button>
+        <button class="quiz-level-btn locked" id="btn_quiz_ch10" data-quiz-level="quiz_ch10">🔒 Розділ 10 (Заблоковано)</button>
+        <button class="quiz-level-btn locked" id="btn_quiz_soon" onclick="alert('Наступні розділи відкриються згодом!')">🔒 Розділи 11-23 (Скоро)</button>
       </div>
 
       <div id="quiz_ch1" class="quiz-stage active"><div class="card"><div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress_ch1" style="width: 0%;"></div></div><div id="container_ch1"></div></div></div>
@@ -893,6 +1002,8 @@ body {
       <div id="quiz_ch6" class="quiz-stage"><div class="card"><div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress_ch6" style="width: 0%;"></div></div><div id="container_ch6"></div></div></div>
       <div id="quiz_ch7" class="quiz-stage"><div class="card"><div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress_ch7" style="width: 0%;"></div></div><div id="container_ch7"></div></div></div>
       <div id="quiz_ch8" class="quiz-stage"><div class="card"><div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress_ch8" style="width: 0%;"></div></div><div id="container_ch8"></div></div></div>
+      <div id="quiz_ch9" class="quiz-stage"><div class="card"><div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress_ch9" style="width: 0%;"></div></div><div id="container_ch9"></div></div></div>
+      <div id="quiz_ch10" class="quiz-stage"><div class="card"><div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress_ch10" style="width: 0%;"></div></div><div id="container_ch10"></div></div></div>
     </section>
 
     <!-- ================= 5. РОЗДІЛ: СЛОВНИК ================= -->
@@ -1107,9 +1218,10 @@ body {
     let diaryData = {
       ch1_dislike: '', friend_sasha: '', friend_misha: '', friend_andryukha: '', friend_danko: '',
       ch3_sacrifice: '', general_review: '', band_name: '', cheer_slogan: '', student_name: '',
-      ch1_mood: '', ch2_mood: '', ch3_mood: '', ch4_mood: '', ch5_mood: '', ch6_mood: '', ch7_mood: '', ch8_mood: '',
+      ch1_mood: '', ch2_mood: '', ch3_mood: '', ch4_mood: '', ch5_mood: '', ch6_mood: '', ch7_mood: '', ch8_mood: '', ch9_mood: '', ch10_mood: '',
       ch5_reflection: '', ch6_reflection: '', ch7_reflection: '', ch8_reflection: '',
       ch8_song_happy: '', ch8_why_happy: '', ch8_song_dance: '', ch8_why_dance: '', ch8_song_dedicate: '', ch8_why_dedicate: '',
+      ch9_band_why: '', ch9_dream: '', ch10_friend: '', ch10_reflection: '',
       quiz_unlocked: 1, poll_choice: ''
     };
     const DIARY_DEFAULTS = Object.assign({}, diaryData);
@@ -1230,6 +1342,11 @@ body {
 
     function syncData(key, value) {
       diaryData[key] = value;
+      Object.entries(FIELD_MAP).forEach(([id, k]) => {
+        if (k !== key) return;
+        const el = document.getElementById(id);
+        if (el && el !== document.activeElement) el.value = value;
+      });
       lsSet('persha_raketka_diary', JSON.stringify(diaryData));
       updateDiaryDisplay();
     }
@@ -1254,11 +1371,22 @@ body {
       const d3 = document.getElementById('diary_ch3_sacrifice');
       if (d3) d3.textContent = diaryData.ch3_sacrifice.trim() || 'Твої роздуми з\'являться тут після заповнення у "Маршруті"...';
 
+      const d9 = document.getElementById('diary_ch9_dream');
+      if (d9) d9.innerHTML = diaryData.ch9_dream.trim() ? escapeHtml(diaryData.ch9_dream) : '<span class="entry-empty">Твій сон з\'явиться тут після заповнення у "Маршруті"...</span>';
+
+      const d10 = document.getElementById('diary_ch10');
+      if (d10) {
+        const parts = [];
+        if (diaryData.ch10_friend.trim()) parts.push(`👭 ${escapeHtml(diaryData.ch10_friend)}`);
+        if (diaryData.ch10_reflection.trim()) parts.push(`🤔 ${escapeHtml(diaryData.ch10_reflection)}`);
+        d10.innerHTML = parts.length > 0 ? parts.join('<br>') : '<span class="entry-empty">Твої роздуми з\'являться тут після заповнення у "Маршруті"...</span>';
+      }
+
       const dt = document.getElementById('diary_thoughts');
       if (dt) {
         const thoughts = [];
         if (diaryData.general_review.trim()) thoughts.push(`💡 Головна думка: «${escapeHtml(diaryData.general_review)}»`);
-        if (diaryData.band_name.trim()) thoughts.push(`🎸 Назва рок-гурту: «${escapeHtml(diaryData.band_name)}»`);
+        if (diaryData.band_name.trim()) thoughts.push(`🎸 Назва рок-гурту: «${escapeHtml(diaryData.band_name)}»` + (diaryData.ch9_band_why.trim() ? ` — ${escapeHtml(diaryData.ch9_band_why)}` : ''));
         if (diaryData.cheer_slogan.trim()) thoughts.push(`🎾 Кричалка для Аліни: «${escapeHtml(diaryData.cheer_slogan)}»`);
         dt.innerHTML = thoughts.length > 0 ? thoughts.join('<br>') : '<span class="entry-empty">Впиши свої думки та ідеї у розділі "Мої думки"...</span>';
       }
@@ -1323,9 +1451,24 @@ body {
       { q: "4. Про що у дитинстві мріяла мама Аліни?", opts: ["Стати відомою співачкою", "Танцювати", "Грати на гітарі", "Стати першою ракеткою світу"], correct: 1 }
     ];
 
+    const quizCh9Data = [
+      { q: "1. Ким працювали батьки Сєні?", opts: ["Мама — вчителька, а тато — лікар", "Мама — театральна режисерка, а тато — бізнесмен", "Мама — бізнесвумен, голова компанії, а тато — театральний режисер", "Мама — редакторка, а тато — тренер з тенісу"], correct: 2 },
+      { q: "2. Хто у Сєніному сні лежав поруч на шезлонгу?", opts: ["Аліна", "Вчителька пані Марина", "Ден Іванович", "Дідусь"], correct: 1 },
+      { q: "3. Що зранку зробив Сєня «для солідності»?", opts: ["Зашив штанину", "Начистив черевики", "Вдягнув краватку", "Зачесав волосся гелем"], correct: 0 },
+      { q: "4. Що мали зробити хлопці до понеділка, щоб виступити на святі Останнього дзвоника?", opts: ["Вивчити нову пісню", "Знайти барабанщика", "Пошити сценічні костюми", "Вигадати назву гурту"], correct: 3 },
+      { q: "5. З чого був дощ, який наснився Сєні?", opts: ["З тенісних м'ячиків", "З бридкого морквяного салату", "З нот і гітарних струн", "З компоту"], correct: 1 }
+    ];
+    const quizCh10Data = [
+      { q: "1. Якою була Ніна?", opts: ["Тихою і сором'язливою", "Суворою і мовчазною", "Дуже гучною особистістю", "Сумною і замкнутою"], correct: 2 },
+      { q: "2. З ким зранку перед школою Аліна говорила телефоном?", opts: ["З татом", "З мамою", "З Ніною", "З бабусею"], correct: 0 },
+      { q: "3. До якого змагання готувалася Аліна на тенісі?", opts: ["Чемпіонат школи", "Кубок Києва", "Турнір «Золотий м'яч»", "Кубок першої ракетки"], correct: 3 },
+      { q: "4. Куди Аліна та Ніна пішли після тренування?", opts: ["У кафе «Кристал» по морозиво", "У парк пити бабл-ті", "На репетицію до Сєні", "У кіно"], correct: 1 },
+      { q: "5. Як, на думку Аліни, Павло Петрович ставився до неї?", opts: ["Вважав її найкращою у команді", "Хотів зробити її капітаном", "Аліна думала, що дратує його", "Аліна думала, що він її боїться"], correct: 2 }
+    ];
+
     const QUIZ_KEY = 'persha_raketka_quiz';
-    const MAX_QUIZ_LEVEL = 8;
-    let quizAnswers = { ch1: {}, ch2: {}, ch3: {}, ch4: {}, ch5: {}, ch6: {}, ch7: {}, ch8: {} };
+    const MAX_QUIZ_LEVEL = 10;
+    let quizAnswers = { ch1: {}, ch2: {}, ch3: {}, ch4: {}, ch5: {}, ch6: {}, ch7: {}, ch8: {}, ch9: {}, ch10: {} };
 
     const quizConfig = {
       ch1: { level: 1, data: quizCh1Data, container: 'container_ch1', progress: 'progress_ch1' },
@@ -1335,7 +1478,9 @@ body {
       ch5: { level: 5, data: quizCh5Data, container: 'container_ch5', progress: 'progress_ch5' },
       ch6: { level: 6, data: quizCh6Data, container: 'container_ch6', progress: 'progress_ch6' },
       ch7: { level: 7, data: quizCh7Data, container: 'container_ch7', progress: 'progress_ch7' },
-      ch8: { level: 8, data: quizCh8Data, container: 'container_ch8', progress: 'progress_ch8' }
+      ch8: { level: 8, data: quizCh8Data, container: 'container_ch8', progress: 'progress_ch8' },
+      ch9: { level: 9, data: quizCh9Data, container: 'container_ch9', progress: 'progress_ch9' },
+      ch10: { level: 10, data: quizCh10Data, container: 'container_ch10', progress: 'progress_ch10' }
     };
 
     function cleanQuizAnswers(obj, total) {
@@ -1500,7 +1645,8 @@ body {
     const quizButtonTitles = {
       1: '🎾 Розділ 1 (7 питань)', 2: '🎸 Розділ 2 (6 питань)', 3: '🎾 Розділ 3 (4 питання)',
       4: '🎨 Розділ 4 (6 питань)', 5: '🎾 Розділ 5 (5 питань)', 6: '🎸 Розділ 6 (5 питань)',
-      7: '🎾 Розділ 7 (4 питання)', 8: '🎸 Розділ 8 (4 питання)'
+      7: '🎾 Розділ 7 (4 питання)', 8: '🎸 Розділ 8 (4 питання)',
+      9: '🎸 Розділ 9 (5 питань)', 10: '🎾 Розділ 10 (5 питань)'
     };
 
     function refreshQuizLocks() {
@@ -1727,6 +1873,18 @@ ${diaryData.ch3_sacrifice || 'Не заповнено'}
 [РОЗДІЛ 4. УРОК МАЛЮВАННЯ]
 Настрій: ${diaryData.ch4_mood || 'Не відзначено'}
 
+[РОЗДІЛ 9. НАЗВА ГУРТУ ТА ДИВНИЙ СОН]
+- Назва для гурту: ${diaryData.band_name || 'Не заповнено'}
+- Чому така назва: ${diaryData.ch9_band_why || 'Не заповнено'}
+- Мій найдивніший сон: ${diaryData.ch9_dream || 'Не заповнено'}
+Настрій: ${diaryData.ch9_mood || 'Не відзначено'}
+
+[РОЗДІЛ 10. ТАКІ РІЗНІ ДРУЗІ]
+- Мій друг, не схожий на мене: ${diaryData.ch10_friend || 'Не заповнено'}
+- Що думає тренер: ${diaryData.ch10_reflection || 'Не заповнено'}
+- Кричалка для Аліни: ${diaryData.cheer_slogan || 'Не заповнено'}
+Настрій: ${diaryData.ch10_mood || 'Не відзначено'}
+
 [МОЇ ДУМКИ ТА ТВОРЧІСТЬ]
 - Головна думка: ${diaryData.general_review || 'Не заповнено'}
 - Назва для рок-гурту: ${diaryData.band_name || 'Не заповнено'}
@@ -1806,7 +1964,9 @@ ${EXPORT_MARKER}${payload}
       cheerText: 'cheer_slogan', studentNameInput: 'student_name', traditionReflect: 'ch5_reflection', coachReflect: 'ch6_reflection',
       ch7Reflection: 'ch7_reflection', ch8Reflection: 'ch8_reflection',
       ch8_song_happy: 'ch8_song_happy', ch8_why_happy: 'ch8_why_happy', ch8_song_dance: 'ch8_song_dance', ch8_why_dance: 'ch8_why_dance',
-      ch8_song_dedicate: 'ch8_song_dedicate', ch8_why_dedicate: 'ch8_why_dedicate'
+      ch8_song_dedicate: 'ch8_song_dedicate', ch8_why_dedicate: 'ch8_why_dedicate',
+      ch9_band_name: 'band_name', ch9_band_why: 'ch9_band_why', ch9Dream: 'ch9_dream',
+      ch10Friend: 'ch10_friend', ch10Reflection: 'ch10_reflection', ch10_cheer: 'cheer_slogan'
     };
 
     function loadSavedData() {
@@ -1822,7 +1982,7 @@ ${EXPORT_MARKER}${payload}
 
     function applyStateToUI() {
       Object.entries(FIELD_MAP).forEach(([id, key]) => { const el = document.getElementById(id); if (el) el.value = diaryData[key] || ''; });
-      ['ch1_mood', 'ch2_mood', 'ch3_mood', 'ch4_mood', 'ch5_mood', 'ch6_mood', 'ch7_mood', 'ch8_mood'].forEach(key => {
+      ['ch1_mood', 'ch2_mood', 'ch3_mood', 'ch4_mood', 'ch5_mood', 'ch6_mood', 'ch7_mood', 'ch8_mood', 'ch9_mood', 'ch10_mood'].forEach(key => {
         const statusEl = document.getElementById(key); if (statusEl) statusEl.textContent = diaryData[key] || 'Обери настрій смайликом ☝️';
         document.querySelectorAll(`.ch-mood-btn[data-mood-target="${key}"]`).forEach(b => {
           b.classList.toggle('active-mood', !!diaryData[key] && b.dataset.moodText === diaryData[key]);
