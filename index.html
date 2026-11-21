@@ -131,6 +131,36 @@ body {
     .poll-btn.selected { background: var(--clay); border-color: var(--clay); color: #fff; }
     .poll-result { margin-top: 14px; font-weight: 800; font-size: 0.95rem; color: var(--petrol); min-height: 24px; }
 
+    /* Комікс (розділ 9) */
+    .comic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 18px 0; }
+    .comic-frame { position: relative; background: #fff; border: 3px solid var(--petrol); border-radius: 6px; padding: 12px; min-height: 210px; display: flex; flex-direction: column; gap: 10px; box-shadow: 5px 5px 0 var(--petrol); }
+    .comic-frame:nth-child(odd) { transform: rotate(-0.6deg); }
+    .comic-frame:nth-child(even) { transform: rotate(0.6deg); }
+    .comic-num { position: absolute; top: -12px; left: -10px; background: var(--clay); color: #fff; font-weight: 900; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid var(--petrol); font-family: 'Plus Jakarta Sans', sans-serif; }
+    .comic-frame.final { background: repeating-radial-gradient(circle at 80% 20%, #fff8f5 0 6px, #fff 6px 12px); }
+    .comic-frame.final .comic-num { background: var(--petrol); width: auto; padding: 0 10px; border-radius: 15px; font-size: 0.78rem; }
+    .comic-bubble { position: relative; background: #fff; border: 2px solid var(--petrol); border-radius: 18px; padding: 2px 4px; margin: 6px 0 10px 18px; }
+    .comic-bubble::after { content: ''; position: absolute; bottom: -10px; left: 22px; border-width: 10px 8px 0 0; border-style: solid; border-color: var(--petrol) transparent transparent transparent; }
+    .comic-bubble input { width: 100%; border: 0; background: transparent; padding: 8px 10px; font: 700 0.92rem 'Nunito', system-ui, sans-serif; color: var(--petrol); outline: none; }
+    .comic-scene { flex: 1; width: 100%; min-height: 80px; resize: vertical; border: 2px dashed #e2d9cf; border-radius: 6px; padding: 8px 10px; font: 0.9rem 'Nunito', system-ui, sans-serif; background: #fffdf9; color: var(--text); }
+    .comic-scene:focus, .comic-bubble:focus-within { border-color: var(--clay); }
+    .comic-title-input { text-align: center; font-weight: 900; font-size: 1.1rem; letter-spacing: 0.5px; }
+    @media (max-width: 640px) { .comic-grid { grid-template-columns: 1fr; } .comic-frame { transform: none !important; } }
+
+    /* Талісман (розділ 10) */
+    .talisman-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 18px; margin: 18px 0; align-items: start; }
+    .talisman-picker { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 14px; }
+    .tal-emoji-btn { background: #fff; border: 2px solid var(--border); font-size: 1.6rem; width: 52px; height: 52px; border-radius: 14px; cursor: pointer; transition: all 0.2s; }
+    .tal-emoji-btn:hover { transform: translateY(-2px); border-color: var(--peach); }
+    .tal-emoji-btn.selected { border-color: var(--clay); background: #fff3ee; box-shadow: 0 3px 10px rgba(231,111,81,0.3); }
+    .talisman-card { position: sticky; top: 90px; background: linear-gradient(160deg, #fff8f5, #fdf1e6); border: 3px solid var(--clay); border-radius: 22px; padding: 20px 16px; text-align: center; box-shadow: 0 10px 24px -12px rgba(231,111,81,0.55); }
+    .talisman-card .tal-badge { font-size: 0.7rem; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; color: var(--clay); }
+    .talisman-card .tal-icon { font-size: 4.2rem; line-height: 1.2; margin: 8px 0; animation: talFloat 3s ease-in-out infinite; }
+    .talisman-card .tal-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 1.15rem; color: var(--petrol); word-break: break-word; }
+    .talisman-card .tal-power { margin-top: 10px; font-size: 0.85rem; background: #fff; border-radius: 12px; padding: 8px 10px; color: var(--text); word-break: break-word; }
+    @keyframes talFloat { 50% { transform: translateY(-6px) rotate(-3deg); } }
+    @media (max-width: 720px) { .talisman-wrap { grid-template-columns: 1fr; } .talisman-card { position: static; order: -1; } }
+
     /* Маршрут */
     .chapter-nav-wrapper { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: thin; }
     .ch-btn { background: #ffffff; border: 2px solid var(--border); color: var(--text-muted); font-weight: 800; font-size: 0.9rem; padding: 10px 20px; border-radius: 50px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; }
@@ -798,39 +828,46 @@ body {
         <div class="card ch-card">
           <div class="ch-header">
             <span class="ch-badge">Розділ 9 • стор. 51–58</span>
-            <h3 class="ch-title">Дивний сон Сєні та пошуки назви гурту</h3>
+            <h3 class="ch-title">Якби мої сни були коміксами</h3>
           </div>
           <div class="task-box">
-            <div class="task-icon">🎸</div>
+            <div class="task-icon">💭</div>
             <div class="task-body">
-              <h4>Творче завдання: Назва для гурту</h4>
-              <p>Щоб виступити на святі Останнього дзвоника, хлопці мають <strong>до понеділка вигадати назву</strong> для свого гурту. Допоможи їм!</p>
-              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ Яку назву ти запропонував/-ла б гурту Сєні? Чому саме таку?</p>
+              <h4>Творче завдання: Комікс-сон</h4>
+              <p>У Сєні сни якісь зовсім дивні. А які сни сняться тобі?</p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">🎬 Перетвори один свій сон (реальний або вигаданий) на комікс із 4 кадрів. Додай репліки й несподіваний фінал!</p>
+              <p style="margin-top: 6px; font-size: 0.85rem; color: var(--text-muted);">У «бульбашку» впиши, що каже герой, а під нею — що відбувається в кадрі. Потім намалюй свій комікс у паперовому читацькому щоденнику ✏️</p>
             </div>
           </div>
-          <div style="background: #fff8f5; border: 1px solid var(--border-accent); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
-            <label style="font-size: 0.88rem; font-weight: 700; color: var(--petrol);">🎤 Моя назва для гурту:</label>
-            <input type="text" class="form-input" id="ch9_band_name" placeholder="Наприклад: «Гучні струни»" oninput="syncData('band_name', this.value)">
-            <textarea class="form-textarea" id="ch9_band_why" rows="2" placeholder="Я обрав/-ла цю назву, тому що..." oninput="syncData('ch9_band_why', this.value)"></textarea>
-          </div>
-          <div class="task-box">
-            <div class="task-icon">🌧️</div>
-            <div class="task-body">
-              <h4>Творче завдання & паперовий щоденник: Найдивніший сон</h4>
-              <p>Сєні наснилося, що він лежить на шезлонгу поруч із пані Мариною, а з неба падає дощ із бридкого морквяного салату!</p>
-              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ А який найдивніший або найсмішніший сон бачив/-ла ти? Опиши його коротко тут.</p>
-              <p style="margin-top: 6px;">📝 А потім <strong>намалюй цей сон у своєму паперовому читацькому щоденнику</strong>.</p>
-            </div>
-          </div>
-          <div style="margin: 18px 0;">
-            <textarea class="form-textarea" id="ch9Dream" rows="3" placeholder="Одного разу мені наснилося, що..." oninput="syncData('ch9_dream', this.value)"></textarea>
+          <input type="text" class="form-input comic-title-input" id="ch9_comic_title" maxlength="80" placeholder="Назва мого комікса-сну" oninput="syncData('ch9_comic_title', this.value)">
+          <div class="comic-grid">
+              <div class="comic-frame">
+                <div class="comic-num">1</div>
+                <div class="comic-bubble"><input type="text" id="ch9_s1" maxlength="120" placeholder="💬 Репліка героя..." oninput="syncData('ch9_s1', this.value)"></div>
+                <textarea class="comic-scene" id="ch9_f1" rows="3" placeholder="Початок сну: Що відбувається? Де я і хто поруч..." oninput="syncData('ch9_f1', this.value)"></textarea>
+              </div>
+              <div class="comic-frame">
+                <div class="comic-num">2</div>
+                <div class="comic-bubble"><input type="text" id="ch9_s2" maxlength="120" placeholder="💬 Репліка героя..." oninput="syncData('ch9_s2', this.value)"></div>
+                <textarea class="comic-scene" id="ch9_f2" rows="3" placeholder="Щось дивне: А потім раптом..." oninput="syncData('ch9_f2', this.value)"></textarea>
+              </div>
+              <div class="comic-frame">
+                <div class="comic-num">3</div>
+                <div class="comic-bubble"><input type="text" id="ch9_s3" maxlength="120" placeholder="💬 Репліка героя..." oninput="syncData('ch9_s3', this.value)"></div>
+                <textarea class="comic-scene" id="ch9_f3" rows="3" placeholder="Ще дивніше!: Усе стало ще дивніше, бо..." oninput="syncData('ch9_f3', this.value)"></textarea>
+              </div>
+              <div class="comic-frame final">
+                <div class="comic-num">4 · Несподіваний фінал 💥</div>
+                <div class="comic-bubble"><input type="text" id="ch9_s4" maxlength="120" placeholder="💬 Репліка героя..." oninput="syncData('ch9_s4', this.value)"></div>
+                <textarea class="comic-scene" id="ch9_f4" rows="3" placeholder="Несподіваний фінал 💥: І тут несподівано..." oninput="syncData('ch9_f4', this.value)"></textarea>
+              </div>
           </div>
           <div class="mood-box">
             <div class="mood-title">Твій настрій після 9 розділу:</div>
             <div class="mood-emojis">
               <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="😂 Сміявся/-лася з сону!">😂</button>
               <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="🥕 Тільки не морквяний салат!">🥕</button>
-              <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="🎸 Вигадую назву гурту">🎸</button>
+              <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="💭 Згадую свої дивні сни">💭</button>
               <button class="ch-mood-btn" data-mood-target="ch9_mood" data-mood-text="🤔 Цікаво, чи встигнуть хлопці">🤔</button>
             </div>
             <div class="mood-status" id="ch9_mood">Обери настрій смайликом ☝️</div>
@@ -843,47 +880,42 @@ body {
         <div class="card ch-card">
           <div class="ch-header">
             <span class="ch-badge" style="background:#eafaf1; color:var(--lime-dark); border-color:#d4efdf;">Розділ 10 • стор. 59–68</span>
-            <h3 class="ch-title">Гучна Ніна, Кубок першої ракетки та бабл-ті в парку</h3>
+            <h3 class="ch-title">Талісман, який насправді допомагає</h3>
           </div>
           <div class="task-box">
-            <div class="task-icon">👭</div>
+            <div class="task-icon">🐶</div>
             <div class="task-body">
-              <h4>Творче завдання: Такі різні друзі</h4>
-              <p>Ніна — <strong>дуже гучна особистість</strong>, зовсім не схожа на Аліну. Та після тренування дівчата разом пішли в парк пити бабл-ті.</p>
-              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ Чи є в тебе друг або подруга, які дуже відрізняються від тебе? Чим ви різні і що вас об'єднує?</p>
+              <h4>Творче завдання: Створи свій талісман</h4>
+              <p>Аліна розсердилася на <strong>Ейса</strong>, бо вважала його безпомічним.</p>
+              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ А якби ти міг/могла створити талісман, який справді допомагав би у складні моменти? Придумай його суперсилу та поясни, як він підтримує свого власника.</p>
+              <p style="margin-top: 6px; font-size: 0.85rem; color: var(--text-muted);">🎨 Намалюй свій талісман у паперовому читацькому щоденнику, а тут створи для нього картку.</p>
             </div>
           </div>
-          <div style="margin: 18px 0;">
-            <textarea class="form-textarea" id="ch10Friend" rows="3" placeholder="Мій друг / моя подруга не схожі на мене, бо... Але нас об'єднує..." oninput="syncData('ch10_friend', this.value)"></textarea>
-          </div>
-          <div class="task-box">
-            <div class="task-icon">🤔</div>
-            <div class="task-body">
-              <h4>Рефлексія: Що думає тренер?</h4>
-              <p>Аліні здавалося, що вона <strong>дратує Павла Петровича</strong>.</p>
-              <p style="margin-top: 8px; font-weight: 800; color: var(--clay);">❓ Чи бувало, що тобі здавалося, ніби хтось на тебе сердиться? Як можна дізнатися, що людина думає насправді?</p>
+          <div class="talisman-wrap">
+            <div>
+              <label style="font-size: 0.88rem; font-weight: 700; color: var(--petrol);">1. Обери, на кого схожий твій талісман:</label>
+              <div class="talisman-picker" id="talismanPicker"><button type="button" class="tal-emoji-btn" data-tal-emoji="🐶" aria-label="Обрати 🐶">🐶</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🦊" aria-label="Обрати 🦊">🦊</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🐉" aria-label="Обрати 🐉">🐉</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🦉" aria-label="Обрати 🦉">🦉</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🐢" aria-label="Обрати 🐢">🐢</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🍀" aria-label="Обрати 🍀">🍀</button><button type="button" class="tal-emoji-btn" data-tal-emoji="⭐" aria-label="Обрати ⭐">⭐</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🎾" aria-label="Обрати 🎾">🎾</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🎸" aria-label="Обрати 🎸">🎸</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🧸" aria-label="Обрати 🧸">🧸</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🦄" aria-label="Обрати 🦄">🦄</button><button type="button" class="tal-emoji-btn" data-tal-emoji="🔮" aria-label="Обрати 🔮">🔮</button></div>
+              <label style="font-size: 0.88rem; font-weight: 700; color: var(--petrol);">2. Як звати твій талісман?</label>
+              <input type="text" class="form-input" id="ch10_tal_name" maxlength="40" placeholder="Наприклад: Сміливчик" oninput="syncData('ch10_tal_name', this.value)">
+              <label style="font-size: 0.88rem; font-weight: 700; color: var(--petrol); display: block; margin-top: 12px;">3. Яка в нього суперсила?</label>
+              <input type="text" class="form-input" id="ch10_tal_power" maxlength="120" placeholder="Наприклад: світиться, коли мені страшно" oninput="syncData('ch10_tal_power', this.value)">
+              <label style="font-size: 0.88rem; font-weight: 700; color: var(--petrol); display: block; margin-top: 12px;">4. Як він підтримує свого власника у складний момент?</label>
+              <textarea class="form-textarea" id="ch10_tal_help" rows="3" placeholder="Коли в мене щось не виходить, мій талісман..." oninput="syncData('ch10_tal_help', this.value)"></textarea>
             </div>
-          </div>
-          <div style="margin: 18px 0;">
-            <textarea class="form-textarea" id="ch10Reflection" rows="3" placeholder="Коли мені здається, що хтось на мене сердиться, я..." oninput="syncData('ch10_reflection', this.value)"></textarea>
-          </div>
-          <div class="task-box">
-            <div class="task-icon">🏆</div>
-            <div class="task-body">
-              <h4>Підтримай Аліну перед Кубком першої ракетки!</h4>
-              <p>Аліна готується до важливого змагання — <strong>Кубка першої ракетки</strong>. Склади для неї коротку кричалку, яку можна вигукувати з трибун.</p>
+            <div class="talisman-card" aria-live="polite">
+              <div class="tal-badge">✨ Мій талісман ✨</div>
+              <div class="tal-icon" id="talPreviewIcon">❔</div>
+              <div class="tal-name" id="talPreviewName">Без імені</div>
+              <div class="tal-power" id="talPreviewPower">Суперсила ще не вигадана...</div>
             </div>
-          </div>
-          <div style="margin: 18px 0;">
-            <input type="text" class="form-input" id="ch10_cheer" placeholder="Наприклад: «Аліна, вперед — тебе кубок жде!»" oninput="syncData('cheer_slogan', this.value)">
           </div>
           <div class="mood-box">
             <div class="mood-title">Твій настрій після 10 розділу:</div>
             <div class="mood-emojis">
               <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="🧋 Захотілося бабл-ті!">🧋</button>
               <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="📣 Ніна — вогонь!">📣</button>
+              <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="🐶 Шкода Ейса">🐶</button>
               <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="🏆 Вболіваю за Аліну на Кубку">🏆</button>
-              <button class="ch-mood-btn" data-mood-target="ch10_mood" data-mood-text="🤗 Радію новій дружбі">🤗</button>
             </div>
             <div class="mood-status" id="ch10_mood">Обери настрій смайликом ☝️</div>
           </div>
@@ -939,12 +971,12 @@ body {
               <div class="entry-text" id="diary_ch3_sacrifice"><span class="entry-empty">Твої роздуми з'являться тут після заповнення у "Маршруті"...</span></div>
             </div>
             <div class="entry-card">
-              <h5>🌧️ Мій найдивніший сон (Розділ 9):</h5>
-              <div class="entry-text" id="diary_ch9_dream"><span class="entry-empty">Твій сон з'явиться тут після заповнення у "Маршруті"...</span></div>
+              <h5>💭 Мій комікс-сон (Розділ 9):</h5>
+              <div class="entry-text" id="diary_ch9_comic"><span class="entry-empty">Твій комікс з'явиться тут після заповнення у "Маршруті"...</span></div>
             </div>
             <div class="entry-card">
-              <h5>👭 Такі різні друзі (Розділ 10):</h5>
-              <div class="entry-text" id="diary_ch10"><span class="entry-empty">Твої роздуми з'являться тут після заповнення у "Маршруті"...</span></div>
+              <h5>🍀 Мій талісман (Розділ 10):</h5>
+              <div class="entry-text" id="diary_ch10"><span class="entry-empty">Твій талісман з'явиться тут після заповнення у "Маршруті"...</span></div>
             </div>
             <div class="entry-card">
               <h5>✨ Мої ідеї та роздуми про книгу:</h5>
@@ -1221,7 +1253,8 @@ body {
       ch1_mood: '', ch2_mood: '', ch3_mood: '', ch4_mood: '', ch5_mood: '', ch6_mood: '', ch7_mood: '', ch8_mood: '', ch9_mood: '', ch10_mood: '',
       ch5_reflection: '', ch6_reflection: '', ch7_reflection: '', ch8_reflection: '',
       ch8_song_happy: '', ch8_why_happy: '', ch8_song_dance: '', ch8_why_dance: '', ch8_song_dedicate: '', ch8_why_dedicate: '',
-      ch9_band_why: '', ch9_dream: '', ch10_friend: '', ch10_reflection: '',
+      ch9_comic_title: '', ch9_s1: '', ch9_f1: '', ch9_s2: '', ch9_f2: '', ch9_s3: '', ch9_f3: '', ch9_s4: '', ch9_f4: '',
+      ch10_tal_emoji: '', ch10_tal_name: '', ch10_tal_power: '', ch10_tal_help: '',
       quiz_unlocked: 1, poll_choice: ''
     };
     const DIARY_DEFAULTS = Object.assign({}, diaryData);
@@ -1340,6 +1373,14 @@ body {
       if (btn) btn.classList.add('active');
     }
 
+    function renderTalismanPreview() {
+      const icon = document.getElementById('talPreviewIcon'); if (!icon) return;
+      icon.textContent = diaryData.ch10_tal_emoji || '❔';
+      document.getElementById('talPreviewName').textContent = diaryData.ch10_tal_name.trim() || 'Без імені';
+      document.getElementById('talPreviewPower').textContent = diaryData.ch10_tal_power.trim() ? '⚡ ' + diaryData.ch10_tal_power.trim() : 'Суперсила ще не вигадана...';
+      document.querySelectorAll('.tal-emoji-btn').forEach(b => b.classList.toggle('selected', b.dataset.talEmoji === diaryData.ch10_tal_emoji));
+    }
+
     function syncData(key, value) {
       diaryData[key] = value;
       Object.entries(FIELD_MAP).forEach(([id, k]) => {
@@ -1371,22 +1412,34 @@ body {
       const d3 = document.getElementById('diary_ch3_sacrifice');
       if (d3) d3.textContent = diaryData.ch3_sacrifice.trim() || 'Твої роздуми з\'являться тут після заповнення у "Маршруті"...';
 
-      const d9 = document.getElementById('diary_ch9_dream');
-      if (d9) d9.innerHTML = diaryData.ch9_dream.trim() ? escapeHtml(diaryData.ch9_dream) : '<span class="entry-empty">Твій сон з\'явиться тут після заповнення у "Маршруті"...</span>';
+      const d9 = document.getElementById('diary_ch9_comic');
+      if (d9) {
+        const lines = [];
+        if (diaryData.ch9_comic_title.trim()) lines.push(`<strong>«${escapeHtml(diaryData.ch9_comic_title)}»</strong>`);
+        for (let i = 1; i <= 4; i++) {
+          const scene = diaryData['ch9_f' + i].trim(), speech = diaryData['ch9_s' + i].trim();
+          if (!scene && !speech) continue;
+          lines.push(`${i === 4 ? '💥' : '🖼️'} Кадр ${i}: ${escapeHtml(scene)}${speech ? ` — 💬 «${escapeHtml(speech)}»` : ''}`);
+        }
+        d9.innerHTML = lines.length > 0 ? lines.join('<br>') : '<span class="entry-empty">Твій комікс з\'явиться тут після заповнення у "Маршруті"...</span>';
+      }
 
       const d10 = document.getElementById('diary_ch10');
       if (d10) {
         const parts = [];
-        if (diaryData.ch10_friend.trim()) parts.push(`👭 ${escapeHtml(diaryData.ch10_friend)}`);
-        if (diaryData.ch10_reflection.trim()) parts.push(`🤔 ${escapeHtml(diaryData.ch10_reflection)}`);
-        d10.innerHTML = parts.length > 0 ? parts.join('<br>') : '<span class="entry-empty">Твої роздуми з\'являться тут після заповнення у "Маршруті"...</span>';
+        const head = [diaryData.ch10_tal_emoji, diaryData.ch10_tal_name.trim()].filter(Boolean).join(' ');
+        if (head) parts.push(`<strong>${escapeHtml(head)}</strong>`);
+        if (diaryData.ch10_tal_power.trim()) parts.push(`⚡ Суперсила: ${escapeHtml(diaryData.ch10_tal_power)}`);
+        if (diaryData.ch10_tal_help.trim()) parts.push(`🤝 Як допомагає: ${escapeHtml(diaryData.ch10_tal_help)}`);
+        d10.innerHTML = parts.length > 0 ? parts.join('<br>') : '<span class="entry-empty">Твій талісман з\'явиться тут після заповнення у "Маршруті"...</span>';
       }
+      renderTalismanPreview();
 
       const dt = document.getElementById('diary_thoughts');
       if (dt) {
         const thoughts = [];
         if (diaryData.general_review.trim()) thoughts.push(`💡 Головна думка: «${escapeHtml(diaryData.general_review)}»`);
-        if (diaryData.band_name.trim()) thoughts.push(`🎸 Назва рок-гурту: «${escapeHtml(diaryData.band_name)}»` + (diaryData.ch9_band_why.trim() ? ` — ${escapeHtml(diaryData.ch9_band_why)}` : ''));
+        if (diaryData.band_name.trim()) thoughts.push(`🎸 Назва рок-гурту: «${escapeHtml(diaryData.band_name)}»`);
         if (diaryData.cheer_slogan.trim()) thoughts.push(`🎾 Кричалка для Аліни: «${escapeHtml(diaryData.cheer_slogan)}»`);
         dt.innerHTML = thoughts.length > 0 ? thoughts.join('<br>') : '<span class="entry-empty">Впиши свої думки та ідеї у розділі "Мої думки"...</span>';
       }
@@ -1873,16 +1926,15 @@ ${diaryData.ch3_sacrifice || 'Не заповнено'}
 [РОЗДІЛ 4. УРОК МАЛЮВАННЯ]
 Настрій: ${diaryData.ch4_mood || 'Не відзначено'}
 
-[РОЗДІЛ 9. НАЗВА ГУРТУ ТА ДИВНИЙ СОН]
-- Назва для гурту: ${diaryData.band_name || 'Не заповнено'}
-- Чому така назва: ${diaryData.ch9_band_why || 'Не заповнено'}
-- Мій найдивніший сон: ${diaryData.ch9_dream || 'Не заповнено'}
+[РОЗДІЛ 9. ЯКБИ МОЇ СНИ БУЛИ КОМІКСАМИ]
+Назва комікса: ${diaryData.ch9_comic_title || 'Не заповнено'}
+${[1, 2, 3, 4].map(i => `- Кадр ${i}${i === 4 ? ' (фінал)' : ''}: ${diaryData['ch9_f' + i] || '-'}${diaryData['ch9_s' + i] ? ` | Репліка: «${diaryData['ch9_s' + i]}»` : ''}`).join('\n')}
 Настрій: ${diaryData.ch9_mood || 'Не відзначено'}
 
-[РОЗДІЛ 10. ТАКІ РІЗНІ ДРУЗІ]
-- Мій друг, не схожий на мене: ${diaryData.ch10_friend || 'Не заповнено'}
-- Що думає тренер: ${diaryData.ch10_reflection || 'Не заповнено'}
-- Кричалка для Аліни: ${diaryData.cheer_slogan || 'Не заповнено'}
+[РОЗДІЛ 10. ТАЛІСМАН, ЯКИЙ НАСПРАВДІ ДОПОМАГАЄ]
+- Талісман: ${[diaryData.ch10_tal_emoji, diaryData.ch10_tal_name].filter(Boolean).join(' ') || 'Не заповнено'}
+- Суперсила: ${diaryData.ch10_tal_power || 'Не заповнено'}
+- Як допомагає: ${diaryData.ch10_tal_help || 'Не заповнено'}
 Настрій: ${diaryData.ch10_mood || 'Не відзначено'}
 
 [МОЇ ДУМКИ ТА ТВОРЧІСТЬ]
@@ -1965,8 +2017,9 @@ ${EXPORT_MARKER}${payload}
       ch7Reflection: 'ch7_reflection', ch8Reflection: 'ch8_reflection',
       ch8_song_happy: 'ch8_song_happy', ch8_why_happy: 'ch8_why_happy', ch8_song_dance: 'ch8_song_dance', ch8_why_dance: 'ch8_why_dance',
       ch8_song_dedicate: 'ch8_song_dedicate', ch8_why_dedicate: 'ch8_why_dedicate',
-      ch9_band_name: 'band_name', ch9_band_why: 'ch9_band_why', ch9Dream: 'ch9_dream',
-      ch10Friend: 'ch10_friend', ch10Reflection: 'ch10_reflection', ch10_cheer: 'cheer_slogan'
+      ch9_comic_title: 'ch9_comic_title', ch9_s1: 'ch9_s1', ch9_f1: 'ch9_f1', ch9_s2: 'ch9_s2', ch9_f2: 'ch9_f2',
+      ch9_s3: 'ch9_s3', ch9_f3: 'ch9_f3', ch9_s4: 'ch9_s4', ch9_f4: 'ch9_f4',
+      ch10_tal_name: 'ch10_tal_name', ch10_tal_power: 'ch10_tal_power', ch10_tal_help: 'ch10_tal_help'
     };
 
     function loadSavedData() {
@@ -2008,6 +2061,10 @@ ${EXPORT_MARKER}${payload}
           const statusEl = document.getElementById(targetId); if (statusEl) statusEl.textContent = text;
           diaryData[targetId] = text; saveDiary();
         });
+      });
+
+      document.querySelectorAll('[data-tal-emoji]').forEach(btn => {
+        btn.addEventListener('click', function() { syncData('ch10_tal_emoji', this.dataset.talEmoji); });
       });
 
       document.querySelectorAll('[data-poll-choice]').forEach(btn => {
